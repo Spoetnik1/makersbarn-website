@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
+import { GB as EN, NL } from 'country-flag-icons/react/3x2'
 import Footer from './Footer'
 import './Layout.css'
 
@@ -113,7 +114,7 @@ function Layout() {
                 aria-expanded={isLanguageDropdownOpen}
               >
                 <span className="language-flag">
-                  {language === 'en' ? '🇬🇧' : '🇳🇱'}
+                  {language === 'en' ? <EN title="United Kingdom" className="w-8 rounded-md" /> : <NL title="Netherlands" className="w-8 rounded-md" />}
                 </span>
               </button>
               
@@ -123,14 +124,14 @@ function Layout() {
                     className={`language-option ${language === 'en' ? 'active' : ''}`}
                     onClick={() => setLanguageTo('en')}
                   >
-                    <span className="language-option-flag">🇬🇧</span>
+                    <span className="language-option-flag"><EN title="United Kingdom" className="w-8 rounded-md" /></span>
                     <span className="language-option-text">English</span>
                   </button>
                   <button
                     className={`language-option ${language === 'nl' ? 'active' : ''}`}
                     onClick={() => setLanguageTo('nl')}
                   >
-                    <span className="language-option-flag">🇳🇱</span>
+                    <span className="language-option-flag"><NL title="Netherlands" className="w-8 rounded-md" /></span>
                     <span className="language-option-text">Nederlands</span>
                   </button>
                 </div>

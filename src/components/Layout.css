@@ -102,22 +102,20 @@
 }
 
 .language-toggle-btn {
-  background: #f5f5f5;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
+  background: transparent;
+  border: none;
   cursor: pointer;
-  padding: 0.5rem 0.75rem;
-  transition: all 0.3s ease;
+  padding: 0.5rem;
+  transition: opacity 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 50px;
-  height: 40px;
+  min-width: auto;
+  height: auto;
 }
 
 .language-toggle-btn:hover {
-  border-color: #646cff;
-  background-color: #fff;
+  opacity: 0.7;
 }
 
 .language-toggle-btn:active {
@@ -284,9 +282,7 @@
   }
 
   .language-toggle-btn {
-    min-width: 45px;
-    height: 38px;
-    padding: 0.4rem 0.6rem;
+    padding: 0.4rem;
   }
 
   .language-flag {
