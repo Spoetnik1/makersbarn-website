@@ -1,0 +1,135 @@
+.impression {
+  padding: 4rem 1.5rem 5rem;
+  background: radial-gradient(circle at top left, #f6f2eb 0, #fff 55%, #f4f1ec 100%);
+}
+
+@media (min-width: 768px) {
+  .impression {
+    padding: 5rem 4rem 6rem;
+  }
+}
+
+.impression-header {
+  max-width: 880px;
+  margin: 0 auto 2.5rem;
+  text-align: left;
+}
+
+.impression-kicker {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: #8a7760;
+  margin: 0 0 0.75rem;
+}
+
+.impression-title {
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-size: clamp(2rem, 3vw + 1rem, 2.8rem);
+  margin: 0 0 0.75rem;
+  color: #26221c;
+}
+
+.impression-subtitle {
+  margin: 0;
+  max-width: 32rem;
+  color: #5c554c;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.impression-tile {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 0;
+  transform-origin: center;
+  transform: scale(0.96);
+  transition:
+    transform 220ms ease-out,
+    box-shadow 220ms ease-out,
+    filter 220ms ease-out;
+  box-shadow: 0 14px 30px rgba(16, 10, 4, 0.08);
+}
+
+.impression-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.04);
+  transition: transform 220ms ease-out;
+}
+
+.impression-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 7, 3, 0.38),
+    transparent 45%
+  );
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: opacity 220ms ease-out;
+}
+
+.impression-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* Larger screens: more columns, masonry-like layout via spans */
+@media (min-width: 720px) {
+  .impression-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .impression-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.1rem;
+  }
+}
+
+/* Size variations for a more dynamic grid */
+.impression-tile-1,
+.impression-tile-5,
+.impression-tile-9 {
+  grid-row: span 2;
+}
+
+.impression-tile-3,
+.impression-tile-7 {
+  grid-column: span 2;
+}
+
+@media (max-width: 719px) {
+  .impression-tile-3,
+  .impression-tile-7 {
+    grid-column: auto;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .impression-tile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(16, 10, 4, 0.18);
+    z-index: 1;
+  }
+
+  .impression-tile:hover img {
+    transform: scale(1.08);
+  }
+
+  .impression-tile:hover::after {
+    opacity: 1;
+  }
+}
+

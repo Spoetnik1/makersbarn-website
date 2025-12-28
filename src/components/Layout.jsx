@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
+import Footer from './Footer'
 import './Layout.css'
 
 function Layout() {
@@ -23,7 +24,7 @@ function Layout() {
       <nav className="navbar">
         <div className="navbar-container">
           <Link to="/" className="navbar-logo" onClick={closeMenu}>
-            Maker's Barn
+            <img src="/tmb-logo.webp" alt="Maker's Barn" className="navbar-logo-img" />
           </Link>
           
           <button 
@@ -44,6 +45,15 @@ function Layout() {
                 onClick={closeMenu}
               >
                 Home
+              </Link>
+            </li>
+            <li className="navbar-item">
+              <Link 
+                to="/about" 
+                className={`navbar-link ${isActive('/about') ? 'active' : ''}`}
+                onClick={closeMenu}
+              >
+                About
               </Link>
             </li>
             <li className="navbar-item">
@@ -71,6 +81,8 @@ function Layout() {
       <main className="main-content">
         <Outlet />
       </main>
+      
+      <Footer />
     </div>
   )
 }

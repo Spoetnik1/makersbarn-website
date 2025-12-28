@@ -1,9 +1,14 @@
+import Hero from '../components/Hero'
+import HeroDetails from '../components/HeroDetails'
+import Impression from '../components/Impression'
+
 function Home() {
   return (
-    <div>
-      <h1>Home Page</h1>
-      <p>Welcome to Maker's Barn</p>
-    </div>
+    <>
+      <Hero />
+      <HeroDetails />
+      <Impression />
+    </>
   )
 }
 

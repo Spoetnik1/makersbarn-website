@@ -1,0 +1,362 @@
+.accommodation {
+  background-color: #f4efe6;
+  background-image: radial-gradient(circle at top left, #f8f4ec 0, #f4efe6 55%, #ebdfcf 100%);
+  padding: 4.5rem 1.5rem 5.5rem;
+}
+
+@media (min-width: 768px) {
+  .accommodation {
+    padding: 5.5rem 4rem 6.5rem;
+  }
+}
+
+.accommodation-hero {
+  max-width: 1180px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+
+.accommodation-header {
+  margin-bottom: 3rem;
+}
+
+.accommodation-kicker {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: #847257;
+  margin: 0 0 0.8rem;
+}
+
+.accommodation-title {
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-size: clamp(2.4rem, 3vw + 1.4rem, 3rem);
+  margin: 0 0 1.2rem;
+  color: #294b3a;
+}
+
+.accommodation-intro {
+  margin: 0 auto 0.9rem;
+  max-width: 46rem;
+  color: #4c4336;
+  font-size: 0.98rem;
+  line-height: 1.9;
+}
+
+.accommodation-intro.secondary {
+  margin-top: 1.5rem;
+}
+
+.accommodation-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+@media (min-width: 720px) {
+  .accommodation-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.8rem 2.2rem;
+  }
+}
+
+.accommodation-card {
+  border: none;
+  padding: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.accommodation-card-bar {
+  display: block;
+  height: 6px;
+  border-radius: 999px;
+  margin-bottom: 0.65rem;
+}
+
+.accommodation-card-image-wrapper {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(39, 32, 22, 0.26);
+}
+
+.accommodation-card-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.accommodation-card-image-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(21, 16, 9, 0.46),
+    transparent 45%
+  );
+  mix-blend-mode: multiply;
+}
+
+.accommodation-card-text {
+  margin-top: 0.9rem;
+}
+
+.accommodation-card-label {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  color: #847257;
+  margin: 0 0 0.4rem;
+}
+
+.accommodation-card-title {
+  margin: 0;
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-size: 1.1rem;
+  color: #294b3a;
+}
+
+.accommodation-details {
+  margin: 0;
+}
+
+.accommodation-detail-band {
+  width: 100%;
+  padding: 3.2rem 1.5rem;
+}
+
+.accommodation-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.2fr);
+  gap: 2.4rem;
+  align-items: center;
+  max-width: 1180px;
+  margin: 0 auto;
+  border-radius: 18px;
+  padding: 3.2rem 2.4rem;
+}
+
+@media (max-width: 767px) {
+  .accommodation-detail {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.accommodation-detail-content {
+  color: #f8f4ec;
+}
+
+.accommodation-detail-bar {
+  display: block;
+  height: 6px;
+  width: 80px;
+  border-radius: 999px;
+  margin-bottom: 1.1rem;
+  background-color: rgba(248, 244, 236, 0.9);
+}
+
+.accommodation-detail-label {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: #f3e7ce;
+  margin: 0 0 0.7rem;
+}
+
+.accommodation-detail-title {
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-size: 1.7rem;
+  margin: 0 0 1rem;
+  color: #fdfbf7;
+}
+
+.accommodation-detail-body {
+  margin: 0 0 1.2rem;
+  font-size: 0.98rem;
+  line-height: 1.9;
+}
+
+.accommodation-detail-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.accommodation-detail-features li {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #f3e7ce;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.accommodation-detail-features li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: rgba(248, 244, 236, 0.8);
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.accommodation-detail-media {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.accommodation-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.accommodation-carousel-frame {
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.accommodation-carousel-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 14px 30px rgba(39, 32, 22, 0.26);
+}
+
+.accommodation-carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(248, 244, 236, 0.15);
+  backdrop-filter: blur(8px);
+  color: #fdfbf7;
+  font-size: 1.6rem;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 2;
+  outline: none;
+}
+
+.accommodation-carousel-nav:focus {
+  outline: none;
+}
+
+.accommodation-carousel-nav:active {
+  outline: none;
+  animation: carouselNavClick 0.3s ease;
+}
+
+.accommodation-carousel-nav:hover {
+  background: rgba(248, 244, 236, 0.25);
+}
+
+@keyframes carouselNavClick {
+  0% {
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    transform: translateY(-50%) scale(0.85);
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+.accommodation-carousel-nav-prev {
+  left: 16px;
+}
+
+.accommodation-carousel-nav-next {
+  right: 16px;
+}
+
+.accommodation-carousel-dots {
+  display: flex;
+  gap: 0.35rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.accommodation-carousel-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(248, 244, 236, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.accommodation-carousel-dot:hover {
+  background-color: rgba(248, 244, 236, 0.7);
+}
+
+.accommodation-carousel-dot.active {
+  width: 20px;
+  height: 5px;
+  border-radius: 999px;
+  background-color: #fdfbf7;
+}
+
+.accommodation-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+
+.accommodation-lightbox-inner {
+  position: relative;
+  max-width: min(960px, 94vw);
+  max-height: 90vh;
+}
+
+.accommodation-lightbox-image {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 18px;
+  display: block;
+}
+
+.accommodation-lightbox-close {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+
+

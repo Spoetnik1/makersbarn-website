@@ -24,15 +24,21 @@
 }
 
 .navbar-logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #333;
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: opacity 0.3s ease;
+  height: 100%;
 }
 
 .navbar-logo:hover {
-  color: #646cff;
+  opacity: 0.8;
+}
+
+.navbar-logo-img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
 }
 
 .navbar-toggle {
@@ -141,9 +147,9 @@
   }
 
   .navbar-link {
-    display: block;
-    padding: 1rem 2rem;
-    width: 100%;
+    display: inline-block;
+    padding: 0.9rem 0;
+    width: auto;
   }
 
   .navbar-link.active::after {
@@ -151,7 +157,7 @@
   }
 
   .navbar-link.active {
-    background-color: #f0f0f0;
+    background-color: transparent;
   }
 }
 
