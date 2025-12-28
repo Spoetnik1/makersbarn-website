@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { motion, useMotionValue } from 'framer-motion'
 import './Accommodation.css'
 
 const OPTIONS = [
@@ -109,22 +110,34 @@ function scrollToOption(id) {
   }
 }
 
-function AccommodationDetailSection({ option, index, onImageClick }) {
+const SPRING_OPTIONS = {
+  type: "spring",
+  mass: 3,
+  stiffness: 400,
+  damping: 50,
+};
+
+const DRAG_BUFFER = 50;
+
+function AccommodationDetailSection({ option, index }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const images = option.images && option.images.length > 0 ? option.images : [option.image]
   const isReversed = index % 2 === 1
+  const dragX = useMotionValue(0)
 
-  const goPrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
-  }
+  useEffect(() => {
+    dragX.set(0);
+  }, [currentIndex, dragX]);
 
-  const goNext = () => {
-    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
-  }
+  const onDragEnd = () => {
+    const x = dragX.get();
 
-  const handleImageClick = () => {
-    onImageClick(images[currentIndex])
-  }
+    if (x <= -DRAG_BUFFER && currentIndex < images.length - 1) {
+      setCurrentIndex((pv) => pv + 1);
+    } else if (x >= DRAG_BUFFER && currentIndex > 0) {
+      setCurrentIndex((pv) => pv - 1);
+    }
+  };
 
   const content = (
     <div className="accommodation-detail-content">
@@ -145,35 +158,39 @@ function AccommodationDetailSection({ option, index, onImageClick }) {
 
   const media = (
     <div className="accommodation-detail-media">
-      <div className="accommodation-carousel">
-        {images.length > 1 && (
-          <button
-            type="button"
-            className="accommodation-carousel-nav accommodation-carousel-nav-prev"
-            onClick={goPrev}
-            aria-label="Previous photo"
-          >
-            ‹
-          </button>
-        )}
-        <button
-          type="button"
-          className="accommodation-carousel-frame"
-          onClick={handleImageClick}
-            aria-label="Enlarge photo"
+      <div className="accommodation-carousel-container">
+        <motion.div
+          drag="x"
+          dragConstraints={{
+            left: 0,
+            right: 0,
+          }}
+          style={{
+            x: dragX,
+          }}
+          animate={{
+            translateX: `-${currentIndex * 100}%`,
+          }}
+          transition={SPRING_OPTIONS}
+          onDragEnd={onDragEnd}
+          className="accommodation-carousel-track"
         >
-          <img src={images[currentIndex]} alt={option.title} />
-        </button>
-        {images.length > 1 && (
-          <button
-            type="button"
-            className="accommodation-carousel-nav accommodation-carousel-nav-next"
-            onClick={goNext}
-            aria-label="Next photo"
-          >
-            ›
-          </button>
-        )}
+          {images.map((imgSrc, idx) => (
+            <motion.div
+              key={idx}
+              style={{
+                backgroundImage: `url(${imgSrc})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+              animate={{
+                scale: currentIndex === idx ? 0.95 : 0.85,
+              }}
+              transition={SPRING_OPTIONS}
+              className="accommodation-carousel-image"
+            />
+          ))}
+        </motion.div>
       </div>
       {images.length > 1 && (
         <div className="accommodation-carousel-dots" aria-hidden="true">
@@ -183,6 +200,7 @@ function AccommodationDetailSection({ option, index, onImageClick }) {
               type="button"
               className={`accommodation-carousel-dot ${i === currentIndex ? 'active' : ''}`}
               onClick={() => setCurrentIndex(i)}
+              aria-label={`Go to slide ${i + 1}`}
             />
           ))}
         </div>
@@ -213,8 +231,6 @@ function AccommodationDetailSection({ option, index, onImageClick }) {
 }
 
 function Accommodation() {
-  const [lightboxImage, setLightboxImage] = useState(null)
-
   return (
     <div className="accommodation">
       <section className="accommodation-hero">
@@ -258,34 +274,9 @@ function Accommodation() {
             key={option.id}
             option={option}
             index={index}
-            onImageClick={setLightboxImage}
           />
         ))}
       </section>
-
-      {lightboxImage && (
-        <div
-          className="accommodation-lightbox"
-          onClick={() => setLightboxImage(null)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div
-            className="accommodation-lightbox-inner"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              className="accommodation-lightbox-close"
-              onClick={() => setLightboxImage(null)}
-              aria-label="Close enlarged photo"
-            >
-              ×
-            </button>
-            <img src={lightboxImage} alt="" className="accommodation-lightbox-image" />
-          </div>
-        </div>
-      )}
     </div>
   )
 }

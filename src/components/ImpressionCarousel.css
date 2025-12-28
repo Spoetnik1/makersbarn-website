@@ -1,0 +1,105 @@
+.impression-carousel {
+  padding: 4rem 1.5rem 5rem;
+  background: radial-gradient(circle at top left, #f6f2eb 0, #fff 55%, #f4f1ec 100%);
+}
+
+@media (min-width: 768px) {
+  .impression-carousel {
+    padding: 5rem 4rem 6rem;
+  }
+}
+
+.impression-header {
+  max-width: 880px;
+  margin: 0 auto 2.5rem;
+  text-align: left;
+}
+
+.impression-kicker {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: #8a7760;
+  margin: 0 0 0.75rem;
+}
+
+.impression-title {
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-size: clamp(2rem, 3vw + 1rem, 2.8rem);
+  margin: 0 0 0.75rem;
+  color: #26221c;
+}
+
+.impression-subtitle {
+  margin: 0;
+  max-width: 32rem;
+  color: #5c554c;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.carousel-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  overflow: hidden;
+}
+
+.carousel-container > div {
+  display: flex;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(138, 119, 96, 0.4);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.carousel-dot:hover {
+  background-color: rgba(138, 119, 96, 0.6);
+  transform: scale(1.2);
+}
+
+.carousel-dot-active {
+  background-color: #8a7760;
+  width: 10px;
+  height: 10px;
+}
+
+.carousel-dot:focus-visible {
+  outline: 2px solid #8a7760;
+  outline-offset: 2px;
+}
+
+.carousel-image {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  min-width: 100%;
+  flex-shrink: 0;
+  border-radius: 18px;
+  background-color: #f4f1ec;
+  object-fit: cover;
+  box-shadow: 0 14px 30px rgba(16, 10, 4, 0.08);
+}
+
+@media (min-width: 768px) {
+  .carousel-image {
+    border-radius: 24px;
+  }
+}
+

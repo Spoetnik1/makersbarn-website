@@ -1,4 +1,4 @@
-import './Impression.css'
+import './ImpressionDynamicWall.css'
 
 import atticBeds from '../assets/images/attic-beds.jpg'
 import atticChill from '../assets/images/attic-chill.jpg'
@@ -31,14 +31,14 @@ const images = [
   { src: quoteImage, alt: 'You are where you need to be artwork' },
 ]
 
-function Impression() {
+function ImpressionDynamicWall() {
   return (
     <section className="impression">
       <div className="impression-header">
         <p className="impression-kicker">A little impression</p>
         <h2 className="impression-title">Slow down, look around.</h2>
         <p className="impression-subtitle">
-          Spaces to focus, wander, nap, write, reflect, and be together. Here’s a glimpse of what
+          Spaces to focus, wander, nap, write, reflect, and be together. Here's a glimpse of what
           your retreat might feel like.
         </p>
       </div>
@@ -57,6 +57,5 @@ function Impression() {
   )
 }
 
-export default Impression
-
+export default ImpressionDynamicWall
 
