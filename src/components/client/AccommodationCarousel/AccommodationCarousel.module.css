@@ -1,0 +1,250 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.8rem 2.2rem;
+  }
+}
+
+.card {
+  border: none;
+  padding: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cardBar {
+  display: block;
+  height: 6px;
+  border-radius: 999px;
+  margin-bottom: 0.65rem;
+}
+
+.cardImageWrapper {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(39, 32, 22, 0.26);
+}
+
+.cardImageWrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(21, 16, 9, 0.46), transparent 45%);
+  mix-blend-mode: multiply;
+}
+
+.cardImage {
+  object-fit: cover;
+}
+
+.cardText {
+  margin-top: 0.9rem;
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-size: 1.1rem;
+  color: #294b3a;
+}
+
+.details {
+  margin: 0;
+}
+
+.detailBand {
+  width: 100%;
+  padding: 3.2rem 1.5rem;
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr);
+  gap: 2.4rem;
+  align-items: center;
+  max-width: 1180px;
+  margin: 0 auto;
+  border-radius: 18px;
+  padding: 3.2rem 2.4rem;
+}
+
+.detailReversed {
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.9fr);
+}
+
+@media (max-width: 767px) {
+  .detailBand {
+    padding: 2.5rem 0;
+  }
+
+  .detail {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 2.5rem 1.2rem;
+    gap: 2rem;
+  }
+}
+
+.detailContent {
+  color: #f8f4ec;
+}
+
+.detailBar {
+  display: block;
+  height: 6px;
+  width: 80px;
+  border-radius: 999px;
+  margin-bottom: 1.1rem;
+  background-color: rgba(248, 244, 236, 0.9);
+}
+
+.detailTitle {
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-size: 1.7rem;
+  margin: 0 0 1rem;
+  color: #fdfbf7;
+}
+
+.detailBody {
+  margin: 0 0 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.detailFeatures {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detailFeatures li {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #f3e7ce;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.detailFeatures li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: rgba(248, 244, 236, 0.8);
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.detailMedia {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+@media (max-width: 767px) {
+  .detailMedia {
+    width: calc(100% + 2.4rem);
+    margin-left: -1.2rem;
+    margin-right: -1.2rem;
+  }
+}
+
+.carouselContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+@media (max-width: 767px) {
+  .carouselContainer {
+    border-radius: 0;
+  }
+}
+
+.carouselTrack {
+  display: flex;
+  cursor: grab;
+  width: 100%;
+}
+
+.carouselTrack:active {
+  cursor: grabbing;
+}
+
+.carouselImage {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  min-width: 100%;
+  flex-shrink: 0;
+  border-radius: 18px;
+  background-color: rgba(248, 244, 236, 0.3);
+  box-shadow: 0 14px 30px rgba(39, 32, 22, 0.26);
+  overflow: hidden;
+}
+
+.carouselImageInner {
+  object-fit: cover;
+}
+
+@media (max-width: 767px) {
+  .carouselImage {
+    border-radius: 0;
+  }
+}
+
+.carouselDots {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.carouselDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(248, 244, 236, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  outline: none;
+}
+
+.carouselDot:hover {
+  background-color: rgba(248, 244, 236, 0.6);
+  transform: scale(1.2);
+}
+
+.carouselDotActive {
+  width: 10px;
+  height: 10px;
+  background-color: #fdfbf7;
+}
+
+.carouselDot:focus-visible {
+  outline: 2px solid rgba(248, 244, 236, 0.8);
+  outline-offset: 2px;
+}

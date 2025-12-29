@@ -1,0 +1,154 @@
+.heroDetails {
+  background-color: #f7f3ee;
+  color: #1f130c;
+  padding: 4.25rem 2rem 4rem;
+}
+
+.inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.text {
+  flex: 1.1;
+}
+
+.title {
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-size: 2.4rem;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-style: italic;
+  font-size: 1.1rem;
+  margin: 0 0 1.75rem;
+  color: #8b6c35;
+}
+
+.body {
+  margin: 0 0 2rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #4e3a2a;
+  max-width: 36rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-size: 0.98rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.buttonPrimary {
+  background: #1f130c;
+  color: #fdf7f0;
+  border-color: #1f130c;
+}
+
+.buttonPrimary:hover {
+  background: #3a2720;
+  border-color: #3a2720;
+}
+
+.buttonSecondary {
+  background: transparent;
+  color: #1f130c;
+  border-color: rgba(31, 19, 12, 0.25);
+}
+
+.buttonSecondary:hover {
+  background: rgba(31, 19, 12, 0.04);
+  border-color: rgba(31, 19, 12, 0.45);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: #7b6451;
+}
+
+.metaSeparator {
+  opacity: 0.5;
+  margin: 0 0.3rem;
+}
+
+.imageWrap {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.imageArch {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 3 / 4;
+  border-radius: 60% 60% 0 0;
+  overflow: hidden;
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.25);
+}
+
+.image {
+  object-fit: cover;
+  transform: scale(1.03) translateY(2%);
+}
+
+@media (max-width: 960px) {
+  .inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .imageWrap {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .imageArch {
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroDetails {
+    padding: 3.5rem 1.5rem 3.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

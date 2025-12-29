@@ -1,0 +1,7 @@
+export * from './routes'
+export * from './languages'
+export * from './animation'
+export * from './footer'
+export * from './hero'
+export * from './colors'
+export * from './contact'

@@ -1,0 +1,1 @@
+export { ImpressionPolaroids } from './ImpressionPolaroids'

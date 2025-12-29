@@ -1,0 +1,40 @@
+.accommodation {
+  background-color: #f4efe6;
+  background-image: radial-gradient(circle at top left, #f8f4ec 0, #f4efe6 55%, #ebdfcf 100%);
+  padding: 4.5rem 1.5rem 5.5rem;
+}
+
+@media (min-width: 768px) {
+  .accommodation {
+    padding: 5.5rem 4rem 6.5rem;
+  }
+}
+
+.hero {
+  max-width: 1180px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+
+.header {
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-family: var(--font-playfair), 'Playfair Display', 'Times New Roman', serif;
+  font-size: clamp(2.4rem, 3vw + 1.4rem, 3rem);
+  margin: 0 0 1.2rem;
+  color: #294b3a;
+}
+
+.intro {
+  margin: 0 auto 0.9rem;
+  max-width: 46rem;
+  color: #4c4336;
+  font-size: 0.98rem;
+  line-height: 1.9;
+}
+
+.secondary {
+  margin-top: 1.5rem;
+}

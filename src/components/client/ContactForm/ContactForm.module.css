@@ -1,0 +1,298 @@
+.contact {
+  width: 100%;
+}
+
+.introSection {
+  background-color: #f7f3ee;
+  padding: 4.5rem 1.5rem 3rem;
+}
+
+@media (min-width: 768px) {
+  .introSection {
+    padding: 5.5rem 4rem 3.5rem;
+  }
+}
+
+.introContent {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.introTitle {
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-size: clamp(2.4rem, 3vw + 1.4rem, 3rem);
+  margin: 0 0 1.5rem;
+  color: #1f130c;
+  line-height: 1.2;
+}
+
+.introText {
+  font-size: clamp(1rem, 1.5vw + 0.5rem, 1.2rem);
+  line-height: 1.8;
+  color: #3d3d3d;
+  margin: 0 0 2.5rem;
+}
+
+.introOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.introOption {
+  font-size: clamp(0.95rem, 1.2vw + 0.5rem, 1.1rem);
+  line-height: 1.7;
+  color: #3d3d3d;
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  border-left: 4px solid #b8894a;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.optionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.introOption strong {
+  color: #294b3a;
+  display: block;
+  font-size: clamp(1.1rem, 1.3vw + 0.5rem, 1.3rem);
+}
+
+.optionDesc {
+  margin: 0;
+  font-size: clamp(0.9rem, 1vw + 0.4rem, 1rem);
+  color: #5a5a5a;
+  line-height: 1.6;
+}
+
+.introButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  margin-top: 0.25rem;
+}
+
+.whatsappButton {
+  background-color: #25D366;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.whatsappButton:hover {
+  background-color: #20BA5A;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+}
+
+.callButton {
+  background-color: #294b3a;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(41, 75, 58, 0.3);
+}
+
+.callButton:hover {
+  background-color: #3d5f4d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(41, 75, 58, 0.4);
+}
+
+.formButton {
+  background-color: #b8894a;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(184, 137, 74, 0.3);
+}
+
+.formButton:hover {
+  background-color: #a67a3f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(184, 137, 74, 0.4);
+}
+
+.formSection {
+  background-color: #f7f3ee;
+  padding: 4.5rem 1.5rem 5.5rem;
+  scroll-margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .formSection {
+    padding: 5.5rem 4rem 6.5rem;
+  }
+}
+
+.formWrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.formContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  box-shadow: 0 14px 30px rgba(39, 32, 22, 0.26);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .formContainer {
+    flex-direction: row;
+  }
+}
+
+.form {
+  padding: 2rem 1.5rem;
+  width: 100%;
+  background-color: #294b3a;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .form {
+    padding: 3rem 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .form {
+    padding: 3rem 2.5rem;
+    flex: 1;
+  }
+}
+
+.formTitle {
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-size: clamp(2rem, 3vw + 1rem, 2.5rem);
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: #ffffff;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.formLabel {
+  font-size: clamp(1.1rem, 2vw + 0.5rem, 1.5rem);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+}
+
+.formInput,
+.formTextarea {
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #ffffff;
+  background-color: rgba(41, 75, 58, 0.8);
+  transition: all 0.3s ease;
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: rgba(184, 137, 74, 0.8);
+  background-color: rgba(41, 75, 58, 0.95);
+  box-shadow: 0 0 0 3px rgba(184, 137, 74, 0.3);
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.submitButton {
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  color: #294b3a;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.submitButton:hover {
+  background-color: #f7f3ee;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.formImage {
+  display: none;
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+  overflow: hidden;
+  background-color: #e8e0d5;
+}
+
+@media (min-width: 1024px) {
+  .formImage {
+    display: block;
+    flex: 0 0 45%;
+    max-width: 45%;
+    min-height: 100%;
+  }
+}
+
+.image {
+  object-fit: cover;
+}
+
+.mapSection {
+  width: 100%;
+  padding: 0;
+}
+
+.mapContainer {
+  width: 100%;
+  height: 450px;
+}
+
+.mapContainer iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@media (max-width: 767px) {
+  .mapContainer {
+    height: 350px;
+  }
+}
