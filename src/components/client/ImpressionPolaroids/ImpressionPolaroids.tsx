@@ -53,22 +53,16 @@ function Card({ containerRef, src, alt, top, left, rotate, className }: CardProp
   }, [])
 
   return (
-    <motion.div
+    <motion.img
       onMouseDown={updateZIndex}
       style={{ top, left, rotate, zIndex }}
       className={cn(styles.dragElement, className)}
+      src={src}
+      alt={alt}
       drag
       dragConstraints={containerRef}
       dragElastic={0.65}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes="(max-width: 768px) 150px, 250px"
-        className={styles.image}
-      />
-    </motion.div>
+    />
   )
 }
 

@@ -123,6 +123,8 @@
 
 .detailContent {
   color: #f8f4ec;
+  display: flex;
+  flex-direction: column;
 }
 
 .detailBar {
@@ -132,6 +134,7 @@
   border-radius: 999px;
   margin-bottom: 1.1rem;
   background-color: rgba(248, 244, 236, 0.9);
+  align-self: flex-start;
 }
 
 .detailTitle {
@@ -140,6 +143,7 @@
   margin: 0 0 1rem;
   color: #fdfbf7;
   line-height: 1.3;
+  align-self: flex-start;
 }
 
 .detailBody {

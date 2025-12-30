@@ -80,21 +80,17 @@
   cursor: grab;
   border-radius: 2px;
   box-shadow: 0 8px 24px rgba(16, 10, 4, 0.15);
-  background-color: #ffffff;
-  padding: 0.5rem 0.5rem 2rem;
+  background-color: #e5e7eb; /* neutral-200 */
+  padding: 0.25rem; /* p-1 */
+  padding-bottom: 1rem; /* pb-4 */
   transition: box-shadow 0.2s ease;
-  overflow: hidden;
-  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
 }
 
 .dragElement:active {
   cursor: grabbing;
   box-shadow: 0 12px 32px rgba(16, 10, 4, 0.25);
-}
-
-.image {
-  object-fit: cover;
-  pointer-events: none;
 }
 
 /* Tailwind-like responsive widths */
