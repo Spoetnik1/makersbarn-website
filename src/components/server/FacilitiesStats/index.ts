@@ -1,0 +1,2 @@
+export { FacilitiesStats } from './FacilitiesStats'
+

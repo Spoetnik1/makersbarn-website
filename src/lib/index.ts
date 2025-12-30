@@ -16,3 +16,16 @@ export {
   type ValidationResult,
 } from './validation'
 export { getImageAltText } from './imageAltText'
+export {
+  generateOrganizationSchema,
+  generateLocalBusinessSchema,
+  generateWebSiteSchema,
+  generateBreadcrumbListSchema,
+  generatePageBreadcrumbs,
+  generateContactPageSchema,
+  type OrganizationSchema,
+  type LocalBusinessSchema,
+  type WebSiteSchema,
+  type BreadcrumbListSchema,
+  type ContactPageSchema,
+} from './structuredData'

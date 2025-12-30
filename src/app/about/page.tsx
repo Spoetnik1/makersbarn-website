@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
-import { TeamGrid } from '@/components/server'
+import { TeamGrid, StructuredData } from '@/components/server'
 import { generatePageMetadata } from '@/lib/metadata'
+import { generatePageBreadcrumbs } from '@/lib/structuredData'
+import { Route } from '@/types'
 import styles from './page.module.css'
 
 export const metadata: Metadata = generatePageMetadata({
@@ -26,21 +28,26 @@ const ABOUT_CONTENT = {
 
 export default function AboutPage() {
   return (
-    <div className={styles.about}>
-      <section className={styles.hero}>
-        <header className={styles.header}>
-          <h1 className={styles.title}>{ABOUT_CONTENT.title}</h1>
-          <p className={styles.intro}>{ABOUT_CONTENT.intro}</p>
-          <p className={`${styles.intro} ${styles.secondary}`}>{ABOUT_CONTENT.secondary}</p>
-        </header>
-      </section>
+    <>
+      <StructuredData
+        data={[generatePageBreadcrumbs({ name: 'About Us', path: Route.ABOUT })]}
+      />
+      <div className={styles.about}>
+        <section className={styles.hero}>
+          <header className={styles.header}>
+            <h1 className={styles.title}>{ABOUT_CONTENT.title}</h1>
+            <p className={styles.intro}>{ABOUT_CONTENT.intro}</p>
+            <p className={`${styles.intro} ${styles.secondary}`}>{ABOUT_CONTENT.secondary}</p>
+          </header>
+        </section>
 
-      <section className={styles.team}>
-        <div className={styles.teamContainer}>
-          <h2 className={styles.teamTitle}>{ABOUT_CONTENT.teamTitle}</h2>
-          <TeamGrid />
-        </div>
-      </section>
-    </div>
+        <section className={styles.team}>
+          <div className={styles.teamContainer}>
+            <h2 className={styles.teamTitle}>{ABOUT_CONTENT.teamTitle}</h2>
+            <TeamGrid />
+          </div>
+        </section>
+      </div>
+    </>
   )
 }

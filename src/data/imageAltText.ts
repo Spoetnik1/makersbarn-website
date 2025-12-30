@@ -28,7 +28,7 @@ export const IMAGE_ALT_TEXT: Record<string, Record<Language, string>> = {
     [Language.NL]: '',
   },
 
-  // Accommodation images
+  // Facilities images
   '/images/hay-house-against-sun.jpg': {
     [Language.EN]: 'Hay House glowing in the evening sun',
     [Language.NL]: '',
@@ -98,11 +98,11 @@ export const IMAGE_ALT_TEXT: Record<string, Record<Language, string>> = {
     [Language.NL]: '',
   },
   '/images/two-beds-in-horizon.jpg': {
-    [Language.EN]: 'Two beds in the Horizon accommodation space',
+    [Language.EN]: 'Two beds in the Horizon facilities space',
     [Language.NL]: '',
   },
   '/images/single-bed-with-wood.jpg': {
-    [Language.EN]: 'Single bed with wooden details in Horizon accommodation',
+    [Language.EN]: 'Single bed with wooden details in Horizon facilities',
     [Language.NL]: '',
   },
 

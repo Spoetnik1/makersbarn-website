@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { ContactForm } from '@/components/client'
+import { StructuredData } from '@/components/server'
 import { generatePageMetadata } from '@/lib/metadata'
+import { generateContactPageSchema, generatePageBreadcrumbs } from '@/lib/structuredData'
+import { Route } from '@/types'
 
 export const metadata: Metadata = generatePageMetadata({
   title: 'Contact',
@@ -10,5 +13,15 @@ export const metadata: Metadata = generatePageMetadata({
 })
 
 export default function ContactPage() {
-  return <ContactForm />
+  return (
+    <>
+      <StructuredData
+        data={[
+          generateContactPageSchema(),
+          generatePageBreadcrumbs({ name: 'Contact', path: Route.CONTACT }),
+        ]}
+      />
+      <ContactForm />
+    </>
+  )
 }

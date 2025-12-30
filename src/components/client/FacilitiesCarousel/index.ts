@@ -1,0 +1,2 @@
+export { FacilitiesCarousel } from './FacilitiesCarousel'
+

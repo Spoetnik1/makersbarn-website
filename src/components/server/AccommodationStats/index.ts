@@ -1,1 +1,0 @@
-export { AccommodationStats } from './AccommodationStats'

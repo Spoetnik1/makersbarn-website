@@ -1,10 +1,10 @@
-import { ACCOMMODATION_STATS } from '@/data'
-import styles from './AccommodationStats.module.css'
+import { FACILITIES_STATS } from '@/data'
+import styles from './FacilitiesStats.module.css'
 
-export function AccommodationStats() {
+export function FacilitiesStats() {
   return (
     <section className={styles.stats}>
-      {ACCOMMODATION_STATS.map((stat) => (
+      {FACILITIES_STATS.map((stat) => (
         <div key={stat.number} className={styles.item}>
           <div className={styles.number}>{stat.number}</div>
           <div className={styles.description}>{stat.description}</div>
@@ -13,3 +13,4 @@ export function AccommodationStats() {
     </section>
   )
 }
+

@@ -1,4 +1,4 @@
-export const ACCOMMODATION_COLORS = {
+export const FACILITIES_COLORS = {
   HAY_HOUSE: '#b8894a',
   COSMOS: '#7d6fa6',
   HORIZON: '#5b8b5b',
@@ -7,4 +7,4 @@ export const ACCOMMODATION_COLORS = {
   IN_BETWEEN: '#94775a',
 } as const
 
-export type AccommodationColor = (typeof ACCOMMODATION_COLORS)[keyof typeof ACCOMMODATION_COLORS]
+export type FacilitiesColor = (typeof FACILITIES_COLORS)[keyof typeof FACILITIES_COLORS]

@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Quicksand } from 'next/font/google'
 import { Navbar } from '@/components/client'
-import { Footer } from '@/components/server'
+import { Footer, StructuredData } from '@/components/server'
 import { baseMetadata } from '@/lib/metadata'
+import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/structuredData'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -27,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${quicksand.variable}`}>
       <body>
+        <StructuredData data={[generateOrganizationSchema(), generateWebSiteSchema()]} />
         <div className="layout">
           <Navbar />
           <main className="main-content">{children}</main>

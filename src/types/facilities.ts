@@ -1,12 +1,12 @@
-export enum AccommodationCategory {
+export enum FacilitiesCategory {
   GROUP_ACCOMMODATION = 'Group Accommodation',
   WORKSHOP_SPACE = 'Workshop Space',
   OUTDOORS = 'Outdoors',
 }
 
-export interface AccommodationOption {
+export interface FacilitiesOption {
   id: string
-  label: AccommodationCategory
+  label: FacilitiesCategory
   title: string
   image: string
   color: string
@@ -15,7 +15,8 @@ export interface AccommodationOption {
   features?: string[]
 }
 
-export interface AccommodationStat {
+export interface FacilitiesStat {
   number: string
   description: string
 }
+

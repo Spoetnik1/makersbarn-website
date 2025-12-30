@@ -3,11 +3,11 @@
 import React, { useState, useEffect, useCallback, memo } from 'react'
 import { motion, useMotionValue } from 'framer-motion'
 import Image from 'next/image'
-import { ACCOMMODATION_OPTIONS } from '@/data'
+import { FACILITIES_OPTIONS } from '@/data'
 import { SPRING_OPTIONS, DRAG_BUFFER, DEFAULT_LANGUAGE } from '@/constants'
-import { AccommodationOption } from '@/types'
+import { FacilitiesOption } from '@/types'
 import { getImageAltText } from '@/lib'
-import styles from './AccommodationCarousel.module.css'
+import styles from './FacilitiesCarousel.module.css'
 
 function scrollToOption(id: string) {
   const el = document.getElementById(id)
@@ -16,15 +16,15 @@ function scrollToOption(id: string) {
   }
 }
 
-interface AccommodationDetailProps {
-  option: AccommodationOption
+interface FacilitiesDetailProps {
+  option: FacilitiesOption
   index: number
 }
 
-const AccommodationDetailSection = memo(function AccommodationDetailSection({
+const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
   option,
   index,
-}: AccommodationDetailProps) {
+}: FacilitiesDetailProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const images = option.images && option.images.length > 0 ? option.images : [option.image]
   const isReversed = index % 2 === 1
@@ -129,11 +129,11 @@ const AccommodationDetailSection = memo(function AccommodationDetailSection({
   )
 })
 
-export function AccommodationCarousel() {
+export function FacilitiesCarousel() {
   return (
     <>
       <div className={styles.grid}>
-        {ACCOMMODATION_OPTIONS.map((option) => (
+        {FACILITIES_OPTIONS.map((option) => (
           <button
             key={option.id}
             type="button"
@@ -162,10 +162,11 @@ export function AccommodationCarousel() {
       </div>
 
       <section className={styles.details}>
-        {ACCOMMODATION_OPTIONS.map((option, index) => (
-          <AccommodationDetailSection key={option.id} option={option} index={index} />
+        {FACILITIES_OPTIONS.map((option, index) => (
+          <FacilitiesDetailSection key={option.id} option={option} index={index} />
         ))}
       </section>
     </>
   )
 }
+

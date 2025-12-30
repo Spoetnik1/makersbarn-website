@@ -1,17 +1,17 @@
-.accommodation {
+.facilities {
   background-color: #f4efe6;
   background-image: radial-gradient(circle at top left, #f8f4ec 0, #f4efe6 55%, #ebdfcf 100%);
   padding: 3rem 1rem 4rem;
 }
 
 @media (min-width: 640px) {
-  .accommodation {
+  .facilities {
     padding: 4.5rem 1.5rem 5.5rem;
   }
 }
 
 @media (min-width: 768px) {
-  .accommodation {
+  .facilities {
     padding: 5.5rem 4rem 6.5rem;
   }
 }

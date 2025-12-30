@@ -1,14 +1,14 @@
-import { AccommodationOption, AccommodationCategory, AccommodationStat } from '@/types'
-import { ACCOMMODATION_COLORS } from '@/constants'
+import { FacilitiesOption, FacilitiesCategory, FacilitiesStat } from '@/types'
+import { FACILITIES_COLORS } from '@/constants'
 import { IMAGES } from './images'
 
-export const ACCOMMODATION_OPTIONS: AccommodationOption[] = [
+export const FACILITIES_OPTIONS: FacilitiesOption[] = [
   {
     id: 'hay-house',
-    label: AccommodationCategory.GROUP_ACCOMMODATION,
+    label: FacilitiesCategory.GROUP_ACCOMMODATION,
     title: 'Enchanting Hay House',
     image: IMAGES.accommodation.hayHouseSun,
-    color: ACCOMMODATION_COLORS.HAY_HOUSE,
+    color: FACILITIES_COLORS.HAY_HOUSE,
     images: [
       IMAGES.accommodation.hayHouseSun,
       IMAGES.accommodation.hayHouseBench,
@@ -24,10 +24,10 @@ export const ACCOMMODATION_OPTIONS: AccommodationOption[] = [
   },
   {
     id: 'cosmos',
-    label: AccommodationCategory.WORKSHOP_SPACE,
+    label: FacilitiesCategory.WORKSHOP_SPACE,
     title: 'The Cosmos',
     image: IMAGES.accommodation.cosmosOutside,
-    color: ACCOMMODATION_COLORS.COSMOS,
+    color: FACILITIES_COLORS.COSMOS,
     images: [
       IMAGES.accommodation.cosmosOutside,
       IMAGES.accommodation.cosmosView,
@@ -42,10 +42,10 @@ export const ACCOMMODATION_OPTIONS: AccommodationOption[] = [
   },
   {
     id: 'horizon',
-    label: AccommodationCategory.OUTDOORS,
+    label: FacilitiesCategory.OUTDOORS,
     title: 'Horizon',
     image: IMAGES.accommodation.atticChill,
-    color: ACCOMMODATION_COLORS.HORIZON,
+    color: FACILITIES_COLORS.HORIZON,
     images: [
       IMAGES.accommodation.atticChill,
       IMAGES.accommodation.atticBeds,
@@ -56,10 +56,10 @@ export const ACCOMMODATION_OPTIONS: AccommodationOption[] = [
   },
   {
     id: 'sauna',
-    label: AccommodationCategory.OUTDOORS,
+    label: FacilitiesCategory.OUTDOORS,
     title: 'Sauna & Hot Tub',
     image: IMAGES.accommodation.sauna,
-    color: ACCOMMODATION_COLORS.SAUNA,
+    color: FACILITIES_COLORS.SAUNA,
     images: [
       IMAGES.accommodation.sauna,
       IMAGES.accommodation.hotTubInField,
@@ -69,10 +69,10 @@ export const ACCOMMODATION_OPTIONS: AccommodationOption[] = [
   },
   {
     id: 'pond',
-    label: AccommodationCategory.OUTDOORS,
+    label: FacilitiesCategory.OUTDOORS,
     title: 'Swimming Pond',
     image: IMAGES.accommodation.pondComplete,
-    color: ACCOMMODATION_COLORS.POND,
+    color: FACILITIES_COLORS.POND,
     images: [
       IMAGES.accommodation.pondComplete,
       IMAGES.accommodation.yogaPondJettyReflection,
@@ -82,10 +82,10 @@ export const ACCOMMODATION_OPTIONS: AccommodationOption[] = [
   },
   {
     id: 'in-between',
-    label: AccommodationCategory.WORKSHOP_SPACE,
+    label: FacilitiesCategory.WORKSHOP_SPACE,
     title: 'Everything in Between',
     image: IMAGES.accommodation.ducks,
-    color: ACCOMMODATION_COLORS.IN_BETWEEN,
+    color: FACILITIES_COLORS.IN_BETWEEN,
     images: [
       IMAGES.accommodation.ducks,
       IMAGES.accommodation.mainHouse,
@@ -102,7 +102,7 @@ export const ACCOMMODATION_OPTIONS: AccommodationOption[] = [
   },
 ]
 
-export const ACCOMMODATION_STATS: AccommodationStat[] = [
+export const FACILITIES_STATS: FacilitiesStat[] = [
   {
     number: '60m²+',
     description: 'Open space practice hall.',
@@ -116,3 +116,4 @@ export const ACCOMMODATION_STATS: AccommodationStat[] = [
     description: 'Of private land, a natural swimming pond, sauna, and fire circle.',
   },
 ]
+

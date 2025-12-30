@@ -1,6 +1,6 @@
 export * from './common'
 export * from './contact'
 export * from './navigation'
-export * from './accommodation'
+export * from './facilities'
 export * from './team'
 export * from './testimonial'

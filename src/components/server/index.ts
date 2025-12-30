@@ -1,4 +1,5 @@
 export { Footer } from './Footer'
-export { AccommodationStats } from './AccommodationStats'
+export { FacilitiesStats } from './FacilitiesStats'
 export { HeroDetails } from './HeroDetails'
 export { TeamGrid } from './TeamGrid'
+export { StructuredData } from './StructuredData'

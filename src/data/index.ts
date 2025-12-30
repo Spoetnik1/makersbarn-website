@@ -1,5 +1,5 @@
 export * from './images'
-export * from './accommodation'
+export * from './facilities'
 export * from './team'
 export * from './testimonials'
 export * from './imageAltText'
