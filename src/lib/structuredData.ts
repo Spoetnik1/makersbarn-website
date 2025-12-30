@@ -1,9 +1,10 @@
 import { Route } from '@/types'
 import { FOOTER_ADDRESS, FOOTER_EMAIL, SOCIAL_LINKS } from '@/constants/footer'
 import { CONTACT_PHONE_NUMBER } from '@/constants/contact'
+import { SITE_CONFIG } from '@/constants/site'
 
-const SITE_NAME = "The Maker's Barn"
-const SITE_URL = 'https://themakersbarn.com'
+const SITE_NAME = SITE_CONFIG.name
+const SITE_URL = SITE_CONFIG.url
 
 export interface OrganizationSchema {
   '@context': string

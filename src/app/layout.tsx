@@ -4,6 +4,7 @@ import { LanguageWrapper, Navbar } from '@/components/client'
 import { Footer, StructuredData } from '@/components/server'
 import { baseMetadata } from '@/lib/metadata'
 import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/structuredData'
+import { LANG_ATTRIBUTES, DEFAULT_LANGUAGE } from '@/constants/languages'
 import { getServerLanguage } from '@/i18n'
 import './globals.css'
 
@@ -27,9 +28,10 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const language = await getServerLanguage()
+  const langAttribute = LANG_ATTRIBUTES[language] || LANG_ATTRIBUTES[DEFAULT_LANGUAGE]
 
   return (
-    <html lang={language} className={`${playfair.variable} ${quicksand.variable}`}>
+    <html lang={langAttribute} className={`${playfair.variable} ${quicksand.variable}`}>
       <body>
         <StructuredData data={[generateOrganizationSchema(), generateWebSiteSchema()]} />
         <LanguageWrapper initialLanguage={language}>

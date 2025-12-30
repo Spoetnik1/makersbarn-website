@@ -4,6 +4,7 @@ import { FacilitiesStats, StructuredData } from '@/components/server'
 import { generatePageMetadata } from '@/lib/metadata'
 import { generateLocalBusinessSchema, generatePageBreadcrumbs } from '@/lib/structuredData'
 import { Route } from '@/types'
+import { SITE_CONFIG } from '@/constants/site'
 import { getServerTranslations } from '@/i18n'
 import styles from './page.module.css'
 
@@ -23,7 +24,7 @@ export default async function FacilitiesPage() {
         data={[
           generateLocalBusinessSchema({
             type: 'LodgingBusiness',
-            image: 'https://themakersbarn.com/images/main-house.jpg',
+            image: `${SITE_CONFIG.url}/images/main-house.jpg`,
           }),
           generatePageBreadcrumbs({ name: t.facilities.title, path: Route.FACILITIES }),
         ]}

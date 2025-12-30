@@ -1,10 +1,9 @@
 import { MetadataRoute } from 'next'
 import { Route } from '@/types'
-
-const SITE_URL = 'https://themakersbarn.com'
+import { SITE_CONFIG } from '@/constants/site'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = SITE_URL
+  const baseUrl = SITE_CONFIG.url
 
   // Define all pages with their priorities and change frequencies
   const routes = [

@@ -6,3 +6,12 @@ export const LANGUAGE_OPTIONS: LanguageOption[] = [
 ]
 
 export const DEFAULT_LANGUAGE = Language.EN
+
+/**
+ * HTML lang attribute values for proper locale specification
+ * Used in <html lang="..."> for SEO and accessibility
+ */
+export const LANG_ATTRIBUTES: Record<Language, string> = {
+  [Language.EN]: 'en-GB',
+  [Language.NL]: 'nl-NL',
+}
