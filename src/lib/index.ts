@@ -15,3 +15,4 @@ export {
   type ValidatedContactFormData,
   type ValidationResult,
 } from './validation'
+export { getImageAltText } from './imageAltText'
