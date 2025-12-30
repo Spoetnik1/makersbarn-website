@@ -2,6 +2,7 @@ export const IMAGES = {
   hero: {
     fieldWalking: '/images/field-walking-women.jpg',
     sauna: '/images/sauna.jpg',
+    arialOverview: '/images/arial-overview.JPG',
   },
   accommodation: {
     hayHouseSun: '/images/hay-house-against-sun.jpg',
@@ -37,7 +38,8 @@ export const IMAGES = {
 } as const
 
 export const CAROUSEL_IMAGES = [
-  IMAGES.accommodation.mainHouse,
+  IMAGES.accommodation.fieldWalking,
+  IMAGES.accommodation.pondComplete,
   IMAGES.accommodation.hayHouseSun,
   IMAGES.accommodation.atticBeds,
   IMAGES.accommodation.cosmosView,
@@ -48,8 +50,8 @@ export const CAROUSEL_IMAGES = [
   IMAGES.accommodation.teahouse,
   IMAGES.accommodation.outsideWalk,
   IMAGES.accommodation.ducks,
-  IMAGES.team.benny,
   IMAGES.accommodation.quoteImage,
+  IMAGES.accommodation.mainHouse,
 ] as const
 
 export const POLAROID_IMAGES = [

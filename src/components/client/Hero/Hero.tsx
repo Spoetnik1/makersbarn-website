@@ -3,7 +3,8 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { IMAGES } from '@/data'
-import { HERO_ANIMATION } from '@/constants'
+import { HERO_ANIMATION, DEFAULT_LANGUAGE } from '@/constants'
+import { getImageAltText } from '@/lib'
 import styles from './Hero.module.css'
 
 const HERO_CONTENT = {
@@ -17,8 +18,8 @@ export function Hero() {
   return (
     <section className={styles.hero}>
       <Image
-        src={IMAGES.hero.fieldWalking}
-        alt="Retreat guests walking through the fields around The Makers Barn"
+        src={IMAGES.accommodation.practiceRoomsWithMats}
+        alt={getImageAltText(IMAGES.accommodation.practiceRoomsWithMats, DEFAULT_LANGUAGE)}
         fill
         priority
         sizes="100vw"

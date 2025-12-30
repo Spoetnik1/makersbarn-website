@@ -4,7 +4,8 @@ import { useEffect, useState, useCallback } from 'react'
 import { motion, useMotionValue } from 'framer-motion'
 import Image from 'next/image'
 import { CAROUSEL_IMAGES } from '@/data'
-import { SPRING_OPTIONS, DRAG_BUFFER } from '@/constants'
+import { SPRING_OPTIONS, DRAG_BUFFER, DEFAULT_LANGUAGE } from '@/constants'
+import { getImageAltText } from '@/lib'
 import styles from './ImpressionCarousel.module.css'
 
 const AUTO_DELAY_MS = 10000
@@ -69,7 +70,7 @@ export function ImpressionCarousel() {
             >
               <Image
                 src={imgSrc}
-                alt={`Impression ${idx + 1}`}
+                alt={getImageAltText(imgSrc, DEFAULT_LANGUAGE)}
                 fill
                 sizes="(max-width: 768px) 100vw, 80vw"
                 className={styles.imageInner}

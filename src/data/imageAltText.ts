@@ -15,6 +15,10 @@ export const IMAGE_ALT_TEXT: Record<string, Record<Language, string>> = {
     [Language.EN]: 'Outdoor sauna at The Makers Barn',
     [Language.NL]: '',
   },
+  '/images/arial-overview.JPG': {
+    [Language.EN]: 'Aerial overview of The Makers Barn and surrounding countryside',
+    [Language.NL]: '',
+  },
   '/images/hot-tub-in-field.jpeg': {
     [Language.EN]: 'Hot tub in the field at The Makers Barn',
     [Language.NL]: '',

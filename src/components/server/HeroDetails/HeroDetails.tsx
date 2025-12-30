@@ -47,7 +47,7 @@ export function HeroDetails() {
         <div className={styles.imageWrap} aria-hidden="true">
           <div className={styles.imageArch}>
             <Image
-              src={IMAGES.hero.sauna}
+              src={IMAGES.accommodation.hayHouseBench}
               alt=""
               fill
               sizes="(max-width: 960px) 360px, 420px"
