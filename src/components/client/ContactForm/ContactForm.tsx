@@ -1,12 +1,13 @@
 'use client'
 
-import { useState, useCallback, FormEvent, ChangeEvent } from 'react'
+import { useState, useCallback, useMemo, FormEvent, ChangeEvent } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { IMAGES } from '@/data'
-import { CONTACT_URLS, ANCHOR_IDS, CONTACT_FORM_MESSAGES } from '@/constants'
+import { CONTACT_URLS, ANCHOR_IDS } from '@/constants'
 import { submitContactForm } from '@/actions'
 import { FormStatus, type ContactFormData } from '@/types'
+import { useTranslation } from '@/context'
 import styles from './ContactForm.module.css'
 
 const INITIAL_FORM_DATA: ContactFormData = {
@@ -23,31 +24,23 @@ const FORM_FIELD_IDS = {
   MESSAGE: 'contact-message',
 } as const
 
-const FORM_LABELS = {
-  name: 'Hi! My name is...',
-  email: 'and you can reach me at...',
-  phone: 'or call me at...',
-  message: "I'd love to ask about...",
-} as const
-
-const FORM_PLACEHOLDERS = {
-  name: 'Your name...',
-  email: 'Your email...',
-  phone: 'Your phone number...',
-  message: 'Whatever your heart desires :)',
-} as const
-
-const STATUS_MESSAGES = {
-  [FormStatus.SUCCESS]: CONTACT_FORM_MESSAGES.SUCCESS,
-  [FormStatus.ERROR]: CONTACT_FORM_MESSAGES.UNEXPECTED_ERROR,
-  [FormStatus.LOADING]: CONTACT_FORM_MESSAGES.LOADING,
-  [FormStatus.IDLE]: '',
-} as const
-
 export function ContactForm() {
   const [formData, setFormData] = useState<ContactFormData>(INITIAL_FORM_DATA)
   const [status, setStatus] = useState<FormStatus>(FormStatus.IDLE)
   const [statusMessage, setStatusMessage] = useState<string>('')
+
+  const { t: contact } = useTranslation('contact')
+  const { t: common } = useTranslation('common')
+
+  const statusMessages = useMemo(
+    () => ({
+      [FormStatus.SUCCESS]: contact.messages.success,
+      [FormStatus.ERROR]: contact.messages.unexpectedError,
+      [FormStatus.LOADING]: contact.messages.loading,
+      [FormStatus.IDLE]: '',
+    }),
+    [contact.messages]
+  )
 
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -58,7 +51,7 @@ export function ContactForm() {
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       setStatus(FormStatus.LOADING)
-      setStatusMessage(STATUS_MESSAGES[FormStatus.LOADING])
+      setStatusMessage(statusMessages[FormStatus.LOADING])
 
       try {
         const result = await submitContactForm(formData)
@@ -73,10 +66,10 @@ export function ContactForm() {
         }
       } catch {
         setStatus(FormStatus.ERROR)
-        setStatusMessage(STATUS_MESSAGES[FormStatus.ERROR])
+        setStatusMessage(statusMessages[FormStatus.ERROR])
       }
     },
-    [formData]
+    [formData, statusMessages]
   )
 
   const isSubmitting = status === FormStatus.LOADING
@@ -85,17 +78,13 @@ export function ContactForm() {
     <div className={styles.contact}>
       <section className={styles.introSection}>
         <div className={styles.introContent}>
-          <h1 className={styles.introTitle}>Get in Touch</h1>
-          <p className={styles.introText}>
-            We&apos;d love to hear from you! Whether you&apos;re planning a retreat, workshop, or
-            just want to learn more about Maker&apos;s Barn, we&apos;re here to help. Choose the way
-            that works best for&nbsp;you:
-          </p>
+          <h1 className={styles.introTitle}>{contact.pageTitle}</h1>
+          <p className={styles.introText}>{contact.introText}</p>
           <div className={styles.introOptions}>
             <div className={styles.introOption}>
               <div className={styles.optionHeader}>
-                <strong>WhatsApp</strong>
-                <p className={styles.optionDesc}>Send us a quick message for instant communication</p>
+                <strong>{contact.options.whatsapp.title}</strong>
+                <p className={styles.optionDesc}>{contact.options.whatsapp.description}</p>
               </div>
               <a
                 href={CONTACT_URLS.WHATSAPP}
@@ -104,27 +93,27 @@ export function ContactForm() {
                 className={`${styles.introButton} ${styles.whatsappButton}`}
               >
                 <WhatsAppIcon />
-                Get in touch on WhatsApp
+                {contact.options.whatsapp.buttonText}
               </a>
             </div>
             <div className={styles.introOption}>
               <div className={styles.optionHeader}>
-                <strong>Send an Email</strong>
-                <p className={styles.optionDesc}>Drop us a line and we&apos;ll get back to you</p>
+                <strong>{contact.options.email.title}</strong>
+                <p className={styles.optionDesc}>{contact.options.email.description}</p>
               </div>
               <a href="mailto:info@makersbarn.com" className={`${styles.introButton} ${styles.callButton}`}>
                 <EmailIcon />
-                Send an Email
+                {contact.options.email.buttonText}
               </a>
             </div>
             <div className={styles.introOption}>
               <div className={styles.optionHeader}>
-                <strong>Contact Form</strong>
-                <p className={styles.optionDesc}>Fill out the form below and we&apos;ll get back to you</p>
+                <strong>{contact.options.form.title}</strong>
+                <p className={styles.optionDesc}>{contact.options.form.description}</p>
               </div>
               <a href={`#${ANCHOR_IDS.CONTACT_FORM}`} className={`${styles.introButton} ${styles.formButton}`}>
                 <ClipboardIcon />
-                Go to Contact Form
+                {contact.options.form.buttonText}
               </a>
             </div>
           </div>
@@ -135,11 +124,11 @@ export function ContactForm() {
         <div className={styles.formWrapper}>
           <div className={styles.formContainer}>
             <form onSubmit={handleSubmit} className={styles.form}>
-              <h3 className={styles.formTitle}>Contact us</h3>
+              <h3 className={styles.formTitle}>{contact.formTitle}</h3>
 
               <div className={styles.formGroup}>
                 <label htmlFor={FORM_FIELD_IDS.NAME} className={styles.formLabel}>
-                  {FORM_LABELS.name}
+                  {contact.labels.name}
                 </label>
                 <input
                   id={FORM_FIELD_IDS.NAME}
@@ -147,7 +136,7 @@ export function ContactForm() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder={FORM_PLACEHOLDERS.name}
+                  placeholder={contact.placeholders.name}
                   className={styles.formInput}
                   required
                 />
@@ -155,7 +144,7 @@ export function ContactForm() {
 
               <div className={styles.formGroup}>
                 <label htmlFor={FORM_FIELD_IDS.EMAIL} className={styles.formLabel}>
-                  {FORM_LABELS.email}
+                  {contact.labels.email}
                 </label>
                 <input
                   id={FORM_FIELD_IDS.EMAIL}
@@ -163,7 +152,7 @@ export function ContactForm() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder={FORM_PLACEHOLDERS.email}
+                  placeholder={contact.placeholders.email}
                   className={styles.formInput}
                   required
                 />
@@ -171,7 +160,7 @@ export function ContactForm() {
 
               <div className={styles.formGroup}>
                 <label htmlFor={FORM_FIELD_IDS.PHONE} className={styles.formLabel}>
-                  {FORM_LABELS.phone}
+                  {contact.labels.phone}
                 </label>
                 <input
                   id={FORM_FIELD_IDS.PHONE}
@@ -179,21 +168,21 @@ export function ContactForm() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder={FORM_PLACEHOLDERS.phone}
+                  placeholder={contact.placeholders.phone}
                   className={styles.formInput}
                 />
               </div>
 
               <div className={styles.formGroup}>
                 <label htmlFor={FORM_FIELD_IDS.MESSAGE} className={styles.formLabel}>
-                  {FORM_LABELS.message}
+                  {contact.labels.message}
                 </label>
                 <textarea
                   id={FORM_FIELD_IDS.MESSAGE}
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder={FORM_PLACEHOLDERS.message}
+                  placeholder={contact.placeholders.message}
                   className={styles.formTextarea}
                   required
                 />
@@ -217,13 +206,13 @@ export function ContactForm() {
                 className={styles.submitButton}
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Sending...' : 'Submit'}
+                {isSubmitting ? contact.buttons.submitting : contact.buttons.submit}
               </motion.button>
             </form>
             <div className={styles.formImage}>
               <Image
                 src={IMAGES.accommodation.hayHouseBench}
-                alt="Maker's Barn"
+                alt={common.logoAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 className={styles.image}
@@ -243,7 +232,7 @@ export function ContactForm() {
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="Maker's Barn Location"
+            title={common.logoAlt}
             sandbox="allow-scripts allow-same-origin"
           />
         </div>

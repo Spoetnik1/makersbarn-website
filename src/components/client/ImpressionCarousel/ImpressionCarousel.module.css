@@ -39,10 +39,79 @@
 }
 
 .container {
+  position: relative;
   max-width: 1180px;
   margin: 0 auto;
   padding: 0 1rem;
   overflow: hidden;
+}
+
+/* Navigation Arrows */
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: #5c554c;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.container:hover .navButton {
+  opacity: 1;
+}
+
+.navButton:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.navButton:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.navButton:focus-visible {
+  opacity: 1;
+  outline: 2px solid #8a7760;
+  outline-offset: 2px;
+}
+
+.navButtonPrev {
+  left: 24px;
+}
+
+.navButtonNext {
+  right: 24px;
+}
+
+@media (max-width: 768px) {
+  .navButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .navButtonPrev {
+    left: 12px;
+  }
+
+  .navButtonNext {
+    right: 12px;
+  }
+
+  .navButton svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .track {
@@ -105,6 +174,16 @@
 
 .imageInner {
   object-fit: cover;
+}
+
+.imageClickable {
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+.imageClickable:focus-visible {
+  outline: 3px solid #8a7760;
+  outline-offset: 4px;
 }
 
 @media (min-width: 768px) {

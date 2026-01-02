@@ -19,6 +19,12 @@
   text-align: center;
 }
 
+@media (min-width: 1024px) {
+  .introContent {
+    max-width: 1200px;
+  }
+}
+
 .introTitle {
   font-family: 'Playfair Display', 'Times New Roman', serif;
   font-size: clamp(2.4rem, 3vw + 1.4rem, 3rem);
@@ -43,6 +49,16 @@
   margin: 0 auto;
 }
 
+@media (min-width: 1024px) {
+  .introOptions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+    text-align: center;
+  }
+}
+
 .introOption {
   font-size: clamp(0.95rem, 1.2vw + 0.5rem, 1.1rem);
   line-height: 1.7;
@@ -54,6 +70,25 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+  .introOption {
+    padding: 2rem 1.5rem;
+    border-left: none;
+    border-top: 4px solid #b8894a;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 20px rgba(41, 75, 58, 0.08);
+    justify-content: space-between;
+    min-height: 280px;
+  }
+
+  .introOption:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(41, 75, 58, 0.15);
+    background-color: rgba(255, 255, 255, 0.95);
+  }
 }
 
 .optionHeader {
@@ -62,10 +97,24 @@
   gap: 0.5rem;
 }
 
+@media (min-width: 1024px) {
+  .optionHeader {
+    gap: 0.75rem;
+    flex: 1;
+  }
+}
+
 .introOption strong {
   color: #294b3a;
   display: block;
   font-size: clamp(1.1rem, 1.3vw + 0.5rem, 1.3rem);
+}
+
+@media (min-width: 1024px) {
+  .introOption strong {
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+  }
 }
 
 .optionDesc {
@@ -73,6 +122,14 @@
   font-size: clamp(0.9rem, 1vw + 0.4rem, 1rem);
   color: #5a5a5a;
   line-height: 1.6;
+}
+
+@media (min-width: 1024px) {
+  .optionDesc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #666;
+  }
 }
 
 .introButton {
@@ -88,6 +145,17 @@
   transition: all 0.3s ease;
   align-self: flex-start;
   margin-top: 0.25rem;
+}
+
+@media (min-width: 1024px) {
+  .introButton {
+    align-self: center;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+    margin-top: auto;
+    width: 100%;
+    max-width: 220px;
+  }
 }
 
 .whatsappButton {

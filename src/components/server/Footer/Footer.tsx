@@ -1,10 +1,10 @@
 import {
   FOOTER_EMAIL,
   FOOTER_ADDRESS,
-  FOOTER_TAGLINE,
   SOCIAL_LINKS,
 } from '@/constants/footer'
 import { SocialPlatform } from '@/types'
+import { getServerTranslations } from '@/i18n'
 import { InstagramIcon, FacebookIcon, LinkedInIcon } from './SocialIcons'
 import styles from './Footer.module.css'
 
@@ -14,7 +14,8 @@ const ICON_MAP: Record<SocialPlatform, React.ComponentType> = {
   [SocialPlatform.LINKEDIN]: LinkedInIcon,
 }
 
-export function Footer() {
+export async function Footer() {
+  const t = await getServerTranslations()
   const currentYear = new Date().getFullYear()
 
   return (
@@ -22,7 +23,7 @@ export function Footer() {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.section}>
-            <h3 className={styles.heading}>Get in Touch</h3>
+            <h3 className={styles.heading}>{t.footer.getInTouch}</h3>
             <p className={styles.email}>
               <a href={`mailto:${FOOTER_EMAIL}`}>{FOOTER_EMAIL}</a>
             </p>
@@ -36,11 +37,11 @@ export function Footer() {
           </div>
 
           <div className={`${styles.section} ${styles.sectionCenter}`}>
-            <p className={styles.tagline}>{FOOTER_TAGLINE}</p>
+            <p className={styles.tagline}>{t.footer.tagline}</p>
           </div>
 
           <div className={styles.section}>
-            <h3 className={styles.heading}>Follow Us</h3>
+            <h3 className={styles.heading}>{t.footer.followUs}</h3>
             <div className={styles.social}>
               {SOCIAL_LINKS.map((link) => {
                 const Icon = ICON_MAP[link.platform]
@@ -63,7 +64,7 @@ export function Footer() {
 
         <div className={styles.bottom}>
           <p className={styles.copyright}>
-            &copy; {currentYear} Maker&apos;s Barn. All rights reserved.
+            &copy; {currentYear} {t.footer.copyright}
           </p>
         </div>
       </div>

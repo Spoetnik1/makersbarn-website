@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useRef, useState, useCallback, memo } from 'react'
+import React, { useRef, useState, useCallback, memo, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { TESTIMONIALS } from '@/data'
+import { IMAGES } from '@/data'
 import { CardPosition } from '@/types'
+import { useTranslation } from '@/context'
 import styles from './Testimonials.module.css'
 
 const CARD_POSITIONS: CardPosition[] = ['front', 'second', 'third', 'back']
@@ -78,8 +79,20 @@ const Card = memo(function Card({ imgUrl, testimonial, author, position, onShuff
   )
 })
 
+/**
+ * Image mapping for testimonials
+ * Uses team images for testimonial cards
+ */
+const TESTIMONIAL_IMAGES = [
+  IMAGES.team.nana,
+  IMAGES.team.benny,
+  IMAGES.team.noud,
+  IMAGES.team.nana,
+]
+
 export function Testimonials() {
   const [order, setOrder] = useState<CardPosition[]>([...CARD_POSITIONS])
+  const { t: testimonials } = useTranslation('testimonials')
 
   const handleShuffle = useCallback(() => {
     setOrder((prev) => {
@@ -90,14 +103,24 @@ export function Testimonials() {
     })
   }, [])
 
+  // Combine translations with images
+  const testimonialItems = useMemo(
+    () =>
+      testimonials.items.map((item, idx) => ({
+        ...item,
+        imgUrl: TESTIMONIAL_IMAGES[idx] || TESTIMONIAL_IMAGES[0],
+      })),
+    [testimonials.items]
+  )
+
   return (
     <section className={styles.section}>
       <div className={styles.header}>
-        <h2 className={styles.title}>What our guests say</h2>
+        <h2 className={styles.title}>{testimonials.sectionTitle}</h2>
       </div>
       <div className={styles.container}>
         <div className={styles.cardsWrapper}>
-          {TESTIMONIALS.map((testimonial, idx) => (
+          {testimonialItems.map((testimonial, idx) => (
             <Card
               key={testimonial.author}
               imgUrl={testimonial.imgUrl}

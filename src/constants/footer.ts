@@ -14,17 +14,12 @@ export const FOOTER_TAGLINE = 'Where creativity meets tranquility'
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     platform: SocialPlatform.INSTAGRAM,
-    url: 'https://www.instagram.com/makersbarn',
+    url: 'https://www.instagram.com/the.makersbarn/',
     ariaLabel: 'Instagram',
   },
   {
-    platform: SocialPlatform.FACEBOOK,
-    url: 'https://www.facebook.com/makersbarn',
-    ariaLabel: 'Facebook',
-  },
-  {
     platform: SocialPlatform.LINKEDIN,
-    url: 'https://www.linkedin.com/company/makersbarn',
+    url: 'https://www.linkedin.com/company/the-makers-barn',
     ariaLabel: 'LinkedIn',
   },
 ]

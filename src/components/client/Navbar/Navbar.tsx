@@ -5,9 +5,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { GB as EN, NL } from 'country-flag-icons/react/3x2'
-import { NAV_LINKS, LANGUAGE_OPTIONS, DEFAULT_LANGUAGE } from '@/constants'
+import { LANGUAGE_OPTIONS } from '@/constants'
 import { IMAGES } from '@/data'
-import { Language } from '@/types'
+import { Language, Route } from '@/types'
+import { useLanguage, useTranslation } from '@/context'
 import styles from './Navbar.module.css'
 
 const FLAG_MAP = {
@@ -20,12 +21,26 @@ const FLAG_TITLES = {
   [Language.NL]: 'Netherlands',
 } as const
 
+/**
+ * Navigation links with route paths
+ * Labels are retrieved from translations
+ */
+const NAV_ROUTES = [
+  { href: Route.HOME, key: 'home' as const },
+  { href: Route.ABOUT, key: 'about' as const },
+  { href: Route.FACILITIES, key: 'facilities' as const },
+  { href: Route.CONTACT, key: 'contact' as const },
+]
+
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [language, setLanguage] = useState<Language>(DEFAULT_LANGUAGE)
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false)
   const languageDropdownRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
+
+  const { language, setLanguage } = useLanguage()
+  const { t: nav } = useTranslation('nav')
+  const { t: common } = useTranslation('common')
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen((prev) => !prev)
@@ -42,7 +57,7 @@ export function Navbar() {
   const handleLanguageSelect = useCallback((lang: Language) => {
     setLanguage(lang)
     setIsLanguageDropdownOpen(false)
-  }, [])
+  }, [setLanguage])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -70,7 +85,7 @@ export function Navbar() {
         <Link href="/" className={styles.logo} onClick={closeMenu}>
           <Image
             src={IMAGES.logo}
-            alt="Maker's Barn"
+            alt={common.logoAlt}
             width={100}
             height={50}
             className={styles.logoImg}
@@ -81,7 +96,7 @@ export function Navbar() {
         <button
           className={`${styles.toggle} ${isMenuOpen ? styles.toggleActive : ''}`}
           onClick={toggleMenu}
-          aria-label="Toggle menu"
+          aria-label={common.toggleMenu}
           aria-expanded={isMenuOpen}
         >
           <span />
@@ -91,14 +106,14 @@ export function Navbar() {
 
         <div className={`${styles.center} ${isMenuOpen ? styles.centerActive : ''}`}>
           <ul className={styles.menu}>
-            {NAV_LINKS.map((link) => (
-              <li key={link.href} className={styles.item}>
+            {NAV_ROUTES.map((route) => (
+              <li key={route.href} className={styles.item}>
                 <Link
-                  href={link.href}
-                  className={`${styles.link} ${isActive(link.href) ? styles.linkActive : ''}`}
+                  href={route.href}
+                  className={`${styles.link} ${isActive(route.href) ? styles.linkActive : ''}`}
                   onClick={closeMenu}
                 >
-                  {link.label}
+                  {nav[route.key]}
                 </Link>
               </li>
             ))}
@@ -110,7 +125,7 @@ export function Navbar() {
             <button
               className={styles.languageBtn}
               onClick={toggleLanguageDropdown}
-              aria-label="Select language"
+              aria-label={common.selectLanguage}
               aria-expanded={isLanguageDropdownOpen}
             >
               <span className={styles.languageFlag}>

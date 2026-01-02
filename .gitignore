@@ -30,6 +30,7 @@ lerna-debug.log*
 !.vscode/extensions.json
 .idea
 .DS_Store
+.claude/
 *.suo
 *.ntvs*
 *.njsproj
@@ -47,3 +48,4 @@ coverage/
 
 # Vercel
 .vercel
+.env*.local

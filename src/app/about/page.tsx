@@ -3,6 +3,7 @@ import { TeamGrid, StructuredData } from '@/components/server'
 import { generatePageMetadata } from '@/lib/metadata'
 import { generatePageBreadcrumbs } from '@/lib/structuredData'
 import { Route } from '@/types'
+import { getServerTranslations } from '@/i18n'
 import styles from './page.module.css'
 
 export const metadata: Metadata = generatePageMetadata({
@@ -12,38 +13,26 @@ export const metadata: Metadata = generatePageMetadata({
   path: '/about',
 })
 
-const ABOUT_CONTENT = {
-  title: 'About Us',
-  intro: `Welcome to MakersBarn, a place where creativity, craftsmanship, and community come together.
-    Nestled in the heart of the countryside, we've transformed a historic hay barn into a vibrant
-    space for retreats, workshops, and creative gatherings. Our mission is to provide a sanctuary
-    where makers, artists, and dreamers can connect, create, and find inspiration.`,
-  secondary: `We believe in the power of hands-on creation, the beauty of natural materials, and the
-    importance of spaces that nurture both individual growth and collective experiences.
-    Whether you're planning a retreat, hosting a workshop, or simply seeking a peaceful
-    place to work on your next project, MakersBarn offers the perfect environment to bring
-    your vision to life.`,
-  teamTitle: 'Meet the Team',
-} as const
+export default async function AboutPage() {
+  const t = await getServerTranslations()
 
-export default function AboutPage() {
   return (
     <>
       <StructuredData
-        data={[generatePageBreadcrumbs({ name: 'About Us', path: Route.ABOUT })]}
+        data={[generatePageBreadcrumbs({ name: t.about.title, path: Route.ABOUT })]}
       />
       <div className={styles.about}>
         <section className={styles.hero}>
           <header className={styles.header}>
-            <h1 className={styles.title}>{ABOUT_CONTENT.title}</h1>
-            <p className={styles.intro}>{ABOUT_CONTENT.intro}</p>
-            <p className={`${styles.intro} ${styles.secondary}`}>{ABOUT_CONTENT.secondary}</p>
+            <h1 className={styles.title}>{t.about.title}</h1>
+            <p className={styles.intro}>{t.about.intro}</p>
+            <p className={`${styles.intro} ${styles.secondary}`}>{t.about.secondary}</p>
           </header>
         </section>
 
         <section className={styles.team}>
           <div className={styles.teamContainer}>
-            <h2 className={styles.teamTitle}>{ABOUT_CONTENT.teamTitle}</h2>
+            <h2 className={styles.teamTitle}>{t.about.teamTitle}</h2>
             <TeamGrid />
           </div>
         </section>

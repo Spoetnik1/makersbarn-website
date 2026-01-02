@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
+import { SITE_CONFIG } from '@/constants/site'
 
-const SITE_NAME = "The Maker's Barn"
-const SITE_URL = 'https://themakersbarn.com'
+const SITE_NAME = SITE_CONFIG.name
+const SITE_URL = SITE_CONFIG.url
 const DEFAULT_DESCRIPTION = 'Your retreat deserves more than just a venue. 60m²+ practice hall, 14 beds, 1.3ha+ private land in the Dutch countryside.'
 
 interface PageMetadataParams {
@@ -70,8 +71,8 @@ export const baseMetadata: Metadata = {
   manifest: '/favicon/site.webmanifest',
   openGraph: {
     type: 'website',
-    locale: 'en_GB',
-    alternateLocale: 'nl_NL',
+    locale: SITE_CONFIG.defaultLocale,
+    alternateLocale: SITE_CONFIG.alternateLocale,
     siteName: SITE_NAME,
   },
   robots: {

@@ -1,8 +1,7 @@
 export const SPRING_OPTIONS = {
-  type: 'spring' as const,
-  mass: 3,
-  stiffness: 400,
-  damping: 50,
+  type: 'tween' as const,
+  duration: 0.4,
+  ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
 }
 
 export const DRAG_BUFFER = 50

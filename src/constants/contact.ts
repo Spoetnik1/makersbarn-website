@@ -1,4 +1,4 @@
-export const CONTACT_PHONE_NUMBER = '+31612345678'
+export const CONTACT_PHONE_NUMBER = '+31649778965'
 
 export const CONTACT_URLS = {
   WHATSAPP: `https://wa.me/${CONTACT_PHONE_NUMBER.replace('+', '')}`,

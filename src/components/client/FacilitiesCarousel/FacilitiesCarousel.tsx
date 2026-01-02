@@ -1,12 +1,13 @@
 'use client'
 
-import React, { useState, useEffect, useCallback, memo } from 'react'
+import React, { useState, useEffect, useCallback, memo, useMemo, useRef } from 'react'
 import { motion, useMotionValue } from 'framer-motion'
 import Image from 'next/image'
 import { FACILITIES_OPTIONS } from '@/data'
 import { SPRING_OPTIONS, DRAG_BUFFER, DEFAULT_LANGUAGE } from '@/constants'
 import { FacilitiesOption } from '@/types'
 import { getImageAltText } from '@/lib'
+import { Lightbox, type LightboxImage } from '../Lightbox'
 import styles from './FacilitiesCarousel.module.css'
 
 function scrollToOption(id: string) {
@@ -26,9 +27,21 @@ const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
   index,
 }: FacilitiesDetailProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const triggerRef = useRef<HTMLDivElement>(null)
   const images = option.images && option.images.length > 0 ? option.images : [option.image]
   const isReversed = index % 2 === 1
   const dragX = useMotionValue(0)
+
+  // Convert to Lightbox format - memoized to prevent unnecessary context updates
+  const lightboxImages: LightboxImage[] = useMemo(
+    () =>
+      images.map((src, idx) => ({
+        src,
+        alt: `${option.title} - Image ${idx + 1}`,
+      })),
+    [images, option.title]
+  )
 
   useEffect(() => {
     dragX.set(0)
@@ -44,9 +57,28 @@ const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
     }
   }, [dragX, currentIndex, images.length])
 
+  const handleImageClick = useCallback(() => {
+    setLightboxOpen(true)
+  }, [])
+
+  const handleLightboxClose = useCallback(() => {
+    setLightboxOpen(false)
+  }, [])
+
+  const handleLightboxImageChange = useCallback((newIndex: number) => {
+    setCurrentIndex(newIndex)
+  }, [])
+
+  const handlePrevious = useCallback(() => {
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+  }, [images.length])
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+  }, [images.length])
+
   const content = (
     <div className={styles.detailContent}>
-      <span className={styles.detailBar} aria-hidden="true" />
       <h2 className={styles.detailTitle}>{option.title}</h2>
       <p className={styles.detailBody}>{option.description}</p>
       {option.features && option.features.length > 0 && (
@@ -62,6 +94,31 @@ const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
   const media = (
     <div className={styles.detailMedia}>
       <div className={styles.carouselContainer}>
+        {/* Navigation Arrows */}
+        {images.length > 1 && (
+          <>
+            <button
+              type="button"
+              className={`${styles.navButton} ${styles.navButtonPrev}`}
+              onClick={handlePrevious}
+              aria-label="Previous image"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              className={`${styles.navButton} ${styles.navButtonNext}`}
+              onClick={handleNext}
+              aria-label="Next image"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </>
+        )}
         <motion.div
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
@@ -74,9 +131,21 @@ const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
           {images.map((imgSrc, idx) => (
             <motion.div
               key={imgSrc}
+              ref={idx === currentIndex ? triggerRef : undefined}
               animate={{ scale: currentIndex === idx ? 0.95 : 0.85 }}
               transition={SPRING_OPTIONS}
-              className={styles.carouselImage}
+              className={`${styles.carouselImage} ${styles.carouselImageClickable}`}
+              onClick={handleImageClick}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  handleImageClick()
+                }
+              }}
+              aria-label={`View ${option.title} image ${idx + 1} in fullscreen`}
+              aria-haspopup="dialog"
             >
               <Image
                 src={imgSrc}
@@ -90,20 +159,31 @@ const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
         </motion.div>
       </div>
       {images.length > 1 && (
-        <div className={styles.carouselDots} role="tablist" aria-label={`${option.title} image navigation`}>
+        <div className={styles.carouselDots} role="group" aria-label={`${option.title} image navigation`}>
           {images.map((imgSrc, i) => (
             <button
               key={imgSrc}
               type="button"
               className={`${styles.carouselDot} ${i === currentIndex ? styles.carouselDotActive : ''}`}
               onClick={() => setCurrentIndex(i)}
-              aria-label={`Go to image ${i + 1}`}
-              aria-selected={i === currentIndex}
-              role="tab"
+              aria-label={`Go to image ${i + 1}${i === currentIndex ? ', current' : ''}`}
+              aria-current={i === currentIndex ? 'true' : undefined}
             />
           ))}
         </div>
       )}
+
+      {/* Lightbox */}
+      <Lightbox
+        images={lightboxImages}
+        initialIndex={currentIndex}
+        isOpen={lightboxOpen}
+        onClose={handleLightboxClose}
+        onImageChange={handleLightboxImageChange}
+        showThumbnails={images.length > 3}
+        loop
+        triggerRef={triggerRef}
+      />
     </div>
   )
 
@@ -169,5 +249,3 @@ export function FacilitiesCarousel() {
     </>
   )
 }
-
-

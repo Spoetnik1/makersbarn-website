@@ -1,40 +1,46 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { HERO_DETAILS_CONTENT, HERO_META_ITEMS } from '@/constants/hero'
+import { Route } from '@/types'
 import { IMAGES } from '@/data'
+import { getImageBlurData } from '@/lib'
+import { getServerTranslations } from '@/i18n'
 import styles from './HeroDetails.module.css'
 
 const META_SEPARATOR = '\u2022' // bullet point
 
-export function HeroDetails() {
+export async function HeroDetails() {
+  const t = await getServerTranslations()
+
   return (
     <section className={styles.heroDetails}>
       <div className={styles.inner}>
         <div className={styles.text}>
-          <h2 className={styles.title}>{HERO_DETAILS_CONTENT.title}</h2>
+          <h2 className={styles.title}>{t.heroDetails.title}</h2>
 
-          <p className={styles.body}>{HERO_DETAILS_CONTENT.body}</p>
+          <p className={styles.subtitle}>{t.heroDetails.subtitle}</p>
+
+          <p className={styles.body}>{t.heroDetails.body}</p>
 
           <div className={styles.actions}>
             <Link
-              href={HERO_DETAILS_CONTENT.primaryCta.href}
+              href={Route.FACILITIES}
               className={`${styles.button} ${styles.buttonPrimary}`}
             >
-              {HERO_DETAILS_CONTENT.primaryCta.label}
+              {t.heroDetails.primaryCtaLabel}
             </Link>
             <Link
-              href={HERO_DETAILS_CONTENT.secondaryCta.href}
+              href={Route.CONTACT}
               className={`${styles.button} ${styles.buttonSecondary}`}
             >
-              {HERO_DETAILS_CONTENT.secondaryCta.label}
+              {t.heroDetails.secondaryCtaLabel}
             </Link>
           </div>
 
           <div className={styles.meta}>
-            {HERO_META_ITEMS.map((item, index) => (
+            {t.heroDetails.metaItems.map((item, index) => (
               <span key={item}>
                 {item}
-                {index < HERO_META_ITEMS.length - 1 && (
+                {index < t.heroDetails.metaItems.length - 1 && (
                   <span className={styles.metaSeparator}>{META_SEPARATOR}</span>
                 )}
               </span>
@@ -51,6 +57,8 @@ export function HeroDetails() {
               sizes="(max-width: 960px) 360px, 420px"
               className={styles.image}
               priority
+              placeholder="blur"
+              blurDataURL={getImageBlurData(IMAGES.accommodation.hayHouseBench)}
             />
           </div>
         </div>

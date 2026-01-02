@@ -139,17 +139,22 @@
 
 .detailTitle {
   font-family: 'Playfair Display', 'Times New Roman', serif;
-  font-size: clamp(1.4rem, 4vw, 1.7rem);
-  margin: 0 0 1rem;
+  font-size: clamp(1.5rem, 4vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.25rem;
   color: #fdfbf7;
   line-height: 1.3;
   align-self: flex-start;
 }
 
 .detailBody {
-  margin: 0 0 1.2rem;
-  font-size: clamp(0.9rem, 2.5vw, 0.95rem);
-  line-height: 1.7;
+  margin: 0 0 1.5rem;
+  font-size: clamp(0.925rem, 2.5vw, 1rem);
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(248, 244, 236, 0.92);
+  max-width: 52ch;
 }
 
 .detailFeatures {
@@ -157,25 +162,25 @@
   padding: 0;
   margin: 0;
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.625rem;
+  align-items: center;
 }
 
 .detailFeatures li {
-  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
-  line-height: 1.6;
-  color: #f3e7ce;
-  position: relative;
-  padding-left: 1.2rem;
+  font-size: clamp(0.8rem, 2.2vw, 0.875rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgba(248, 244, 236, 0.9);
+  padding: 0.375rem 0.75rem;
+  background-color: rgba(248, 244, 236, 0.08);
+  border-radius: 6px;
+  border: 1px solid rgba(248, 244, 236, 0.15);
+  transition: background-color 0.2s ease;
 }
 
-.detailFeatures li::before {
-  content: '•';
-  position: absolute;
-  left: 0;
-  color: rgba(248, 244, 236, 0.8);
-  font-size: 1.2rem;
-  line-height: 1.4;
+.detailFeatures li:hover {
+  background-color: rgba(248, 244, 236, 0.14);
 }
 
 .detailMedia {
@@ -199,6 +204,74 @@
   justify-content: center;
   overflow: hidden;
   border-radius: 18px;
+}
+
+/* Navigation Arrows */
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(248, 244, 236, 0.2);
+  color: #fdfbf7;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.carouselContainer:hover .navButton {
+  opacity: 1;
+}
+
+.navButton:hover {
+  background: rgba(248, 244, 236, 0.35);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.navButton:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.navButton:focus-visible {
+  opacity: 1;
+  outline: 2px solid rgba(248, 244, 236, 0.8);
+  outline-offset: 2px;
+}
+
+.navButtonPrev {
+  left: 16px;
+}
+
+.navButtonNext {
+  right: 16px;
+}
+
+@media (max-width: 767px) {
+  .navButton {
+    width: 36px;
+    height: 36px;
+  }
+
+  .navButtonPrev {
+    left: 8px;
+  }
+
+  .navButtonNext {
+    right: 8px;
+  }
+
+  .navButton svg {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -231,6 +304,16 @@
 
 .carouselImageInner {
   object-fit: cover;
+}
+
+.carouselImageClickable {
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+.carouselImageClickable:focus-visible {
+  outline: 3px solid rgba(248, 244, 236, 0.8);
+  outline-offset: 4px;
 }
 
 @media (max-width: 767px) {
