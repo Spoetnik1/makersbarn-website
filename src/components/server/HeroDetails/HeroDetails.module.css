@@ -40,6 +40,12 @@
   max-width: 36rem;
 }
 
+.bodyItalic {
+  font-style: italic;
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  color: #6b5238;
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -65,11 +71,15 @@
   background: #1f130c;
   color: #fdf7f0;
   border-color: #1f130c;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(31, 19, 12, 0.2);
 }
 
 .buttonPrimary:hover {
   background: #3a2720;
   border-color: #3a2720;
+  box-shadow: 0 4px 12px rgba(31, 19, 12, 0.3);
+  transform: translateY(-1px);
 }
 
 .buttonSecondary {

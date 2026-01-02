@@ -13,8 +13,6 @@ export function HeroDetails() {
         <div className={styles.text}>
           <h2 className={styles.title}>{HERO_DETAILS_CONTENT.title}</h2>
 
-          <p className={styles.subtitle}>{HERO_DETAILS_CONTENT.subtitle}</p>
-
           <p className={styles.body}>{HERO_DETAILS_CONTENT.body}</p>
 
           <div className={styles.actions}>
