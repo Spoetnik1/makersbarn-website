@@ -2,6 +2,13 @@ import { createLogger, type ValidatedContactFormData } from '@/lib'
 
 const logger = createLogger('slack-service')
 
+// Environment variables
+const SLACK_WEBHOOK_APP_EVENTS = process.env.SLACK_WEBHOOK_APP_EVENTS
+const SLACK_WEBHOOK_USER_CONTACTS = process.env.SLACK_WEBHOOK_USER_CONTACTS
+const SLACK_INCOMING_WEBHOOK = process.env.SLACK_INCOMING_WEBHOOK
+const SUPPRESS_SLACK_MESSAGES = process.env.SUPPRESS_SLACK_MESSAGES === 'true'
+const NODE_ENV = process.env.NODE_ENV
+
 export enum SlackChannel {
   APP_EVENTS = '#app-events',
   USER_CONTACTS = '#user-contacts',
@@ -21,25 +28,22 @@ interface SlackResult {
 
 function getWebhookForChannel(channel: SlackChannel): string | undefined {
   const webhookMap: Record<SlackChannel, string | undefined> = {
-    [SlackChannel.APP_EVENTS]: process.env.SLACK_WEBHOOK_APP_EVENTS,
-    [SlackChannel.USER_CONTACTS]: process.env.SLACK_WEBHOOK_USER_CONTACTS,
+    [SlackChannel.APP_EVENTS]: SLACK_WEBHOOK_APP_EVENTS,
+    [SlackChannel.USER_CONTACTS]: SLACK_WEBHOOK_USER_CONTACTS,
   }
-  return webhookMap[channel]
+  return webhookMap[channel] || SLACK_INCOMING_WEBHOOK
 }
 
 function formatMessageForEnvironment(message: string): string {
-  const nodeEnv = process.env.NODE_ENV
-  const isProduction = nodeEnv === 'production'
-  return isProduction ? message : `[${nodeEnv}] ${message}`
+  const isProduction = NODE_ENV === 'production'
+  return isProduction ? message : `[${NODE_ENV}] ${message}`
 }
 
 export async function sendSlackMessage({
   channel = DEFAULT_CHANNEL,
   message,
 }: SlackMessageParams): Promise<SlackResult> {
-  const suppressMessages = process.env.SUPPRESS_SLACK_MESSAGES === 'true'
-
-  if (suppressMessages) {
+  if (SUPPRESS_SLACK_MESSAGES) {
     logger.debug('Slack message suppressed', { channel, messageLength: message.length })
     return { success: true }
   }

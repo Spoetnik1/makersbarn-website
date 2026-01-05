@@ -54,8 +54,8 @@ export async function submitContactForm(data: ContactFormData): Promise<SubmitCo
   const validatedData = validation.data!
   logger.info('Contact form submission started', { email: validatedData.email })
 
+  // Send Slack notification (secondary - failures don't affect email)
   try {
-    // Send Slack notification (non-blocking - failures don't affect email)
     const slackMessage = formatContactFormMessage(validatedData)
     const slackResult = await sendSlackMessage({
       channel: SlackChannel.USER_CONTACTS,
@@ -68,8 +68,15 @@ export async function submitContactForm(data: ContactFormData): Promise<SubmitCo
         slackError: slackResult.error,
       })
     }
+  } catch (error) {
+    logger.warn('Slack notification failed unexpectedly, continuing with email', {
+      email: validatedData.email,
+      error,
+    })
+  }
 
-    // Send email notifications
+  // Send email notifications (primary)
+  try {
     const emailResult = await sendEmail(validatedData)
 
     if (!emailResult.success) {

@@ -46,14 +46,14 @@ function buildFormFields(data: ValidatedContactFormData): EmailField[] {
 
 export async function sendEmail(formData: ValidatedContactFormData): Promise<EmailResult> {
   const apiToken = process.env.POSTMARKAPP_API_TOKEN
-  const fromEmail = process.env.POSTMARK_FROM_EMAIL
-  const toEmail = process.env.POSTMARK_TO_EMAIL
+  const senderEmail = process.env.POSTMARK_SENDER_EMAIL
+  const adminEmail = process.env.POSTMARK_ADMIN_EMAIL
 
-  if (!apiToken || !fromEmail || !toEmail) {
+  if (!apiToken || !senderEmail || !adminEmail) {
     logger.error('Missing Postmark configuration', {
       hasApiToken: !!apiToken,
-      hasFromEmail: !!fromEmail,
-      hasToEmail: !!toEmail,
+      hasSenderEmail: !!senderEmail,
+      hasAdminEmail: !!adminEmail,
     })
     return { success: false, error: 'Email service not configured' }
   }
@@ -63,21 +63,21 @@ export async function sendEmail(formData: ValidatedContactFormData): Promise<Ema
 
   // Support multiple recipients: comma-separated string or array
   // Postmark accepts both formats
-  const toEmails = toEmail.includes(',') 
-    ? toEmail.split(',').map(email => email.trim()).join(',')
-    : toEmail
+  const adminEmails = adminEmail.includes(',') 
+    ? adminEmail.split(',').map(email => email.trim()).join(',')
+    : adminEmail
 
   logger.info('Sending contact form emails', { 
     userEmail: formData.email,
-    adminRecipients: toEmails,
-    recipientCount: toEmails.split(',').length 
+    adminRecipients: adminEmails,
+    recipientCount: adminEmails.split(',').length 
   })
 
   try {
     // Send notification email to admin(s)
     const adminEmailResponse = await client.sendEmail({
-      From: fromEmail,
-      To: toEmails,
+      From: senderEmail,
+      To: adminEmails,
       Subject: EMAIL_SUBJECTS.ADMIN_NOTIFICATION,
       HtmlBody: `
         <h2>New Contact Form Submission</h2>
@@ -98,24 +98,27 @@ ${createEmailText(fields)}
     // Check if Postmark returned an error code
     if (adminEmailResponse.ErrorCode && adminEmailResponse.ErrorCode !== 0) {
       logger.error('Admin notification email failed', {
-        to: toEmails,
+        to: adminEmails,
         errorCode: adminEmailResponse.ErrorCode,
         message: adminEmailResponse.Message,
       })
-      // Continue to send user confirmation even if admin email fails
-    } else {
-      logger.info('Admin notification email sent', {
-        to: toEmails,
-        messageId: adminEmailResponse.MessageID,
-        submittedAt: adminEmailResponse.SubmittedAt,
-        errorCode: adminEmailResponse.ErrorCode,
-      })
+      return { 
+        success: false, 
+        error: `Admin notification email failed: ${adminEmailResponse.Message || 'Unknown error'}` 
+      }
     }
+
+    logger.info('Admin notification email sent', {
+      to: adminEmails,
+      messageId: adminEmailResponse.MessageID,
+      submittedAt: adminEmailResponse.SubmittedAt,
+      errorCode: adminEmailResponse.ErrorCode,
+    })
 
     // Send confirmation email to user
     if (formData.email) {
       const userEmailResponse = await client.sendEmail({
-        From: fromEmail,
+        From: senderEmail,
         To: formData.email,
         Subject: EMAIL_SUBJECTS.USER_CONFIRMATION,
         HtmlBody: `

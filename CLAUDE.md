@@ -63,8 +63,10 @@ Supports English (EN) and Dutch (NL) languages:
 ### Environment Variables
 
 Required for contact form functionality (see `.env.example`):
-- `POSTMARKAPP_API_TOKEN`, `POSTMARK_FROM_EMAIL`, `POSTMARK_TO_EMAIL`
-- `SLACK_WEBHOOK_USER_CONTACTS`
+- `POSTMARKAPP_API_TOKEN` - Postmark API token
+- `POSTMARK_SENDER_EMAIL` - Email address used as sender for both admin notifications and user confirmations
+- `POSTMARK_ADMIN_EMAIL` - Email address(es) to receive admin notifications (comma-separated for multiple recipients)
+- `SLACK_WEBHOOK_USER_CONTACTS` - Slack webhook URL for contact form notifications
 - `SUPPRESS_SLACK_MESSAGES` - set to `true` to disable Slack in development
 
 ### ESLint Configuration
