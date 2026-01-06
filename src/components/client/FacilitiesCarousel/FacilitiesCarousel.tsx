@@ -9,8 +9,19 @@ import { FacilitiesOption, Language } from '@/types'
 import { getImageAltText } from '@/lib'
 import { useTranslation } from '@/context'
 import type { FacilitiesTranslations } from '@/i18n/types'
+
 import { Lightbox, type LightboxImage } from '../Lightbox'
 import styles from './FacilitiesCarousel.module.css'
+
+// Map facility IDs to translation keys
+const FACILITY_TRANSLATION_KEYS: Record<string, keyof FacilitiesTranslations['items']> = {
+  'hay-house': 'hayHouse',
+  'cosmos': 'cosmos',
+  'horizon': 'horizon',
+  'sauna': 'sauna',
+  'pond': 'pond',
+  'in-between': 'inBetween',
+} as const
 
 function scrollToOption(id: string) {
   const el = document.getElementById(id)
@@ -19,11 +30,18 @@ function scrollToOption(id: string) {
   }
 }
 
+interface FacilityItemTranslation {
+  title: string
+  description: string
+  features?: readonly string[]
+}
+
 interface FacilitiesDetailProps {
   option: FacilitiesOption
   index: number
   language: Language
   carouselTranslations: FacilitiesTranslations['carousel']
+  itemTranslation: FacilityItemTranslation
 }
 
 const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
@@ -31,6 +49,7 @@ const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
   index,
   language,
   carouselTranslations,
+  itemTranslation,
 }: FacilitiesDetailProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [lightboxOpen, setLightboxOpen] = useState(false)
@@ -44,9 +63,9 @@ const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
     () =>
       images.map((src, idx) => ({
         src,
-        alt: `${option.title} - Image ${idx + 1}`,
+        alt: `${itemTranslation.title} - Image ${idx + 1}`,
       })),
-    [images, option.title]
+    [images, itemTranslation.title]
   )
 
   useEffect(() => {
@@ -85,11 +104,11 @@ const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
 
   const content = (
     <div className={styles.detailContent}>
-      <h2 className={styles.detailTitle}>{option.title}</h2>
-      <p className={styles.detailBody}>{option.description}</p>
-      {option.features && option.features.length > 0 && (
+      <h2 className={styles.detailTitle}>{itemTranslation.title}</h2>
+      <p className={styles.detailBody}>{itemTranslation.description}</p>
+      {itemTranslation.features && itemTranslation.features.length > 0 && (
         <ul className={styles.detailFeatures}>
-          {option.features.map((feature) => (
+          {itemTranslation.features.map((feature) => (
             <li key={feature}>{feature}</li>
           ))}
         </ul>
@@ -150,7 +169,7 @@ const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
                   handleImageClick()
                 }
               }}
-              aria-label={`${carouselTranslations.viewFullscreen} ${option.title} ${idx + 1}`}
+              aria-label={`${carouselTranslations.viewFullscreen} ${itemTranslation.title} ${idx + 1}`}
               aria-haspopup="dialog"
             >
               <Image
@@ -165,7 +184,7 @@ const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
         </motion.div>
       </div>
       {images.length > 1 && (
-        <div className={styles.carouselDots} role="group" aria-label={`${option.title} ${carouselTranslations.imageNavigation}`}>
+        <div className={styles.carouselDots} role="group" aria-label={`${itemTranslation.title} ${carouselTranslations.imageNavigation}`}>
           {images.map((imgSrc, i) => (
             <button
               key={imgSrc}
@@ -218,35 +237,44 @@ const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
 export function FacilitiesCarousel() {
   const { t, language } = useTranslation('facilities')
 
+  // Helper to get translation for a facility
+  const getItemTranslation = (id: string): FacilityItemTranslation => {
+    const key = FACILITY_TRANSLATION_KEYS[id]
+    return t.items[key]
+  }
+
   return (
     <>
       <div className={styles.grid}>
-        {FACILITIES_OPTIONS.map((option) => (
-          <button
-            key={option.id}
-            type="button"
-            className={styles.card}
-            onClick={() => scrollToOption(option.id)}
-          >
-            <span
-              className={styles.cardBar}
-              style={{ backgroundColor: option.color }}
-              aria-hidden="true"
-            />
-            <div className={styles.cardImageWrapper}>
-              <Image
-                src={option.image}
-                alt={option.title}
-                fill
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
-                className={styles.cardImage}
+        {FACILITIES_OPTIONS.map((option) => {
+          const itemTranslation = getItemTranslation(option.id)
+          return (
+            <button
+              key={option.id}
+              type="button"
+              className={styles.card}
+              onClick={() => scrollToOption(option.id)}
+            >
+              <span
+                className={styles.cardBar}
+                style={{ backgroundColor: option.color }}
+                aria-hidden="true"
               />
-            </div>
-            <div className={styles.cardText}>
-              <p className={styles.cardTitle}>{option.title}</p>
-            </div>
-          </button>
-        ))}
+              <div className={styles.cardImageWrapper}>
+                <Image
+                  src={option.image}
+                  alt={itemTranslation.title}
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                  className={styles.cardImage}
+                />
+              </div>
+              <div className={styles.cardText}>
+                <p className={styles.cardTitle}>{itemTranslation.title}</p>
+              </div>
+            </button>
+          )
+        })}
       </div>
 
       <section className={styles.details}>
@@ -257,6 +285,7 @@ export function FacilitiesCarousel() {
             index={index}
             language={language}
             carouselTranslations={t.carousel}
+            itemTranslation={getItemTranslation(option.id)}
           />
         ))}
       </section>
