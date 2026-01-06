@@ -65,6 +65,21 @@
   }
 }
 
+.ctaTitle {
+  font-family: var(--font-playfair), 'Playfair Display', 'Times New Roman', serif;
+  font-size: clamp(1.6rem, 2.5vw + 0.8rem, 2.2rem);
+  margin: 0 0 0.75rem;
+  color: #294b3a;
+}
+
+.ctaSubtitle {
+  margin: 0 auto 1.5rem;
+  max-width: 32rem;
+  color: #5c554c;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.7;
+}
+
 .ctaButton {
   display: inline-flex;
   align-items: center;

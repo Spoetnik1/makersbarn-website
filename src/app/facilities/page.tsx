@@ -42,6 +42,8 @@ export default async function FacilitiesPage() {
         </section>
 
         <footer className={styles.ctaFooter}>
+          <h2 className={styles.ctaTitle}>{t.facilities.ctaTitle}</h2>
+          <p className={styles.ctaSubtitle}>{t.facilities.ctaSubtitle}</p>
           <Link href={Route.CONTACT} className={styles.ctaButton}>
             {t.facilities.ctaButton}
             <svg

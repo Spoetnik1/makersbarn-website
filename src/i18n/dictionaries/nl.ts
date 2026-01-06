@@ -115,6 +115,8 @@ export const nl: Dictionary = {
       workshopSpace: 'Workshopruimte',
       outdoors: 'Buiten',
     },
+    ctaTitle: 'Klaar om je retreat te plannen?',
+    ctaSubtitle: 'Laat ons je helpen een onvergetelijke ervaring te creëren voor je groep.',
     ctaButton: 'Boek nu je retreat',
     items: {
       hayHouse: {

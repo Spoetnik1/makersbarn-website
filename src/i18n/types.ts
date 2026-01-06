@@ -124,6 +124,8 @@ export interface FacilitiesTranslations {
     workshopSpace: string
     outdoors: string
   }
+  ctaTitle: string
+  ctaSubtitle: string
   ctaButton: string
   items: {
     hayHouse: {
