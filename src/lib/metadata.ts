@@ -21,6 +21,8 @@ interface PageMetadataParams {
   description?: string
   path?: string
   image?: string
+  imageWidth?: number
+  imageHeight?: number
   locale?: Language
 }
 
@@ -29,6 +31,8 @@ export function generatePageMetadata({
   description = DEFAULT_DESCRIPTION,
   path = '',
   image = '/images/main-house.jpg',
+  imageWidth = 1200,
+  imageHeight = 630,
   locale = DEFAULT_LANGUAGE,
 }: PageMetadataParams): Metadata {
   const fullTitle = `${title} | ${SITE_NAME}`
@@ -44,6 +48,14 @@ export function generatePageMetadata({
     alternateLanguages[lang] = `${SITE_URL}${altPath}`
   }
 
+  // Build Open Graph image with required properties for WhatsApp
+  const ogImage = {
+    url: `${SITE_URL}${image}`,
+    width: imageWidth,
+    height: imageHeight,
+    alt: fullTitle,
+  }
+
   return {
     title: fullTitle,
     description,
@@ -52,7 +64,7 @@ export function generatePageMetadata({
       description,
       url,
       siteName: SITE_NAME,
-      images: [{ url: `${SITE_URL}${image}` }],
+      images: [ogImage],
       locale: OG_LOCALE_MAP[locale],
       type: 'website',
     },
