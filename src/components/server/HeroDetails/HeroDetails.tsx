@@ -1,15 +1,20 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Route } from '@/types'
+import { Route, Language } from '@/types'
 import { IMAGES } from '@/data'
 import { getImageBlurData } from '@/lib'
 import { getServerTranslations } from '@/i18n'
+import { getLocalizedPath } from '@/lib/routing'
 import styles from './HeroDetails.module.css'
 
 const META_SEPARATOR = '\u2022' // bullet point
 
-export async function HeroDetails() {
-  const t = await getServerTranslations()
+interface HeroDetailsProps {
+  locale?: Language
+}
+
+export async function HeroDetails({ locale }: HeroDetailsProps = {}) {
+  const t = await getServerTranslations(locale)
 
   return (
     <section className={styles.heroDetails}>
@@ -21,13 +26,13 @@ export async function HeroDetails() {
 
           <div className={styles.actions}>
             <Link
-              href={Route.FACILITIES}
+              href={locale ? getLocalizedPath(Route.FACILITIES, locale) : Route.FACILITIES}
               className={`${styles.button} ${styles.buttonPrimary}`}
             >
               {t.heroDetails.primaryCtaLabel}
             </Link>
             <Link
-              href={Route.CONTACT}
+              href={locale ? getLocalizedPath(Route.CONTACT, locale) : Route.CONTACT}
               className={`${styles.button} ${styles.buttonSecondary}`}
             >
               {t.heroDetails.secondaryCtaLabel}

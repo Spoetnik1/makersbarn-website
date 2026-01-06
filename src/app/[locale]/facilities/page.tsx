@@ -7,17 +7,31 @@ import { generateLocalBusinessSchema, generatePageBreadcrumbs } from '@/lib/stru
 import { Route } from '@/types'
 import { SITE_CONFIG } from '@/constants/site'
 import { getServerTranslations } from '@/i18n'
-import styles from './page.module.css'
+import { getValidLocale } from '@/lib/locale'
+import { getLocalizedPath } from '@/lib/routing'
+import styles from '../../facilities/page.module.css'
 
-export const metadata: Metadata = generatePageMetadata({
-  title: 'Facilities',
-  description:
-    'Explore our unique retreat spaces at MakersBarn. Rent the entire location with private garden, converted hay barn, 14 beds plus space for tents and campervans.',
-  path: '/facilities',
-})
+interface FacilitiesPageProps {
+  params: Promise<{ locale: string }>
+}
 
-export default async function FacilitiesPage() {
-  const t = await getServerTranslations()
+export async function generateMetadata({ params }: FacilitiesPageProps): Promise<Metadata> {
+  const { locale } = await params
+  const validLocale = getValidLocale(locale)
+  const t = await getServerTranslations(validLocale)
+  
+  return generatePageMetadata({
+    title: t.facilities.metaTitle,
+    description: t.facilities.metaDescription,
+    path: '/facilities',
+    locale: validLocale,
+  })
+}
+
+export default async function FacilitiesPage({ params }: FacilitiesPageProps) {
+  const { locale } = await params
+  const validLocale = getValidLocale(locale)
+  const t = await getServerTranslations(validLocale)
 
   return (
     <>
@@ -27,7 +41,7 @@ export default async function FacilitiesPage() {
             type: 'LodgingBusiness',
             image: `${SITE_CONFIG.url}/images/main-house.jpg`,
           }),
-          generatePageBreadcrumbs({ name: t.facilities.title, path: Route.FACILITIES }),
+          generatePageBreadcrumbs({ name: t.facilities.title, path: getLocalizedPath(Route.FACILITIES, validLocale) }),
         ]}
       />
       <div className={styles.facilities}>
@@ -44,7 +58,7 @@ export default async function FacilitiesPage() {
         <footer className={styles.ctaFooter}>
           <h2 className={styles.ctaTitle}>{t.facilities.ctaTitle}</h2>
           <p className={styles.ctaSubtitle}>{t.facilities.ctaSubtitle}</p>
-          <Link href={Route.CONTACT} className={styles.ctaButton}>
+          <Link href={getLocalizedPath(Route.CONTACT, validLocale)} className={styles.ctaButton}>
             {t.facilities.ctaButton}
             <svg
               width="18"
@@ -64,5 +78,4 @@ export default async function FacilitiesPage() {
     </>
   )
 }
-
 

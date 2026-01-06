@@ -7,8 +7,9 @@ import Link from 'next/link'
 import { CAROUSEL_IMAGES } from '@/data'
 import { SPRING_OPTIONS, DRAG_BUFFER } from '@/constants'
 import { getImageAltText } from '@/lib'
-import { useTranslation } from '@/context'
+import { useTranslation, useLanguage } from '@/context'
 import { Route } from '@/types'
+import { getLocalizedPath } from '@/lib/routing'
 import { Lightbox, type LightboxImage } from '../Lightbox'
 import styles from './ImpressionCarousel.module.css'
 
@@ -18,6 +19,7 @@ export function ImpressionCarousel() {
   const triggerRef = useRef<HTMLDivElement>(null)
   const dragX = useMotionValue(0)
   const { t, language } = useTranslation('impressionCarousel')
+  const { language: currentLanguage } = useLanguage()
 
   // Convert to Lightbox format - memoized to prevent unnecessary context updates
   const lightboxImages: LightboxImage[] = useMemo(
@@ -181,7 +183,7 @@ export function ImpressionCarousel() {
 
       {/* Facilities CTA */}
       <div className={styles.footer}>
-        <Link href={Route.FACILITIES} className={styles.facilitiesButton}>
+        <Link href={getLocalizedPath(Route.FACILITIES, currentLanguage)} className={styles.facilitiesButton}>
           {t.facilitiesButton}
           <svg
             width="20"

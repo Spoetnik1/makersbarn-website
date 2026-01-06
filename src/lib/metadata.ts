@@ -1,15 +1,27 @@
 import { Metadata } from 'next'
 import { SITE_CONFIG } from '@/constants/site'
+import { DEFAULT_LANGUAGE } from '@/constants'
+import { Language } from '@/types'
+import { getLocalizedPath } from './routing'
 
 const SITE_NAME = SITE_CONFIG.name
 const SITE_URL = SITE_CONFIG.url
 const DEFAULT_DESCRIPTION = 'Give your retreat the place it deserves. 60m²+ practice hall, 14 beds, 1.3ha+ private land in the Dutch countryside.'
+
+/**
+ * Maps Language enum to OpenGraph locale format
+ */
+const OG_LOCALE_MAP: Record<Language, string> = {
+  [Language.EN]: 'en_GB',
+  [Language.NL]: 'nl_NL',
+}
 
 interface PageMetadataParams {
   title: string
   description?: string
   path?: string
   image?: string
+  locale?: Language
 }
 
 export function generatePageMetadata({
@@ -17,9 +29,20 @@ export function generatePageMetadata({
   description = DEFAULT_DESCRIPTION,
   path = '',
   image = '/images/main-house.jpg',
+  locale = DEFAULT_LANGUAGE,
 }: PageMetadataParams): Metadata {
   const fullTitle = `${title} | ${SITE_NAME}`
-  const url = `${SITE_URL}${path}`
+  
+  // Generate localized path for the current locale
+  const localizedPath = getLocalizedPath(path, locale)
+  const url = `${SITE_URL}${localizedPath}`
+  
+  // Generate alternate language URLs for hreflang tags
+  const alternateLanguages: Record<string, string> = {}
+  for (const lang of Object.values(Language) as Language[]) {
+    const altPath = getLocalizedPath(path, lang)
+    alternateLanguages[lang] = `${SITE_URL}${altPath}`
+  }
 
   return {
     title: fullTitle,
@@ -30,7 +53,7 @@ export function generatePageMetadata({
       url,
       siteName: SITE_NAME,
       images: [{ url: `${SITE_URL}${image}` }],
-      locale: 'en_GB',
+      locale: OG_LOCALE_MAP[locale],
       type: 'website',
     },
     twitter: {
@@ -41,6 +64,7 @@ export function generatePageMetadata({
     },
     alternates: {
       canonical: url,
+      languages: alternateLanguages,
     },
   }
 }

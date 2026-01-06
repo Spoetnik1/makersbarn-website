@@ -3,12 +3,13 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { GB as EN, NL } from 'country-flag-icons/react/3x2'
 import { LANGUAGE_OPTIONS } from '@/constants'
 import { IMAGES } from '@/data'
 import { Language, Route } from '@/types'
 import { useLanguage, useTranslation } from '@/context'
+import { getLocalizedPath, replaceLocaleInPath, getLocaleFromPath } from '@/lib/routing'
 import styles from './Navbar.module.css'
 
 const FLAG_MAP = {
@@ -53,10 +54,14 @@ export function Navbar() {
     setIsLanguageDropdownOpen((prev) => !prev)
   }, [])
 
+  const router = useRouter()
+
   const handleLanguageSelect = useCallback((lang: Language) => {
-    setLanguage(lang)
+    // Navigate to the same page but with the new locale
+    const newPath = replaceLocaleInPath(pathname, lang)
+    router.push(newPath)
     setIsLanguageDropdownOpen(false)
-  }, [setLanguage])
+  }, [pathname, router])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -74,14 +79,21 @@ export function Navbar() {
     }
   }, [])
 
-  const isActive = (path: string) => pathname === path
+  // Get current locale from pathname
+  const currentLocale = getLocaleFromPath(pathname) || language
 
-  const CurrentFlag = FLAG_MAP[language]
+  // Check if a route is active (accounting for locale prefix)
+  const isActive = (path: string) => {
+    const localizedPath = getLocalizedPath(path, currentLocale)
+    return pathname === localizedPath || pathname === path
+  }
+
+  const CurrentFlag = FLAG_MAP[currentLocale]
 
   return (
     <nav className={styles.navbar}>
       <div className={styles.container}>
-        <Link href="/" className={styles.logo} onClick={closeMenu}>
+        <Link href={getLocalizedPath('/', currentLocale)} className={styles.logo} onClick={closeMenu}>
           <Image
             src={IMAGES.logo}
             alt={common.logoAlt}
@@ -108,7 +120,7 @@ export function Navbar() {
             {NAV_ROUTES.map((route) => (
               <li key={route.href} className={styles.item}>
                 <Link
-                  href={route.href}
+                  href={getLocalizedPath(route.href, currentLocale)}
                   className={`${styles.link} ${isActive(route.href) ? styles.linkActive : ''}`}
                   onClick={closeMenu}
                 >
@@ -118,7 +130,7 @@ export function Navbar() {
             ))}
             <li className={styles.item}>
               <Link
-                href={Route.CONTACT}
+                href={getLocalizedPath(Route.CONTACT, currentLocale)}
                 className={`${styles.link} ${styles.ctaButtonMobile} ${isActive(Route.CONTACT) ? styles.linkActive : ''}`}
                 onClick={closeMenu}
               >
@@ -130,7 +142,7 @@ export function Navbar() {
 
         <div className={styles.right}>
           <Link
-            href={Route.CONTACT}
+            href={getLocalizedPath(Route.CONTACT, currentLocale)}
             className={styles.ctaButton}
             onClick={closeMenu}
           >
@@ -144,7 +156,7 @@ export function Navbar() {
               aria-expanded={isLanguageDropdownOpen}
             >
               <span className={styles.languageFlag}>
-                <CurrentFlag title={FLAG_TITLES[language]} className={styles.flagIcon} />
+                <CurrentFlag title={FLAG_TITLES[currentLocale]} className={styles.flagIcon} />
               </span>
             </button>
 
@@ -155,7 +167,7 @@ export function Navbar() {
                   return (
                     <button
                       key={option.code}
-                      className={`${styles.option} ${language === option.code ? styles.optionActive : ''}`}
+                      className={`${styles.option} ${currentLocale === option.code ? styles.optionActive : ''}`}
                       onClick={() => handleLanguageSelect(option.code)}
                     >
                       <span className={styles.optionFlag}>

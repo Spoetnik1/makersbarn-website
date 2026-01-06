@@ -14,9 +14,13 @@ const ICON_MAP: Record<SocialPlatform, React.ComponentType> = {
   [SocialPlatform.LINKEDIN]: LinkedInIcon,
 }
 
-export async function Footer() {
-  const t = await getServerTranslations()
-  const language = await getServerLanguage()
+interface FooterProps {
+  locale?: Language
+}
+
+export async function Footer({ locale }: FooterProps = {}) {
+  const language = locale || await getServerLanguage()
+  const t = await getServerTranslations(language)
   const currentYear = new Date().getFullYear()
 
   return (

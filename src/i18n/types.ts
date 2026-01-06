@@ -37,6 +37,8 @@ export interface HeroDetailsTranslations {
  */
 export interface ContactTranslations {
   pageTitle: string
+  metaTitle: string
+  metaDescription: string
   introText: string
   formTitle: string
   options: {

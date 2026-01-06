@@ -34,8 +34,12 @@ export async function getServerLanguage(): Promise<Language> {
  * Gets the translation dictionary for the current server context
  *
  * Use this in Server Components to get translations
+ * @param locale - Optional locale to use. If not provided, detects from server context
  */
-export async function getServerTranslations(): Promise<Dictionary> {
+export async function getServerTranslations(locale?: Language): Promise<Dictionary> {
+  if (locale) {
+    return getDictionary(locale)
+  }
   const language = await getServerLanguage()
   return getDictionary(language)
 }

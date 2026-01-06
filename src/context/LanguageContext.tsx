@@ -9,7 +9,7 @@ import {
   useMemo,
   type ReactNode,
 } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { Language } from '@/types'
 import { DEFAULT_LANGUAGE, LANG_ATTRIBUTES } from '@/constants'
 import { getDictionary } from '@/i18n/dictionaries'
@@ -19,6 +19,7 @@ import {
   setLanguageToLocalStorage,
   setLanguageCookie,
 } from '@/lib/language'
+import { getLocaleFromPath, replaceLocaleInPath } from '@/lib/routing'
 
 /**
  * Context value shape for language state and operations
@@ -54,18 +55,41 @@ export function LanguageProvider({
   children,
   initialLanguage = DEFAULT_LANGUAGE,
 }: LanguageProviderProps) {
-  const [language, setLanguageState] = useState<Language>(initialLanguage)
-  const [isHydrated, setIsHydrated] = useState(false)
   const router = useRouter()
+  const pathname = usePathname()
+  
+  // Get locale from URL path, fallback to initialLanguage
+  const urlLocale = getLocaleFromPath(pathname) || initialLanguage
+  const [language, setLanguageState] = useState<Language>(urlLocale)
+  const [isHydrated, setIsHydrated] = useState(false)
+
+  // Sync language state with URL locale when pathname changes
+  useEffect(() => {
+    const urlLocale = getLocaleFromPath(pathname)
+    if (urlLocale && urlLocale !== language) {
+      setLanguageState(urlLocale)
+      // Sync storage to match URL
+      setLanguageToLocalStorage(urlLocale)
+      setLanguageCookie(urlLocale)
+    }
+  }, [pathname, language])
 
   // On mount, check if localStorage has a different preference
+  // But prioritize URL locale over localStorage
   useEffect(() => {
+    const urlLocale = getLocaleFromPath(pathname)
     const storedLanguage = getLanguageFromLocalStorage()
 
-    if (storedLanguage && storedLanguage !== language) {
-      // User has a stored preference that differs from server
+    // If URL has a locale, use it (highest priority)
+    if (urlLocale) {
+      setLanguageState(urlLocale)
+      // Sync storage to match URL
+      setLanguageToLocalStorage(urlLocale)
+      setLanguageCookie(urlLocale)
+    } else if (storedLanguage && storedLanguage !== language) {
+      // No locale in URL, but localStorage has preference
+      // This shouldn't happen in normal flow, but handle it gracefully
       setLanguageState(storedLanguage)
-      // Sync cookie to match localStorage
       setLanguageCookie(storedLanguage)
     } else if (!storedLanguage) {
       // No localStorage, sync it with current language
@@ -83,14 +107,13 @@ export function LanguageProvider({
     }
   }, [language, isHydrated])
 
-  // Update language and persist to both storage mechanisms
+  // Update language and navigate to new URL with locale
   const setLanguage = useCallback((newLanguage: Language) => {
-    setLanguageState(newLanguage)
-    setLanguageToLocalStorage(newLanguage)
-    setLanguageCookie(newLanguage)
-    // Refresh server components to re-render with new language
-    router.refresh()
-  }, [router])
+    // Navigate to the same page but with the new locale
+    const newPath = replaceLocaleInPath(pathname, newLanguage)
+    router.push(newPath)
+    // State will be updated by the useEffect that watches pathname
+  }, [pathname, router])
 
   // Get dictionary for current language
   const dictionary = useMemo(() => getDictionary(language), [language])

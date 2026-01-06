@@ -1,32 +1,19 @@
-import dynamic from 'next/dynamic'
-import { Hero } from '@/components/client'
-import { HeroDetails, FacilitiesStats, StructuredData } from '@/components/server'
-import { generatePageMetadata } from '@/lib/metadata'
-import { generateLocalBusinessSchema, generatePageBreadcrumbs } from '@/lib/structuredData'
-import { Route } from '@/types'
+import { redirect } from 'next/navigation'
+import { getServerLanguage } from '@/i18n'
+import { getLocalizedPath } from '@/lib/routing'
 
-const ImpressionCarousel = dynamic(
-  () => import('@/components/client/ImpressionCarousel').then((mod) => mod.ImpressionCarousel)
-)
-
-export const metadata = generatePageMetadata({
-  title: 'Home',
-  path: '/',
-})
-
-export default function HomePage() {
-  return (
-    <>
-      <StructuredData
-        data={[
-          generateLocalBusinessSchema(),
-          generatePageBreadcrumbs({ name: 'Home', path: Route.HOME }),
-        ]}
-      />
-      <Hero />
-      <HeroDetails />
-      <FacilitiesStats />
-      <ImpressionCarousel />
-    </>
-  )
+/**
+ * Root page redirect handler
+ * 
+ * Redirects root requests (/) to the appropriate localized path (/en/ or /nl/)
+ * based on user preference (cookie/localStorage) or domain detection.
+ * Defaults to /en/ if no preference is detected.
+ */
+export default async function RootRedirect() {
+  // Get the user's preferred language from cookie or domain detection
+  const language = await getServerLanguage()
+  
+  // Redirect to the localized home path
+  const localizedPath = getLocalizedPath('/', language)
+  redirect(localizedPath)
 }

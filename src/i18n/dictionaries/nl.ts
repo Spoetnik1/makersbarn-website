@@ -14,12 +14,12 @@ export const nl: Dictionary = {
   hero: {
     eyebrow: 'Welkom bij',
     emphasis: 'the Makers Barn',
-    subtitle: 'Geef je retreat',
+    subtitle: 'Geef je retraite',
     subtitleBreak: 'de plek die het verdient.',
   },
 
   heroDetails: {
-    title: 'Een fijne, intieme locatie voor retreats en sessies',
+    title: 'Een fijne, intieme locatie voor retraites en sessies',
     subtitle: 'Midden op het Nederlandse platteland, omringd door natuur.',
     body: 'Een plek die voelt als thuiskomen, omringd door bomen met daarbuiten weidse weilanden. Opgezet voor transformerende bijeenkomsten die je bijblijven. Of je nu een yoga retraite, een workshop of een creatieve bijeenkomst geeft, onze plek staat voor je klaar.',
     primaryCtaLabel: 'Ontdek de ruimtes',
@@ -32,7 +32,10 @@ export const nl: Dictionary = {
   },
 
   contact: {
-    pageTitle: 'Plan je retreat',
+    pageTitle: 'Plan je retraite',
+    metaTitle: 'Contact',
+    metaDescription:
+      'Neem contact op met MakersBarn. We horen graag van je over het plannen van je retraite, workshop of creatieve bijeenkomst.',
     introText:
       'Leuk dat je contact wilt opnemen! Of je nu een retraite of workshop wilt plannen, of gewoon meer wilt weten over the MakersBarn - we horen graag van je. Kies wat het beste bij je past:',
     formTitle: 'Stuur ons een bericht',
@@ -100,11 +103,11 @@ export const nl: Dictionary = {
 
   facilities: {
     title: 'Faciliteiten',
-    intro: `Huur de hele locatie voor je retreat, masterclass of creatieve uitjes. We hebben een eigen tuin, een verbouwde hooischuur, 14 bedden, plus ruimte voor tenten en campers, en alle rust die je nodig hebt.`,
-    secondary: `Heb je extra ruimte nodig tijdens je retreat? Of wil je een aparte plek boeken voor een een-op-een sessie of andere intieme bijeenkomst? We hebben een paar pareltjes die we graag met je delen als thuis-weg-van-huis.`,
+    intro: `Huur de hele locatie voor je retraite, masterclass of creatieve uitjes. We hebben een eigen tuin, een verbouwde hooischuur, 14 bedden, plus ruimte voor tenten en campers, en alle rust die je nodig hebt.`,
+    secondary: `Heb je extra ruimte nodig tijdens je retraite? Of wil je een aparte plek boeken voor een een-op-een sessie of andere intieme bijeenkomst? We hebben een paar pareltjes die we graag met je delen als thuis-weg-van-huis.`,
     metaTitle: 'Faciliteiten',
     metaDescription:
-      'Ontdek onze unieke retreat ruimtes bij de MakersBarn. Huur de hele locatie met eigen tuin, verbouwde hooischuur, 14 bedden plus ruimte voor tenten en campers.',
+      'Ontdek onze unieke retraite ruimtes bij de MakersBarn. Huur de hele locatie met eigen tuin, verbouwde hooischuur, 14 bedden plus ruimte voor tenten en campers.',
     stats: [
       { number: '1200+', description: 'Bomen geplant op het terrein' },
       { number: '13.000+ m²', description: 'Eigen terrein met zwemvijver, sauna en vuurplaats' },
@@ -115,9 +118,9 @@ export const nl: Dictionary = {
       workshopSpace: 'Workshopruimte',
       outdoors: 'Buiten',
     },
-    ctaTitle: 'Klaar om je retreat te plannen?',
+    ctaTitle: 'Klaar om je retraite te plannen?',
     ctaSubtitle: 'Laat ons je helpen een onvergetelijke ervaring te creëren voor je groep.',
-    ctaButton: 'Boek nu je retreat',
+    ctaButton: 'Boek nu je retraite',
     carousel: {
       previousImage: 'Vorige afbeelding',
       nextImage: 'Volgende afbeelding',
@@ -163,7 +166,7 @@ export const nl: Dictionary = {
       inBetween: {
         title: 'Alles ertussenin',
         description:
-          'Alle gebouwen en faciliteiten zijn natuurlijk essentieel voor een retreat, maar het zijn juist de kleine dingen daartussen die een plek echt bijzonder maken.',
+          'Alle gebouwen en faciliteiten zijn natuurlijk essentieel voor een retraite, maar het zijn juist de kleine dingen daartussen die een plek echt bijzonder maken.',
         features: ['Mooie paden', '1000+ bomen', 'Theehuis', 'Vogelgebied', 'Weidse uitzichten'],
       },
     },
@@ -186,7 +189,7 @@ export const nl: Dictionary = {
     kicker: 'Een kleine impressie',
     title: 'Een plek om blijvende herinneringen te maken',
     subtitle:
-      'Ruimtes om je te focussen, te dwalen, te dutten, te schrijven, te reflecteren en samen te zijn. Hier is een glimp van hoe je retreat zou kunnen aanvoelen.',
+      'Ruimtes om je te focussen, te dwalen, te dutten, te schrijven, te reflecteren en samen te zijn. Hier is een glimp van hoe je retraite zou kunnen aanvoelen.',
   },
 
   testimonials: {
@@ -194,17 +197,17 @@ export const nl: Dictionary = {
     items: [
       {
         testimonial:
-          'De MakersBarn is pure magie. De combinatie van prachtig platteland, doordachte ruimtes en de sauna maakte onze retreat echt transformerend. We gingen verfrist en diep verbonden naar huis.',
-        author: 'Emma K. - Wellness Retreat Organisator',
+          'De MakersBarn is pure magie. De combinatie van prachtig platteland, doordachte ruimtes en de sauna maakte onze retraite echt transformerend. We gingen verfrist en diep verbonden naar huis.',
+        author: 'Emma K. - Wellness Retraite Organisator',
       },
       {
         testimonial:
-          'Dit is de mooiste retreat plek die ik ooit heb meegemaakt. De aandacht voor detail, de natuurlijke omgeving en de rustige sfeer waren precies wat ons team nodig had om weer op te laden.',
+          'Dit is de mooiste retraite plek die ik ooit heb meegemaakt. De aandacht voor detail, de natuurlijke omgeving en de rustige sfeer waren precies wat ons team nodig had om weer op te laden.',
         author: 'Marcus T. - Leiderschapscoach',
       },
       {
         testimonial:
-          'Ik heb retreats georganiseerd door heel Europa, maar de MakersBarn is echt bijzonder. Het Nederlandse platteland, de warme gastvrijheid en de knusse ruimtes maken het ideaal voor diepgaand, betekenisvol werk.',
+          'Ik heb retraites georganiseerd door heel Europa, maar de MakersBarn is echt bijzonder. Het Nederlandse platteland, de warme gastvrijheid en de knusse ruimtes maken het ideaal voor diepgaand, betekenisvol werk.',
         author: 'Sophie L. - Workshop Facilitator',
       },
       {
@@ -261,9 +264,9 @@ export const nl: Dictionary = {
 
   metadata: {
     siteName: "The Maker's Barn",
-    siteTitle: "The Maker's Barn - Retreat op het Nederlandse platteland",
+    siteTitle: "The Maker's Barn - Retraite op het Nederlandse platteland",
     defaultDescription:
-      'Geef je retreat de plek die het verdient. 60m²+ praktijkzaal, 14 bedden, 1.3ha+ eigen terrein midden op het Nederlandse platteland.',
-    keywords: ['retreat', 'Nederland', 'platteland', 'wellness', 'workshop locatie', 'creatieve retreat'],
+      'Geef je retraite de plek die het verdient. 60m²+ praktijkzaal, 14 bedden, 1.3ha+ eigen terrein midden op het Nederlandse platteland.',
+    keywords: ['retraite', 'Nederland', 'platteland', 'wellness', 'workshop locatie', 'creatieve retraite'],
   },
 } as const
