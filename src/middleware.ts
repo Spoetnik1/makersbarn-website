@@ -8,7 +8,6 @@ import {
   createLanguageCookieValue,
 } from '@/lib'
 import { getLocaleFromPath, getLocalizedPath, getPathWithoutLocale } from '@/lib/routing'
-import { Language } from '@/types'
 
 const logger = createLogger('middleware')
 

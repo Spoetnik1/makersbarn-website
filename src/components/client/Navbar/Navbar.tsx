@@ -38,7 +38,7 @@ export function Navbar() {
   const languageDropdownRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
 
-  const { language, setLanguage } = useLanguage()
+  const { language } = useLanguage()
   const { t: nav } = useTranslation('nav')
   const { t: common } = useTranslation('common')
 
