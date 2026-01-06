@@ -22,14 +22,13 @@ const FLAG_TITLES = {
 } as const
 
 /**
- * Navigation links with route paths
+ * Navigation links with route paths (excluding Contact which is now a CTA)
  * Labels are retrieved from translations
  */
 const NAV_ROUTES = [
   { href: Route.HOME, key: 'home' as const },
   { href: Route.ABOUT, key: 'about' as const },
   { href: Route.FACILITIES, key: 'facilities' as const },
-  { href: Route.CONTACT, key: 'contact' as const },
 ]
 
 export function Navbar() {
@@ -117,10 +116,26 @@ export function Navbar() {
                 </Link>
               </li>
             ))}
+            <li className={styles.item}>
+              <Link
+                href={Route.CONTACT}
+                className={`${styles.link} ${styles.ctaButtonMobile} ${isActive(Route.CONTACT) ? styles.linkActive : ''}`}
+                onClick={closeMenu}
+              >
+                {nav.contact}
+              </Link>
+            </li>
           </ul>
         </div>
 
         <div className={styles.right}>
+          <Link
+            href={Route.CONTACT}
+            className={styles.ctaButton}
+            onClick={closeMenu}
+          >
+            {nav.contact}
+          </Link>
           <div className={styles.languageWrapper} ref={languageDropdownRef}>
             <button
               className={styles.languageBtn}

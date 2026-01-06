@@ -93,6 +93,39 @@
   gap: 1rem;
 }
 
+/* CTA Button - Primary Contact Action */
+.ctaButton {
+  background-color: #b8894a;
+  color: #ffffff;
+  padding: 0.625rem 1.25rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(184, 137, 74, 0.25);
+}
+
+.ctaButton:hover {
+  background-color: #a67a3f;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(184, 137, 74, 0.35);
+  color: #ffffff;
+}
+
+.ctaButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(184, 137, 74, 0.2);
+}
+
+/* Mobile CTA in menu - hidden on desktop */
+.ctaButtonMobile {
+  display: none;
+}
+
 .languageWrapper {
   position: relative;
 }
@@ -240,6 +273,16 @@
   .right {
     gap: 0.5rem;
     margin-right: 3.5rem;
+  }
+
+  .ctaButton {
+    display: none;
+  }
+
+  .ctaButtonMobile {
+    display: inline-block;
+    color: #b8894a !important;
+    font-weight: 600 !important;
   }
 
   .center {

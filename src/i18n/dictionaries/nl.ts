@@ -32,7 +32,7 @@ export const nl: Dictionary = {
   },
 
   contact: {
-    pageTitle: 'Neem contact op',
+    pageTitle: 'Plan je retreat',
     introText:
       'Leuk dat je contact wilt opnemen! Of je nu een retreat of workshop wilt plannen, of gewoon meer wilt weten over de Makers Barn - we horen graag van je. Kies wat het beste bij je past:',
     formTitle: 'Stuur ons een bericht',
@@ -57,7 +57,7 @@ export const nl: Dictionary = {
       name: 'Hoi! Ik ben...',
       email: 'Je kunt me bereiken via...',
       phone: 'Of bel me op...',
-      message: 'Ik wil graag weten...',
+      message: 'Hoe kunnen we je helpen?',
     },
     placeholders: {
       name: 'Je naam...',

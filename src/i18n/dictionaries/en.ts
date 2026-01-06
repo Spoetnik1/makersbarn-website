@@ -29,7 +29,7 @@ export const en: Dictionary = {
   },
 
   contact: {
-    pageTitle: 'Get in Touch',
+    pageTitle: 'Plan Your Retreat',
     introText:
       "We'd love to hear from you! Whether you're planning a retreat, workshop, or just want to learn more about Maker's Barn, we're here to help. Choose the way that works best for you:",
     formTitle: 'Contact us',
@@ -54,7 +54,7 @@ export const en: Dictionary = {
       name: 'Hi! My name is...',
       email: 'and you can reach me at...',
       phone: 'or call me at...',
-      message: "I'd love to ask about...",
+      message: 'How can we help you?',
     },
     placeholders: {
       name: 'Your name...',
