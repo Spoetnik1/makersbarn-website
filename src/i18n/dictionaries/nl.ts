@@ -34,7 +34,7 @@ export const nl: Dictionary = {
   contact: {
     pageTitle: 'Plan je retreat',
     introText:
-      'Leuk dat je contact wilt opnemen! Of je nu een retreat of workshop wilt plannen, of gewoon meer wilt weten over de Makers Barn - we horen graag van je. Kies wat het beste bij je past:',
+      'Leuk dat je contact wilt opnemen! Of je nu een retraite of workshop wilt plannen, of gewoon meer wilt weten over the MakersBarn - we horen graag van je. Kies wat het beste bij je past:',
     formTitle: 'Stuur ons een bericht',
     options: {
       whatsapp: {
