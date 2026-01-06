@@ -136,7 +136,7 @@ export const nl: Dictionary = {
           '3-persoonskamer met gedeelde douche',
           '2-persoonskamer met eigen douche',
           'Privékamer met gedeelde douche',
-          'Grote zolderruimte met 2-4 slaapplekken en een douche',
+          'Grote zolder (2-4 bedden, douche)',
           'Zolderruimte voor binnen praktijksessies',
         ],
       },

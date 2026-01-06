@@ -62,7 +62,7 @@ export const FACILITIES_OPTIONS: FacilitiesOption[] = [
       '3 bed room with shared shower',
       '2 bed room with ensuit shower',
       'Private room with shared shower',
-      'Large attic space with 2-4 sleeping spaces and a shower',
+      'Large attic (2-4 beds, shower)',
       'Attic space for indoor practic sessions',
     ],
   },
