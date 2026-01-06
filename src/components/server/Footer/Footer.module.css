@@ -36,10 +36,25 @@
   text-align: center;
 }
 
+.sectionRight {
+  align-items: flex-start;
+}
+
+.sectionRightInner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
 @media (min-width: 768px) {
   .sectionCenter {
     align-items: center;
     justify-content: center;
+  }
+
+  .sectionRight {
+    align-items: flex-end;
   }
 }
 

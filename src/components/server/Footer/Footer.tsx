@@ -40,24 +40,26 @@ export async function Footer() {
             <p className={styles.tagline}>{t.footer.tagline}</p>
           </div>
 
-          <div className={styles.section}>
-            <h3 className={styles.heading}>{t.footer.followUs}</h3>
-            <div className={styles.social}>
-              {SOCIAL_LINKS.map((link) => {
-                const Icon = ICON_MAP[link.platform]
-                return (
-                  <a
-                    key={link.platform}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.socialLink}
-                    aria-label={link.ariaLabel}
-                  >
-                    <Icon />
-                  </a>
-                )
-              })}
+          <div className={`${styles.section} ${styles.sectionRight}`}>
+            <div className={styles.sectionRightInner}>
+              <h3 className={styles.heading}>{t.footer.followUs}</h3>
+              <div className={styles.social}>
+                {SOCIAL_LINKS.map((link) => {
+                  const Icon = ICON_MAP[link.platform]
+                  return (
+                    <a
+                      key={link.platform}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.socialLink}
+                      aria-label={link.ariaLabel}
+                    >
+                      <Icon />
+                    </a>
+                  )
+                })}
+              </div>
             </div>
           </div>
         </div>
