@@ -315,6 +315,123 @@ export interface LocationTranslations {
 }
 
 /**
+ * Shanti Deva Retreat page translations
+ */
+export interface ShantiDevaRetreatTranslations {
+  metaTitle: string
+  metaDescription: string
+  backToExperiences: string
+
+  hero: {
+    title: string
+    subtitle: string
+    withTeachers: string
+    dailyTime: string
+    bookNow: string
+  }
+
+  dates: {
+    title: string
+    firstRetreat: string
+    secondRetreat: string
+    duration: string
+  }
+
+  teacher: {
+    sectionTitle: string
+    biography: string
+    gesheTitle: string
+    monkTitle: string
+  }
+
+  details: {
+    title: string
+    location: string
+    locationDescription: string
+    address: string
+    accessibility: string
+    accessibilityItems: {
+      carFromZwolle: string
+      freePickup: string
+      sharedTransport: string
+    }
+  }
+
+  schedule: {
+    title: string
+    arrivalDay: string
+    studyDays: string
+    finalDay: string
+    specialActivity: string
+    activities: {
+      arrivalCheckin: string
+      farmTour: string
+      dinner: string
+      introProgram: string
+      guidedMeditation: string
+      breakfast: string
+      morningTeaching: string
+      lunch: string
+      afternoonTeaching: string
+      qaSession: string
+      closingSession: string
+      freeTime: string
+      checkout: string
+    }
+  }
+
+  included: {
+    title: string
+    accommodation: string
+    accommodationOptions: {
+      doubleRooms: string
+      sharedRooms: string
+      singleRoom: string
+      tentCaravan: string
+    }
+    services: {
+      beddingTowels: string
+      vegetarianMeals: string
+      farmFacilities: string
+    }
+  }
+
+  pricing: {
+    title: string
+    totalPrice: string
+    perParticipant: string
+    breakdown: string
+    breakdownItems: {
+      accommodation: string
+      meals: string
+      venueRental: string
+      teacherSupport: string
+    }
+    paymentTerms: string
+    paymentItems: {
+      depositPayment: string
+      secondPayment: string
+    }
+    cancellation: string
+    cancellationItems: {
+      fourMonthsRefund: string
+      afterFullPayment: string
+      replacementRefund: string
+    }
+  }
+
+  registration: {
+    title: string
+    subtitle: string
+    participantRange: string
+    contact: string
+    whatsapp: string
+    email: string
+    registerButton: string
+  }
+}
+
+/**
  * Complete dictionary structure for a single language
  */
 export interface Dictionary {
@@ -327,6 +444,7 @@ export interface Dictionary {
   facilities: FacilitiesTranslations
   experiences: ExperiencesTranslations
   location: LocationTranslations
+  shantiDevaRetreat: ShantiDevaRetreatTranslations
   impressionCarousel: ImpressionCarouselTranslations
   impressionPolaroids: ImpressionPolaroidsTranslations
   testimonials: TestimonialsTranslations

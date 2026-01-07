@@ -27,5 +27,6 @@ export interface FeaturedRetreat {
   title: string
   image: string
   dateRange: string
-  externalUrl: string
+  externalUrl?: string
+  internalUrl?: string
 }

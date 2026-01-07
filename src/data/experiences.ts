@@ -38,10 +38,10 @@ export const EXPERIENCE_OFFERS: ExperienceOffer[] = [
 
 export const FEATURED_RETREATS: FeaturedRetreat[] = [
   {
-    id: 'shanti-deva-august-2026',
+    id: 'shanti-deva-2026',
     title: 'Shanti Deva Buddhist Tibetan Retreat',
     image: '/images/buddhist-retreat.png',
-    dateRange: 'August 4-9, 2026',
-    externalUrl: 'https://forms.gle/4HuFKtxAfhhuBupFA',
+    dateRange: 'June & August 2026',
+    internalUrl: '/experiences/shanti-deva-retreat',
   },
 ]

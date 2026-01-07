@@ -234,15 +234,25 @@ export default async function ExperiencesPage({ params }: ExperiencesPageProps) 
                   <h3 className={styles.featuredTitle}>{retreat.title}</h3>
                   <p className={styles.featuredDate}>{retreat.dateRange}</p>
 
-                  <a
-                    href={retreat.externalUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.featuredCta}
-                  >
-                    {t.experiences.featuredRetreats.bookNow}
-                    <ExternalLinkIcon />
-                  </a>
+                  {retreat.internalUrl ? (
+                    <Link
+                      href={getLocalizedPath(retreat.internalUrl, validLocale)}
+                      className={styles.featuredCta}
+                    >
+                      {t.experiences.featuredRetreats.bookNow}
+                      <ArrowIcon className={styles.featuredCtaIcon} />
+                    </Link>
+                  ) : retreat.externalUrl ? (
+                    <a
+                      href={retreat.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.featuredCta}
+                    >
+                      {t.experiences.featuredRetreats.bookNow}
+                      <ExternalLinkIcon />
+                    </a>
+                  ) : null}
                 </div>
               </article>
             ))}

@@ -359,6 +359,16 @@
   background: #1e3a2c;
 }
 
+.featuredCtaIcon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.featuredCta:hover .featuredCtaIcon {
+  transform: translateX(3px);
+}
+
 /* Divider */
 .divider {
   max-width: 1180px;

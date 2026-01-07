@@ -350,4 +350,118 @@ export const nl: Dictionary = {
     cta: 'Neem contact met ons op voor meer informatie.',
     ctaButton: 'Neem Contact Op',
   },
+
+  shantiDevaRetreat: {
+    metaTitle: 'Shanti Deva Boeddhistisch Tibetaans Retraite',
+    metaDescription: 'Doe mee met Gen La Geshe Pema Dorjee voor een 6-daagse Boeddhistische retraite op het Nederlandse platteland. Studeer Tibetaans Boeddhisme met meditatie, onderricht en vegetarische maaltijden inbegrepen.',
+    backToExperiences: 'Terug naar Ervaringen',
+
+    hero: {
+      title: 'Shanti Deva Boeddhistisch Tibetaans Retraite',
+      subtitle: 'Studie van Tibetaans Boeddhisme',
+      withTeachers: 'met Gen La Geshe Pema Dorjee & de Gerespecteerde monnik Lobsang',
+      dailyTime: 'Dagelijks van 7:00 tot 20:00 uur',
+      bookNow: 'Reserveer Je Plek',
+    },
+
+    dates: {
+      title: 'Beschikbare Data',
+      firstRetreat: 'Eerste retraite',
+      secondRetreat: 'Tweede retraite',
+      duration: '5 nachten (6 dagen)',
+    },
+
+    teacher: {
+      sectionTitle: 'Wie is Geshe Pema Dorjee?',
+      biography: 'Geshe Pema Dorjee werd geboren in Tibet en vluchtte met zijn familie in 1959 naar Dharamsala, India. Hij studeerde Boeddhistische filosofie en ontving in 1995 de Geshe-graad - de hoogste academische titel in het Tibetaans Boeddhisme. Meer dan 20 jaar gaf hij les en was hij directeur van het Tibetan Children\'s Village. Op verzoek van Zijne Heiligheid de Dalai Lama richtte hij het Bodong Research Center en een klooster in Kathmandu op. Hij heeft ook uitgebreide humanitaire projecten geleid, waaronder scholen, weeshuizen, watersystemen en aardbevingshulp in Nepal. Sinds 1997 geeft hij wereldwijd les, bekend om zijn helderheid, warmte en mededogen.',
+      gesheTitle: 'Geshe',
+      monkTitle: 'Gerespecteerde Monnik',
+    },
+
+    details: {
+      title: 'Retraite Details',
+      location: 'Locatie',
+      locationDescription: 'Een plattelandsboerderij in Nederland',
+      address: 'Adres boerderij',
+      accessibility: 'Bereikbaarheid',
+      accessibilityItems: {
+        carFromZwolle: '15 minuten met de auto vanaf Zwolle (1u15 met de trein vanaf Schiphol Airport, Amsterdam)',
+        freePickup: 'Gratis ophaalservice vanaf station Zwolle (14:00-16:00)',
+        sharedTransport: 'Gedeeld vervoer terug naar het station aan het einde: ~€10 per persoon',
+      },
+    },
+
+    schedule: {
+      title: 'Dagprogramma',
+      arrivalDay: 'Aankomstdag',
+      studyDays: 'Studiedagen',
+      finalDay: 'Laatste Dag',
+      specialActivity: 'Een Tibetaanse Momo Kookworkshop wordt gehouden op een van de retraitedagen.',
+      activities: {
+        arrivalCheckin: 'Aankomst & Kamer Inchecken',
+        farmTour: 'Rondleiding Boerderij',
+        dinner: 'Diner',
+        introProgram: 'Introductie & Programma Overzicht',
+        guidedMeditation: 'Geleide Meditatie',
+        breakfast: 'Ontbijt',
+        morningTeaching: 'Ochtend Onderricht (met korte pauze)',
+        lunch: 'Lunch',
+        afternoonTeaching: 'Middag Onderricht (met korte pauze)',
+        qaSession: 'Vraag & Antwoord Sessie',
+        closingSession: 'Afsluitende Sessie & V&A',
+        freeTime: 'Vrije Tijd',
+        checkout: 'Uitchecken',
+      },
+    },
+
+    included: {
+      title: 'Wat is Inbegrepen',
+      accommodation: 'Accommodatie',
+      accommodationOptions: {
+        doubleRooms: 'Tweepersoonskamers (5 nachten)',
+        sharedRooms: 'Kamers voor 3-4 personen (5 nachten)',
+        singleRoom: 'Eenpersoonskamer (5 nachten)',
+        tentCaravan: 'Optie om in eigen tent of caravan te verblijven tegen gereduceerd tarief',
+      },
+      services: {
+        beddingTowels: 'Beddengoed & handdoeken (zwembad/sauna handdoek niet inbegrepen)',
+        vegetarianMeals: '3 vegetarische maaltijden per dag + drankjes & snacks',
+        farmFacilities: 'Gebruik van alle boerderijfaciliteiten - Buiten hot tub, Sauna, Ecologisch zwembad en meer',
+      },
+    },
+
+    pricing: {
+      title: 'Prijzen',
+      totalPrice: '€640',
+      perParticipant: 'per deelnemer (inclusief btw)',
+      breakdown: 'Prijsoverzicht',
+      breakdownItems: {
+        accommodation: 'Accommodatie',
+        meals: 'Maaltijden',
+        venueRental: 'Locatie huur bijdrage',
+        teacherSupport: 'Ondersteuning reis & verblijf Geshe Pema Dorjee & monnik Lobsang',
+      },
+      paymentTerms: 'Betalingsvoorwaarden',
+      paymentItems: {
+        depositPayment: 'Eerste betaling (aanbetaling): €140 bij inschrijving',
+        secondPayment: 'Tweede betaling: €500, vier maanden voor de retraite',
+      },
+      cancellation: 'Annuleringsbeleid',
+      cancellationItems: {
+        fourMonthsRefund: 'Tot 4 maanden voor aanvang: volledige terugbetaling aanbetaling',
+        afterFullPayment: 'Na tweede betaling (volledige betaling): 25% terugbetaling',
+        replacementRefund: 'Als een vervangende deelnemer wordt gevonden: volledige terugbetaling',
+      },
+    },
+
+    registration: {
+      title: 'Klaar om Mee te Doen?',
+      subtitle: 'Plaatsen zijn beperkt. Reserveer vandaag nog je plek.',
+      participantRange: '10-15 deelnemers',
+      contact: 'Vragen? Neem direct contact op met de retreat organisatoren',
+      whatsapp: 'WhatsApp',
+      email: 'E-mail',
+      registerButton: 'Inschrijven',
+    },
+  },
 } as const

@@ -245,6 +245,120 @@ export const en: Dictionary = {
     ctaButton: 'Get in Touch',
   },
 
+  shantiDevaRetreat: {
+    metaTitle: 'Shanti Deva Buddhist Tibetan Retreat',
+    metaDescription: 'Join Gen La Geshe Pema Dorjee for a 6-day Buddhist retreat in the Dutch countryside. Study Tibetan Buddhism with meditation, teachings, and vegetarian meals included.',
+    backToExperiences: 'Back to Experiences',
+
+    hero: {
+      title: 'Shanti Deva Buddhist Tibetan Retreat',
+      subtitle: 'Study of Tibetan Buddhism',
+      withTeachers: 'with Gen La Geshe Pema Dorjee & the Respected monk Lobsang',
+      dailyTime: 'From 7 AM to 8 PM daily',
+      bookNow: 'Book Your Spot',
+    },
+
+    dates: {
+      title: 'Available Dates',
+      firstRetreat: 'First retreat',
+      secondRetreat: 'Second retreat',
+      duration: '5 nights (6 days)',
+    },
+
+    teacher: {
+      sectionTitle: 'Who is Geshe Pema Dorjee?',
+      biography: 'Geshe Pema Dorjee was born in Tibet and fled with his family in 1959, growing up in Dharamsala, India. He studied Buddhist philosophy and in 1995 was awarded the Geshe degree - the highest academic title in Tibetan Buddhism. For over 20 years he taught and served as principal at the Tibetan Children\'s Village. At the request of His Holiness the Dalai Lama, he founded the Bodong Research Center and a monastery in Kathmandu. He has also led extensive humanitarian projects, including schools, orphanages, water systems, and earthquake relief in Nepal. Since 1997 he has been teaching worldwide, known for his clarity, warmth, and compassion.',
+      gesheTitle: 'Geshe',
+      monkTitle: 'Respected Monk',
+    },
+
+    details: {
+      title: 'Retreat Details',
+      location: 'Location',
+      locationDescription: 'A countryside farm in the Netherlands',
+      address: 'Farm address',
+      accessibility: 'Accessibility',
+      accessibilityItems: {
+        carFromZwolle: '15 minutes by car from Zwolle (1h15 by train from Schiphol Airport, Amsterdam)',
+        freePickup: 'Free pickup from Zwolle train station (14:00-16:00)',
+        sharedTransport: 'Shared transport back to the station at the end: ~€10 per person',
+      },
+    },
+
+    schedule: {
+      title: 'Daily Schedule',
+      arrivalDay: 'Arrival Day',
+      studyDays: 'Study Days',
+      finalDay: 'Final Day',
+      specialActivity: 'A Tibetan Momo Cooking Workshop will be held on one of the retreat days.',
+      activities: {
+        arrivalCheckin: 'Arrival & Room Check-in',
+        farmTour: 'Farm Tour',
+        dinner: 'Dinner',
+        introProgram: 'Introduction & Program Overview',
+        guidedMeditation: 'Guided Meditation',
+        breakfast: 'Breakfast',
+        morningTeaching: 'Morning Teaching (with short break)',
+        lunch: 'Lunch',
+        afternoonTeaching: 'Afternoon Teaching (with short break)',
+        qaSession: 'Q&A Session',
+        closingSession: 'Closing Session & Q&A',
+        freeTime: 'Free Time',
+        checkout: 'Check-out',
+      },
+    },
+
+    included: {
+      title: 'What\'s Included',
+      accommodation: 'Accommodation',
+      accommodationOptions: {
+        doubleRooms: 'Double rooms (5 nights)',
+        sharedRooms: 'Rooms for 3-4 people (5 nights)',
+        singleRoom: 'Single room (5 nights)',
+        tentCaravan: 'Option to stay in a tent or caravan at reduced price',
+      },
+      services: {
+        beddingTowels: 'Bedding & towels (pool/sauna towel not included)',
+        vegetarianMeals: '3 vegetarian meals daily + drinks & snacks',
+        farmFacilities: 'Use of all farm facilities - Outdoor hot tub, Sauna, Ecological pool and more',
+      },
+    },
+
+    pricing: {
+      title: 'Pricing',
+      totalPrice: '€640',
+      perParticipant: 'per participant (tax included)',
+      breakdown: 'Price Breakdown',
+      breakdownItems: {
+        accommodation: 'Accommodation',
+        meals: 'Meals',
+        venueRental: 'Venue rental share',
+        teacherSupport: 'Support for travel & stay of Geshe Pema Dorjee & monk Lobsang',
+      },
+      paymentTerms: 'Payment Terms',
+      paymentItems: {
+        depositPayment: 'First payment (deposit): €140 upon registration',
+        secondPayment: 'Second payment: €500, four months before retreat',
+      },
+      cancellation: 'Cancellation Policy',
+      cancellationItems: {
+        fourMonthsRefund: 'Up to 4 months before start: full refund of deposit',
+        afterFullPayment: 'After second payment (full payment): 25% refund',
+        replacementRefund: 'If a replacement participant is found: full refund',
+      },
+    },
+
+    registration: {
+      title: 'Ready to Join?',
+      subtitle: 'Spaces are limited. Reserve your spot today.',
+      participantRange: '10-15 participants',
+      contact: 'Questions? Contact retreat organisers directly',
+      whatsapp: 'WhatsApp',
+      email: 'Email',
+      registerButton: 'Register Now',
+    },
+  },
+
   impressionCarousel: {
     kicker: 'A little impression',
     title: 'Slow down, look around.',
