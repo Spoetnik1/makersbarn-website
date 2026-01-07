@@ -103,11 +103,10 @@ export const nl: Dictionary = {
 
   facilities: {
     title: 'Faciliteiten',
-    intro: `Huur de hele locatie voor je retraite, masterclass of creatieve uitjes. We hebben een eigen tuin, een verbouwde hooischuur, 14 bedden, plus ruimte voor tenten en campers, en alle rust die je nodig hebt.`,
-    secondary: `Heb je extra ruimte nodig tijdens je retraite? Of wil je een aparte plek boeken voor een een-op-een sessie of andere intieme bijeenkomst? We hebben een paar pareltjes die we graag met je delen als thuis-weg-van-huis.`,
+    intro: `Huur de ruimtes die je nodig hebt voor je retraite, masterclass of creatieve uitjes. We hebben een eigen tuin, een verbouwde hooischuur, 14 bedden, plus ruimte voor tenten en campers, en alle rust die je nodig hebt. We helpen je ook graag met het regelen van catering op basis van jouw wensen en behoeften.`,
     metaTitle: 'Faciliteiten',
     metaDescription:
-      'Ontdek onze unieke retraite ruimtes bij de MakersBarn. Huur de hele locatie met eigen tuin, verbouwde hooischuur, 14 bedden plus ruimte voor tenten en campers.',
+      'Huur de ruimtes die je nodig hebt bij MakersBarn. Eigen tuin, verbouwde hooischuur, 14 bedden, ruimte voor tenten en campers, plus catering op maat.',
     stats: [
       { number: '1200+', description: 'Bomen geplant op het terrein' },
       { number: '13.000+ m²', description: 'Eigen terrein met zwemvijver, sauna en vuurplaats' },

@@ -104,17 +104,6 @@ export function Navbar() {
           />
         </Link>
 
-        <button
-          className={`${styles.toggle} ${isMenuOpen ? styles.toggleActive : ''}`}
-          onClick={toggleMenu}
-          aria-label={common.toggleMenu}
-          aria-expanded={isMenuOpen}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-
         <div className={`${styles.center} ${isMenuOpen ? styles.centerActive : ''}`}>
           <ul className={styles.menu}>
             {NAV_ROUTES.map((route) => (
@@ -183,6 +172,16 @@ export function Navbar() {
               </div>
             )}
           </div>
+          <button
+            className={`${styles.toggle} ${isMenuOpen ? styles.toggleActive : ''}`}
+            onClick={toggleMenu}
+            aria-label={common.toggleMenu}
+            aria-expanded={isMenuOpen}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </div>
       </div>
     </nav>

@@ -49,7 +49,6 @@ export default async function FacilitiesPage({ params }: FacilitiesPageProps) {
           <header className={styles.header}>
             <h1 className={styles.title}>{t.facilities.title}</h1>
             <p className={styles.intro}>{t.facilities.intro}</p>
-            <p className={`${styles.intro} ${styles.secondary}`}>{t.facilities.secondary}</p>
           </header>
 
           <FacilitiesCarousel />

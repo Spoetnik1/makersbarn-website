@@ -114,7 +114,6 @@ export interface AboutTranslations {
 export interface FacilitiesTranslations {
   title: string
   intro: string
-  secondary: string
   metaTitle: string
   metaDescription: string
   stats: readonly {
