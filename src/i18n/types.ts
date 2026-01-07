@@ -384,6 +384,7 @@ export interface ShantiDevaRetreatTranslations {
     title: string
     accommodation: string
     accommodationOptions: {
+      duration: string
       doubleRooms: string
       sharedRooms: string
       singleRoom: string

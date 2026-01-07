@@ -418,9 +418,10 @@ export const nl: Dictionary = {
       title: 'Wat is Inbegrepen',
       accommodation: 'Accommodatie',
       accommodationOptions: {
-        doubleRooms: 'Tweepersoonskamers (5 nachten)',
-        sharedRooms: 'Kamers voor 3-4 personen (5 nachten)',
-        singleRoom: 'Eenpersoonskamer (5 nachten)',
+        duration: '5 nachten (6 dagen)',
+        doubleRooms: 'Tweepersoonskamers',
+        sharedRooms: 'Kamers voor 3-4 personen',
+        singleRoom: 'Eenpersoonskamer',
         tentCaravan: 'Optie om in eigen tent of caravan te verblijven tegen gereduceerd tarief',
       },
       services: {

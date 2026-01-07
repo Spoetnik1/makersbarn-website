@@ -381,8 +381,8 @@ export default async function ShantiDevaRetreatPage({ params }: ShantiDevaRetrea
               </div>
               <div className={styles.venueImageSmall}>
                 <Image
-                  src="/images/cosmos-outside-wooden-cabin.jpeg"
-                  alt="Accommodation cabin"
+                  src="/images/graden_view_with_hammocks.JPG"
+                  alt="Garden view with hammocks"
                   fill
                   sizes="(max-width: 768px) 50vw, 20vw"
                   className={styles.venueImage}
@@ -465,6 +465,10 @@ export default async function ShantiDevaRetreatPage({ params }: ShantiDevaRetrea
               <div className={styles.includedCard}>
                 <h3 className={styles.includedCardTitle}>{t.shantiDevaRetreat.included.accommodation}</h3>
                 <ul className={styles.includedList}>
+                  <li className={styles.includedItem}>
+                    <CheckIcon className={styles.checkIcon} />
+                    {t.shantiDevaRetreat.included.accommodationOptions.duration}
+                  </li>
                   <li className={styles.includedItem}>
                     <CheckIcon className={styles.checkIcon} />
                     {t.shantiDevaRetreat.included.accommodationOptions.doubleRooms}

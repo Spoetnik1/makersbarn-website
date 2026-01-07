@@ -312,9 +312,10 @@ export const en: Dictionary = {
       title: 'What\'s Included',
       accommodation: 'Accommodation',
       accommodationOptions: {
-        doubleRooms: 'Double rooms (5 nights)',
-        sharedRooms: 'Rooms for 3-4 people (5 nights)',
-        singleRoom: 'Single room (5 nights)',
+        duration: '5 nights (6 days)',
+        doubleRooms: 'Double rooms',
+        sharedRooms: 'Rooms for 3-4 people',
+        singleRoom: 'Single room',
         tentCaravan: 'Option to stay in a tent or caravan at reduced price',
       },
       services: {
