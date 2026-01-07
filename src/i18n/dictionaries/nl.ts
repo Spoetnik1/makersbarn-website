@@ -8,6 +8,7 @@ export const nl: Dictionary = {
     home: 'Home',
     about: 'Over ons',
     facilities: 'Faciliteiten',
+    experiences: 'Boek een Retraite',
     contact: 'Contact',
   },
 
@@ -169,6 +170,63 @@ export const nl: Dictionary = {
         features: ['Mooie paden', '1000+ bomen', 'Theehuis', 'Vogelgebied', 'Weidse uitzichten'],
       },
     },
+  },
+
+  experiences: {
+    metaTitle: 'Ervaringen',
+    metaDescription: 'Ontdek jouw perfecte retraite-ervaring bij MakersBarn. Boek een solo yoga retraite, huur onze accommodatie, of sluit je aan bij een groepsweekend.',
+    title: 'Ervaringen',
+    intro: 'Of je nu op zoek bent naar rust, je eigen uitje wilt samenstellen, of wilt deelnemen aan een samengestelde retraite met anderen, we hebben de perfecte ervaring voor je klaar.',
+    createExperience: {
+      title: 'Creëer Je Eigen Ervaring',
+      subtitle: 'Stel jouw perfecte escape samen met onze flexibele opties',
+    },
+    soloRetreat: {
+      title: 'Solo Yoga Retraite',
+      description: 'Een gepersonaliseerde retraite-ervaring in de Cosmos cabin. Op maat gemaakte yoga sessies, sauna, hot tub en complete rust voor je persoonlijke reis.',
+      features: [
+        '2-3 nachten pakketten',
+        'Gepersonaliseerde yoga sessies',
+        'Sauna & hot tub toegang',
+        'Vers ontbijt inbegrepen',
+      ],
+      ctaLabel: 'Ontdek Solo Retraite',
+    },
+    accommodation: {
+      title: 'Boek Onze Accommodatie',
+      description: 'Huur onze prachtige ruimtes voor je eigen privé uitje. Perfect voor stellen, gezinnen of kleine groepen op zoek naar een rustige escape.',
+      features: [
+        'Yoga sessies beschikbaar',
+        'Hot tub huur',
+        'Sauna toegang',
+        'Catering op aanvraag',
+      ],
+      platforms: {
+        airbnb: 'Boek via Airbnb',
+        natuurhuisje: 'Boek via Natuurhuisje',
+      },
+    },
+    togetherRetreat: {
+      title: 'Vrienden Retraite',
+      description: 'Een all-inclusive escape met vrienden. Yoga, creatieve workshops, heerlijke maaltijden en betekenisvolle connecties in een prachtige omgeving.',
+      features: [
+        'All-inclusive ervaring',
+        'Yoga & creatieve workshops',
+        'Ayurvedisch geïnspireerde maaltijden',
+        'Exclusieve groepstoegang',
+      ],
+      ctaLabel: 'Ontdek Groepsretraites',
+    },
+    featuredRetreats: {
+      title: 'Uitgelichte Retraites',
+      subtitle: 'Sluit je aan bij een van onze aankomende samengestelde retraite-ervaringen',
+      bookNow: 'Boek Nu',
+      spotsLeft: 'plekken beschikbaar',
+      fullyBooked: 'Volgeboekt',
+    },
+    ctaTitle: 'Niet zeker welke ervaring bij je past?',
+    ctaSubtitle: 'Neem contact met ons op en we helpen je de perfecte match te vinden.',
+    ctaButton: 'Neem Contact Op',
   },
 
   impressionCarousel: {

@@ -5,6 +5,7 @@ export const en: Dictionary = {
     home: 'Home',
     about: 'About',
     facilities: 'Facilities',
+    experiences: 'Join a Retreat',
     contact: 'Contact',
   },
 
@@ -166,6 +167,63 @@ export const en: Dictionary = {
         features: ['Beautiful paths', '1000+ trees', 'Tea house', 'Bird area', 'Wide views'],
       },
     },
+  },
+
+  experiences: {
+    metaTitle: 'Experiences',
+    metaDescription: 'Discover your perfect retreat experience at MakersBarn. Book a solo yoga retreat, rent our accommodation, or join a group weekend retreat.',
+    title: 'Experiences',
+    intro: 'Whether you seek solitude, want to create your own getaway, or join a curated retreat with others, we have the perfect experience waiting for you.',
+    createExperience: {
+      title: 'Create Your Own Experience',
+      subtitle: 'Design your perfect escape with our flexible options',
+    },
+    soloRetreat: {
+      title: 'Solo Yoga Retreat',
+      description: 'A personalized retreat experience in the Cosmos cabin. Tailored yoga sessions, sauna, hot tub, and complete tranquility for your personal journey.',
+      features: [
+        '2-3 night packages',
+        'Personalized yoga sessions',
+        'Sauna & hot tub access',
+        'Fresh breakfast included',
+      ],
+      ctaLabel: 'Explore Solo Retreat',
+    },
+    accommodation: {
+      title: 'Book Our Accommodation',
+      description: 'Rent our beautiful spaces for your own private getaway. Perfect for couples, families, or small groups looking for a peaceful escape.',
+      features: [
+        'Yoga sessions available',
+        'Hot tub rental',
+        'Sauna access',
+        'Catering on request',
+      ],
+      platforms: {
+        airbnb: 'Book on Airbnb',
+        natuurhuisje: 'Book on Natuurhuisje',
+      },
+    },
+    togetherRetreat: {
+      title: 'Friends Retreat',
+      description: 'An all-inclusive escape with friends. Yoga, creative workshops, delicious meals, and meaningful connections in a beautiful setting.',
+      features: [
+        'All-inclusive experience',
+        'Yoga & creative workshops',
+        'Ayurvedic-inspired meals',
+        'Exclusive group access',
+      ],
+      ctaLabel: 'Explore Group Retreats',
+    },
+    featuredRetreats: {
+      title: 'Featured Retreats',
+      subtitle: 'Join one of our upcoming curated retreat experiences',
+      bookNow: 'Book Now',
+      spotsLeft: 'spots left',
+      fullyBooked: 'Fully Booked',
+    },
+    ctaTitle: 'Not sure which experience is right for you?',
+    ctaSubtitle: 'Get in touch and we\'ll help you find the perfect fit for your needs.',
+    ctaButton: 'Contact Us',
   },
 
   impressionCarousel: {

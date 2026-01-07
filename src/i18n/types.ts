@@ -7,6 +7,8 @@ export interface NavTranslations {
   home: string
   about: string
   facilities: string
+  experiences: string
+  location: string
   contact: string
 }
 
@@ -249,6 +251,138 @@ export interface MetadataTranslations {
 }
 
 /**
+ * Experiences page translations
+ */
+export interface ExperiencesTranslations {
+  metaTitle: string
+  metaDescription: string
+  title: string
+  intro: string
+  createExperience: {
+    title: string
+    subtitle: string
+  }
+  soloRetreat: {
+    title: string
+    description: string
+    features: readonly string[]
+    ctaLabel: string
+  }
+  accommodation: {
+    title: string
+    description: string
+    features: readonly string[]
+    platforms: {
+      airbnb: string
+      natuurhuisje: string
+    }
+  }
+  togetherRetreat: {
+    title: string
+    description: string
+    features: readonly string[]
+    ctaLabel: string
+  }
+  featuredRetreats: {
+    title: string
+    subtitle: string
+    bookNow: string
+    spotsLeft: string
+    fullyBooked: string
+  }
+  ctaTitle: string
+  ctaSubtitle: string
+  ctaButton: string
+}
+
+/**
+ * Location page translations
+ */
+export interface LocationTranslations {
+  metaTitle: string
+  metaDescription: string
+  title: string
+  intro: string
+  categories: {
+    attractions: string
+    food: string
+    hiking: string
+    wellness: string
+    cities: string
+  }
+  carousel: {
+    previousImage: string
+    nextImage: string
+    viewFullscreen: string
+    goToImage: string
+    imageNavigation: string
+  }
+  items: {
+    kasteelHetNijenhuis: {
+      title: string
+      description: string
+      features: readonly string[]
+    }
+    bokkersMillBakery: {
+      title: string
+      description: string
+      features: readonly string[]
+    }
+    deJongheLeeuw: {
+      title: string
+      description: string
+      features: readonly string[]
+    }
+    overeschOrganic: {
+      title: string
+      description: string
+      features: readonly string[]
+    }
+    huismanFarm: {
+      title: string
+      description: string
+      features: readonly string[]
+    }
+    duurseWaarden: {
+      title: string
+      description: string
+      features: readonly string[]
+    }
+    havezateDenAlerdinck: {
+      title: string
+      description: string
+    }
+    sallandseHeuvelrug: {
+      title: string
+      description: string
+    }
+    biking: {
+      title: string
+      description: string
+      features: readonly string[]
+    }
+    saunaSwoll: {
+      title: string
+      description: string
+      features: readonly string[]
+    }
+    zwolle: {
+      title: string
+      description: string
+      features: readonly string[]
+    }
+    hanzesteden: {
+      title: string
+      description: string
+      features: readonly string[]
+    }
+  }
+  ctaTitle: string
+  ctaSubtitle: string
+  ctaButton: string
+}
+
+/**
  * Complete dictionary structure for a single language
  */
 export interface Dictionary {
@@ -259,6 +393,8 @@ export interface Dictionary {
   footer: FooterTranslations
   about: AboutTranslations
   facilities: FacilitiesTranslations
+  experiences: ExperiencesTranslations
+  location: LocationTranslations
   impressionCarousel: ImpressionCarouselTranslations
   impressionPolaroids: ImpressionPolaroidsTranslations
   testimonials: TestimonialsTranslations

@@ -30,6 +30,7 @@ const NAV_ROUTES = [
   { href: Route.HOME, key: 'home' as const },
   { href: Route.ABOUT, key: 'about' as const },
   { href: Route.FACILITIES, key: 'facilities' as const },
+  { href: Route.EXPERIENCES, key: 'experiences' as const },
 ]
 
 export function Navbar() {
