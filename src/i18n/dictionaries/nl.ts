@@ -103,11 +103,10 @@ export const nl: Dictionary = {
 
   facilities: {
     title: 'Faciliteiten',
-    intro: `Huur de hele locatie voor je retraite, masterclass of creatieve uitjes. We hebben een eigen tuin, een verbouwde hooischuur, 14 bedden, plus ruimte voor tenten en campers, en alle rust die je nodig hebt.`,
-    secondary: `Heb je extra ruimte nodig tijdens je retraite? Of wil je een aparte plek boeken voor een een-op-een sessie of andere intieme bijeenkomst? We hebben een paar pareltjes die we graag met je delen als thuis-weg-van-huis.`,
+    intro: `Huur de ruimtes die je nodig hebt voor je retraite, masterclass of creatieve uitjes. We hebben een eigen tuin, een verbouwde hooischuur, 14 bedden, plus ruimte voor tenten en campers, en alle rust die je nodig hebt. We helpen je ook graag met het regelen van catering op basis van jouw wensen en behoeften.`,
     metaTitle: 'Faciliteiten',
     metaDescription:
-      'Ontdek onze unieke retraite ruimtes bij de MakersBarn. Huur de hele locatie met eigen tuin, verbouwde hooischuur, 14 bedden plus ruimte voor tenten en campers.',
+      'Huur de ruimtes die je nodig hebt bij MakersBarn. Eigen tuin, verbouwde hooischuur, 14 bedden, ruimte voor tenten en campers, plus catering op maat.',
     stats: [
       { number: '1200+', description: 'Bomen geplant op het terrein' },
       { number: '13.000+ m²', description: 'Eigen terrein met zwemvijver, sauna en vuurplaats' },
@@ -223,12 +222,12 @@ export const nl: Dictionary = {
       {
         name: 'Nana',
         description:
-          'Het brein achter de MakersBarn. Zij doet de meeste communicatie, dus waarschijnlijk is zij de eerste die je spreekt.',
+          'Nana is het brein en het hart achter The Makers Barn. De plek is ontstaan uit haar eigen levensreis en helingsproces, wat de sfeer heeft gevormd die we hier proberen te creëren. Zij is degene met wie je vanaf het begin contact hebt en die ervoor zorgt dat jouw retraite precies aanvoelt zoals je het voor je ziet. Nana brengt een kalme, geaarde aanwezigheid, geïnspireerd door haar liefde voor de natuur, yoga, mindful leven en kleine creatieve momenten. Ze begrijpt wat retraitebegeleiders nodig hebben en ondersteunt hen op een heldere, zorgzame en praktische manier.',
       },
       {
         name: 'Benny',
         description:
-          'Benny heeft een passie voor IT en zit vaak achter zijn computer om aan verschillende projecten te werken. Klussen met zijn handen doet hij graag als afwisseling, dus het leven bij de MakersBarn past hem perfect.',
+          'Een echte maker in hart en nieren. Benny creëert graag magie, zowel achter het scherm als in de keuken. Met de aap als zijn krachtdier brengt hij speelse nieuwsgierigheid en vreugde in alles wat hij doet. Hij vindt balans tussen de virtuele en fysieke wereld door mindfulness, en staat altijd klaar om te helpen, vriendelijkheid te delen en een goed gesprek te voeren.',
       },
       {
         name: 'Noud',

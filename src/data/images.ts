@@ -38,6 +38,7 @@ export const IMAGES = {
     womanInPond: '/images/woman-in-pond.jpg',
     lunchTogether: '/images/lunch-together.jpg',
     manInHammock: '/images/man-in-hammock-looking-on-field.jpg',
+    gardenViewWithHammocks: '/images/graden_view_with_hammocks.JPG',
   },
   team: {
     nana: '/images/nana-stairs.jpg',
@@ -59,6 +60,7 @@ export const CAROUSEL_IMAGES = [
   IMAGES.accommodation.quoteImage,
   IMAGES.accommodation.mainHouse,
   IMAGES.accommodation.manInHammock,
+  IMAGES.accommodation.gardenViewWithHammocks,
 ] as const
 
 export const POLAROID_IMAGES = [

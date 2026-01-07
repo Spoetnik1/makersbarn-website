@@ -100,11 +100,10 @@ export const en: Dictionary = {
 
   facilities: {
     title: 'Facilities',
-    intro: `Rent the entire location for your retreat, masterclass, or creative adventures. We offer a private garden, converted hay barn, 14 beds, plus space for tents and campervans, and all the tranquility you need.`,
-    secondary: `Need extra spaces during your retreat or want to book a separate space for a one-on-one session or other intimate gathering? We have these gems that we lovingly offer as your home away from home.`,
+    intro: `Rent the spaces you need for your retreat, masterclass, or creative adventures. We offer a private garden, converted hay barn, 14 beds, plus space for tents and campervans, and all the tranquility you need. We also help arranging catering based on your requirements and needs.`,
     metaTitle: 'Facilities',
     metaDescription:
-      'Explore our unique retreat spaces at MakersBarn. Rent the entire location with private garden, converted hay barn, 14 beds plus space for tents and campervans.',
+      'Rent the spaces you need at MakersBarn. Private garden, converted hay barn, 14 beds, space for tents and campervans, plus catering arrangements available.',
     stats: [
       { number: '1200+', description: 'Trees planted on the area' },
       { number: '13.000+ m²', description: 'Of private land, a natural swimming pond, sauna, and fire circle.' },
@@ -220,12 +219,12 @@ export const en: Dictionary = {
       {
         name: 'Nana',
         description:
-          'The true mastermind behind the MakersBarn. She takes up most communications so she will be your first person to meet.',
+          "Nana is the mastermind and the heart behind The Makers Barn. The place grew out of her own life journey and healing process, which shaped the atmosphere we try to create here. She's the person you'll be in touch with from the start and the one who helps make sure your retreat feels exactly the way you imagine it. Nana brings a calm, grounded presence, influenced by her love for nature, yoga, mindful living, and small creative moments. She understands what retreat facilitators need and supports them in a clear, caring, and practical way.",
       },
       {
         name: 'Benny',
         description:
-          'Benny still has the passion for IT and can often be found behind his computer working on different businesses. Loves manual work as a break so is very content living at the MakersBarn.',
+          "A true maker at heart, Benny loves creating magic both on screen and in the kitchen. With the monkey as his spirit animal, he brings playful curiosity and joy to everything he does. Balances the virtual and physical world with mindfulness, and is always ready to help, share some kindness, and chat about whatever's on your mind.",
       },
       {
         name: 'Noud',
