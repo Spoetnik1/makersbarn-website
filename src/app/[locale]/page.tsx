@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: HomePageProps) {
     path: '/',
     locale: validLocale,
     ogTitle: t.metadata.siteTitle, // Use the more descriptive site title for social sharing
+    image: '/open-graph-preview-image.png', // Custom OG image for social sharing
   })
 }
 
