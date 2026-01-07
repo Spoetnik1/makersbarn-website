@@ -92,7 +92,7 @@ export const baseMetadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
-  keywords: ['retreat', 'Netherlands', 'countryside', 'wellness', 'workshop venue', 'creative retreat'],
+  keywords: ['retreat', 'retraite', 'huren', 'rent', 'organize', 'organiseren', 'natuur', 'nature', 'yoga'],
   authors: [{ name: SITE_NAME }],
   icons: {
     icon: [

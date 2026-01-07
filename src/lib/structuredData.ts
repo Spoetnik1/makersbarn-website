@@ -125,7 +125,7 @@ export function generateOrganizationSchema(): OrganizationSchema {
     url: SITE_URL,
     logo: `${SITE_URL}/tmb-logo.webp`,
     description:
-      'A countryside retreat venue in the Netherlands offering accommodation, practice spaces, and creative workshops.',
+      'A countryside retreat venue in the Netherlands offering accommodation, practice spaces, and tranquil nature experiences.',
     address: {
       '@type': 'PostalAddress',
       streetAddress: FOOTER_ADDRESS.street,
@@ -157,7 +157,7 @@ export function generateLocalBusinessSchema(options?: {
 }): LocalBusinessSchema {
   const {
     type = 'LodgingBusiness',
-    image = `${SITE_URL}/images/main-house.jpg`,
+    image = `${SITE_URL}/open-graph-preview-image.png`,
     priceRange,
     amenities = [
       { name: 'Practice Hall', value: true },
@@ -226,7 +226,7 @@ export function generateWebSiteSchema(options?: {
     name: SITE_NAME,
     url: SITE_URL,
     description:
-      'Give your retreat the place it deserves. 60m²+ practice hall, 14 beds, 1.3ha+ private land in the Dutch countryside.',
+      'A home for your retreat. Large private nature landscapes, practice space, 14 beds plus space for tents and RVs.',
     publisher: {
       '@id': `${SITE_URL}#organization`,
     },
@@ -288,7 +288,7 @@ export function generateContactPageSchema(): ContactPageSchema {
     name: `Contact | ${SITE_NAME}`,
     url: `${SITE_URL}/contact`,
     description:
-      "Get in touch with MakersBarn. We'd love to hear from you about planning your retreat, workshop, or creative gathering.",
+      "Get in touch with MakersBarn. We'd love to hear from you about planning your retreat, workshop, or any other gathering.",
     mainEntity: {
       '@type': 'Organization',
       '@id': `${SITE_URL}#organization`,

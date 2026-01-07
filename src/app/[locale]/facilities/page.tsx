@@ -5,7 +5,6 @@ import { StructuredData } from '@/components/server'
 import { generatePageMetadata } from '@/lib/metadata'
 import { generateLocalBusinessSchema, generatePageBreadcrumbs } from '@/lib/structuredData'
 import { Route } from '@/types'
-import { SITE_CONFIG } from '@/constants/site'
 import { getServerTranslations } from '@/i18n'
 import { getValidLocale } from '@/lib/locale'
 import { getLocalizedPath } from '@/lib/routing'
@@ -39,7 +38,6 @@ export default async function FacilitiesPage({ params }: FacilitiesPageProps) {
         data={[
           generateLocalBusinessSchema({
             type: 'LodgingBusiness',
-            image: `${SITE_CONFIG.url}/images/main-house.jpg`,
           }),
           generatePageBreadcrumbs({ name: t.facilities.title, path: getLocalizedPath(Route.FACILITIES, validLocale) }),
         ]}
