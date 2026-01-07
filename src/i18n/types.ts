@@ -303,82 +303,10 @@ export interface LocationTranslations {
   metaDescription: string
   title: string
   intro: string
-  categories: {
-    attractions: string
-    food: string
-    hiking: string
-    wellness: string
-    cities: string
-  }
-  carousel: {
-    previousImage: string
-    nextImage: string
-    viewFullscreen: string
-    goToImage: string
-    imageNavigation: string
-  }
-  items: {
-    kasteelHetNijenhuis: {
-      title: string
-      description: string
-      features: readonly string[]
-    }
-    bokkersMillBakery: {
-      title: string
-      description: string
-      features: readonly string[]
-    }
-    deJongheLeeuw: {
-      title: string
-      description: string
-      features: readonly string[]
-    }
-    overeschOrganic: {
-      title: string
-      description: string
-      features: readonly string[]
-    }
-    huismanFarm: {
-      title: string
-      description: string
-      features: readonly string[]
-    }
-    duurseWaarden: {
-      title: string
-      description: string
-      features: readonly string[]
-    }
-    havezateDenAlerdinck: {
-      title: string
-      description: string
-    }
-    sallandseHeuvelrug: {
-      title: string
-      description: string
-    }
-    biking: {
-      title: string
-      description: string
-      features: readonly string[]
-    }
-    saunaSwoll: {
-      title: string
-      description: string
-      features: readonly string[]
-    }
-    zwolle: {
-      title: string
-      description: string
-      features: readonly string[]
-    }
-    hanzesteden: {
-      title: string
-      description: string
-      features: readonly string[]
-    }
-  }
-  ctaTitle: string
-  ctaSubtitle: string
+  surroundings: string
+  hiking: string
+  cities: string
+  cta: string
   ctaButton: string
 }
 

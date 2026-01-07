@@ -6,6 +6,7 @@ export const en: Dictionary = {
     about: 'About',
     facilities: 'Facilities',
     experiences: 'Join a Retreat',
+    location: 'Location',
     contact: 'Contact',
   },
 
@@ -224,6 +225,18 @@ export const en: Dictionary = {
     ctaTitle: 'Not sure which experience is right for you?',
     ctaSubtitle: 'Get in touch and we\'ll help you find the perfect fit for your needs.',
     ctaButton: 'Contact Us',
+  },
+
+  location: {
+    metaTitle: 'Location & Surroundings',
+    metaDescription: 'The Makers Barn is located in beautiful Overijssel, surrounded by nature, historic cities, and endless outdoor activities.',
+    title: 'Our Surroundings',
+    intro: 'The Makers Barn is nestled in the heart of Overijssel, one of the most beautiful and natural provinces of the Netherlands. Surrounded by forests, rivers, and open landscapes, there is no shortage of things to explore.',
+    surroundings: 'Within walking distance you will find a historic castle with sculpture gardens. Local farms offer fresh produce, and charming villages dot the countryside. For wellness seekers, a premium sauna resort is just 15 minutes away.',
+    hiking: 'The area offers countless hiking and biking routes through nature reserves, along the IJssel river, and through the stunning Sallandse Heuvelrug national park. We provide free bikes for our guests to explore at their own pace.',
+    cities: 'Historic Hanseatic cities like Zwolle, Deventer, and Kampen are easily accessible by train or car, each offering rich history, beautiful architecture, and vibrant local culture.',
+    cta: 'Contact us to learn more.',
+    ctaButton: 'Get in Touch',
   },
 
   impressionCarousel: {

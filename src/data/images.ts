@@ -45,6 +45,11 @@ export const IMAGES = {
     benny: '/images/benny-smile.jpg',
     noud: '/images/noud-banjo.jpg',
   },
+  location: {
+    kasteelNijenhuis: '/images/Kasteel_Het_Nijenhuis.jpg',
+    havezateAlerdinck: '/images/Havezate Den Alerdinck.webp',
+    havezateAlerdinckTrees: '/images/Havezate Den Alerdinck tress.png',
+  },
   logo: '/tmb-logo.webp',
 } as const
 

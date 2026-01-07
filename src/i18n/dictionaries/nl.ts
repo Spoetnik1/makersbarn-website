@@ -9,6 +9,7 @@ export const nl: Dictionary = {
     about: 'Over ons',
     facilities: 'Faciliteiten',
     experiences: 'Boek een Retraite',
+    location: 'Omgeving',
     contact: 'Contact',
   },
 
@@ -325,5 +326,22 @@ export const nl: Dictionary = {
     defaultDescription:
       'Geef je retraite de plek die het verdient. 60m²+ praktijkzaal, 14 bedden, 1.3ha+ eigen terrein midden op het Nederlandse platteland.',
     keywords: ['retraite', 'Nederland', 'platteland', 'wellness', 'workshop locatie', 'creatieve retraite'],
+  },
+
+  location: {
+    metaTitle: 'Omgeving',
+    metaDescription:
+      'The Makers Barn ligt in het prachtige Overijssel, omringd door natuur, historische steden en eindeloze outdoor activiteiten.',
+    title: 'Onze Omgeving',
+    intro:
+      'The Makers Barn ligt midden in Overijssel, een van de mooiste en meest natuurlijke provincies van Nederland. Omringd door bossen, rivieren en open landschappen is er geen gebrek aan dingen om te ontdekken.',
+    surroundings:
+      'Op loopafstand vind je een historisch kasteel met beeldentuinen. Lokale boerderijen bieden verse producten, en charmante dorpjes liggen verspreid over het platteland. Voor wellness-liefhebbers is een premium saunaresort slechts 15 minuten rijden.',
+    hiking:
+      'De omgeving biedt talloze wandel- en fietsroutes door natuurgebieden, langs de IJssel en door het prachtige nationaal park de Sallandse Heuvelrug. We stellen gratis fietsen beschikbaar zodat onze gasten op eigen tempo kunnen verkennen.',
+    cities:
+      'Historische Hanzesteden zoals Zwolle, Deventer en Kampen zijn gemakkelijk bereikbaar met de trein of auto, elk met een rijke geschiedenis, prachtige architectuur en levendige lokale cultuur.',
+    cta: 'Neem contact met ons op voor meer informatie.',
+    ctaButton: 'Neem Contact Op',
   },
 } as const

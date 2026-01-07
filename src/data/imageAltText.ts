@@ -160,6 +160,20 @@ export const IMAGE_ALT_TEXT: Record<string, Record<Language, string>> = {
     [Language.NL]: 'Noud',
   },
 
+  // Location / Surroundings images
+  '/images/Kasteel_Het_Nijenhuis.jpg': {
+    [Language.EN]: 'Kasteel Het Nijenhuis - historic castle with sculpture garden near The Makers Barn',
+    [Language.NL]: 'Kasteel Het Nijenhuis - historisch kasteel met beeldentuin nabij The Makers Barn',
+  },
+  '/images/Havezate Den Alerdinck.webp': {
+    [Language.EN]: 'Havezate Den Alerdinck - historic manor house in the surrounding area',
+    [Language.NL]: 'Havezate Den Alerdinck - historisch landhuis in de omgeving',
+  },
+  '/images/Havezate Den Alerdinck tress.png': {
+    [Language.EN]: 'Tree-lined avenue at Havezate Den Alerdinck estate',
+    [Language.NL]: 'Bomenlaan bij landgoed Havezate Den Alerdinck',
+  },
+
   // Logo
   '/tmb-logo.webp': {
     [Language.EN]: 'Makers Barn Logo',

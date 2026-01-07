@@ -1,0 +1,155 @@
+.location {
+  background-color: #f4efe6;
+  background-image: radial-gradient(circle at top left, #f8f4ec 0, #f4efe6 55%, #ebdfcf 100%);
+  padding: 4rem 1.5rem 5rem;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .location {
+    padding: 5rem 2rem 6rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .location {
+    padding: 6rem 4rem 7rem;
+  }
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-playfair), 'Playfair Display', 'Times New Roman', serif;
+  font-size: clamp(2.2rem, 4vw + 1rem, 3rem);
+  margin: 0;
+  color: #294b3a;
+  line-height: 1.2;
+}
+
+.body {
+  margin-bottom: 2.5rem;
+}
+
+.body p {
+  margin: 0 0 1.25rem;
+  color: #4c4336;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  line-height: 1.8;
+}
+
+.body p:last-child {
+  margin-bottom: 0;
+}
+
+.imageGallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 2.5rem 0;
+}
+
+@media (min-width: 640px) {
+  .imageGallery {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(41, 75, 58, 0.1);
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.imageWrapper:hover .image {
+  transform: scale(1.05);
+}
+
+.mapSection {
+  margin: 2.5rem 0;
+}
+
+.mapContainer {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(41, 75, 58, 0.1);
+}
+
+.mapContainer iframe {
+  display: block;
+}
+
+.cta {
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(41, 75, 58, 0.12);
+}
+
+.ctaText {
+  margin: 0 0 1.25rem;
+  color: #294b3a;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  font-weight: 500;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  border-radius: 999px;
+  font-size: 0.98rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #fdfbf7;
+  background: #294b3a;
+  border: 1px solid #294b3a;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(41, 75, 58, 0.2);
+}
+
+.ctaButton:hover {
+  background: #1e3a2c;
+  border-color: #1e3a2c;
+  box-shadow: 0 4px 16px rgba(41, 75, 58, 0.3);
+  transform: translateY(-2px);
+}
+
+.ctaButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(41, 75, 58, 0.2);
+}
+
+.ctaButton:focus-visible {
+  outline: 2px solid #294b3a;
+  outline-offset: 3px;
+}
+
+.ctaButton svg {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.ctaButton:hover svg {
+  transform: translateX(3px);
+}
