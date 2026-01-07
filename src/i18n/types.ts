@@ -108,6 +108,8 @@ export interface AboutTranslations {
   teamTitle: string
   metaTitle: string
   metaDescription: string
+  cta: string
+  ctaButton: string
 }
 
 /**

@@ -98,6 +98,8 @@ export const en: Dictionary = {
     metaTitle: 'About Us',
     metaDescription:
       'Meet the team behind MakersBarn. Learn about our mission to create a sanctuary where makers, artists, and dreamers can connect and find inspiration.',
+    cta: 'We love sharing our favorite spots! Need recommendations for hikes, local activities, or hidden gems in the area? Just ask.',
+    ctaButton: 'Get in Touch',
   },
 
   facilities: {

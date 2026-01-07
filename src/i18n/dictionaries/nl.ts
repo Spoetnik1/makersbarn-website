@@ -101,6 +101,8 @@ export const nl: Dictionary = {
     metaTitle: 'Over ons',
     metaDescription:
       'Maak kennis met het team achter de MakersBarn. Een plek waar makers, kunstenaars en dromers samenkomen en inspiratie vinden.',
+    cta: 'We delen graag onze favoriete plekjes! Tips nodig voor wandelingen, lokale activiteiten of verborgen pareltjes in de omgeving? Vraag het ons gerust.',
+    ctaButton: 'Neem Contact Op',
   },
 
   facilities: {

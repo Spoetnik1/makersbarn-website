@@ -100,15 +100,15 @@ export const FACILITIES_OPTIONS: FacilitiesOption[] = [
     id: 'in-between',
     label: FacilitiesCategory.WORKSHOP_SPACE,
     title: 'Everything in Between',
-    image: IMAGES.accommodation.ducks,
+    image: IMAGES.accommodation.gardenViewWithHammocks,
     color: FACILITIES_COLORS.IN_BETWEEN,
     images: [
+      IMAGES.accommodation.gardenViewWithHammocks,
+      IMAGES.accommodation.outsideGuitarCircle,
       IMAGES.accommodation.ducks,
       IMAGES.accommodation.mainHouse,
       IMAGES.accommodation.outsideWalk,
       IMAGES.accommodation.teahouse,
-      IMAGES.accommodation.outsideGuitarCircle,
-      IMAGES.accommodation.gardenViewWithHammocks,
     ],
     description: 'The offered Facilities are essential for a retreat, but it\'s the little things in between that make a place truly special',
     features: [
