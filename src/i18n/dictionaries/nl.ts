@@ -14,8 +14,8 @@ export const nl: Dictionary = {
   hero: {
     eyebrow: 'Welkom bij',
     emphasis: 'the Makers Barn',
-    subtitle: 'Geef je retraite',
-    subtitleBreak: 'de plek die het verdient.',
+    subtitle: 'Een thuis voor je retraite',
+    subtitleBreak: '',
   },
 
   heroDetails: {

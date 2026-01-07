@@ -49,8 +49,12 @@ export function Hero() {
           transition={HERO_ANIMATION.subheading.transition}
         >
           {hero.subtitle}
-          <br />
-          {hero.subtitleBreak}
+          {hero.subtitleBreak && (
+            <>
+              <br />
+              {hero.subtitleBreak}
+            </>
+          )}
         </motion.h2>
       </div>
     </section>
