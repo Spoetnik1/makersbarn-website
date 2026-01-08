@@ -71,6 +71,9 @@ export interface ContactTranslations {
   emailAlternative: {
     text: string
   }
+  whatsappAlternative: {
+    text: string
+  }
 }
 
 /**

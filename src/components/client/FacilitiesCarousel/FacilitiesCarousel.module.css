@@ -24,6 +24,9 @@
   background: transparent;
   text-align: left;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .cardBar {
@@ -68,6 +71,9 @@
 
 .cardText {
   margin-top: 0.75rem;
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-start;
 }
 
 @media (min-width: 640px) {

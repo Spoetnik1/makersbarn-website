@@ -1,6 +1,6 @@
 import { SocialLink, SocialPlatform } from '@/types'
 
-export const FOOTER_EMAIL = 'info@makersbarn.nl'
+export const FOOTER_EMAIL = 'info@themakersbarn.com'
 
 export const FOOTER_ADDRESS = {
   street: 'Duisterendijk 2',

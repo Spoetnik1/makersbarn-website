@@ -69,6 +69,9 @@ export const nl: Dictionary = {
     emailAlternative: {
       text: 'Liever mailen? Bereik ons direct via',
     },
+    whatsappAlternative: {
+      text: 'Of stuur ons een WhatsApp',
+    },
   },
 
   unifiedContact: {

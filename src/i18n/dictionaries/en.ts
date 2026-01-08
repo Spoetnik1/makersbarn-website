@@ -66,6 +66,9 @@ export const en: Dictionary = {
     emailAlternative: {
       text: 'Prefer email? Reach us directly at',
     },
+    whatsappAlternative: {
+      text: 'Or send us a WhatsApp',
+    },
   },
 
   unifiedContact: {
