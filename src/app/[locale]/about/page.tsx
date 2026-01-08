@@ -63,7 +63,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
           </div>
         </section>
 
-        <section className={styles.surroundings}>
+        <section id="location" className={styles.surroundings}>
           <div className={styles.surroundingsContent}>
             <h2 className={styles.surroundingsTitle}>{t.location.title}</h2>
 

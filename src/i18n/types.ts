@@ -84,6 +84,7 @@ export interface FooterTranslations {
   followUs: string
   tagline: string
   copyright: string
+  viewLocation: string
 }
 
 /**

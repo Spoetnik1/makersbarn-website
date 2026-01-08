@@ -94,11 +94,35 @@
   color: var(--color-secondary);
 }
 
+.addressGroup {
+  display: flex;
+  flex-direction: column;
+}
+
 .address {
   margin: 0;
   font-size: var(--font-size-base);
   line-height: var(--line-height-relaxed);
   color: var(--color-text-inverse-muted);
+}
+
+.locationLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-inverse-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.locationLink:hover {
+  color: var(--color-secondary);
+}
+
+.locationLink svg {
+  flex-shrink: 0;
 }
 
 .tagline {

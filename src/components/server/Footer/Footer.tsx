@@ -1,10 +1,12 @@
+import Link from 'next/link'
 import {
   FOOTER_EMAIL,
   FOOTER_ADDRESS,
   SOCIAL_LINKS,
 } from '@/constants/footer'
-import { SocialPlatform, Language } from '@/types'
+import { SocialPlatform, Language, Route } from '@/types'
 import { getServerTranslations, getServerLanguage } from '@/i18n'
+import { getLocalizedPath } from '@/lib/routing'
 import { InstagramIcon, FacebookIcon, LinkedInIcon } from './SocialIcons'
 import styles from './Footer.module.css'
 
@@ -12,6 +14,25 @@ const ICON_MAP: Record<SocialPlatform, React.ComponentType> = {
   [SocialPlatform.INSTAGRAM]: InstagramIcon,
   [SocialPlatform.FACEBOOK]: FacebookIcon,
   [SocialPlatform.LINKEDIN]: LinkedInIcon,
+}
+
+function MapPinIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  )
 }
 
 interface FooterProps {
@@ -32,17 +53,26 @@ export async function Footer({ locale }: FooterProps = {}) {
             <p className={styles.email}>
               <a href={`mailto:${FOOTER_EMAIL}`}>{FOOTER_EMAIL}</a>
             </p>
-            <p className={styles.address}>
-              {FOOTER_ADDRESS.street}
-              <br />
-              {FOOTER_ADDRESS.postalCode} {FOOTER_ADDRESS.city}
-              {language === Language.EN && (
-                <>
-                  <br />
-                  {FOOTER_ADDRESS.country}
-                </>
-              )}
-            </p>
+            <div className={styles.addressGroup}>
+              <p className={styles.address}>
+                {FOOTER_ADDRESS.street}
+                <br />
+                {FOOTER_ADDRESS.postalCode} {FOOTER_ADDRESS.city}
+                {language === Language.EN && (
+                  <>
+                    <br />
+                    {FOOTER_ADDRESS.country}
+                  </>
+                )}
+              </p>
+              <Link
+                href={`${getLocalizedPath(Route.ABOUT, language)}#location`}
+                className={styles.locationLink}
+              >
+                <MapPinIcon />
+                {t.footer.viewLocation}
+              </Link>
+            </div>
           </div>
 
           <div className={`${styles.section} ${styles.sectionCenter}`}>

@@ -225,6 +225,7 @@ export const nl: Dictionary = {
     followUs: 'Volg ons',
     tagline: 'Where creativity meets tranquility',
     copyright: "Maker's Barn.",
+    viewLocation: 'Bekijk locatie',
   },
 
   about: {
