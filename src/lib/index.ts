@@ -11,8 +11,13 @@ export { createLogger, LogLevel, type Logger } from './logger'
 export { escapeHtml, escapeHtmlObject } from './html'
 export {
   ContactFormSchema,
+  ContactInfoSchema,
   validateContactForm,
+  BookingFormSchema,
+  validateBookingForm,
+  getRetreatTypeDisplayLabel,
   type ValidatedContactFormData,
+  type ValidatedContactInfo,
   type ValidationResult,
 } from './validation'
 export { getImageAltText } from './imageAltText'
@@ -51,3 +56,14 @@ export {
   type BreadcrumbListSchema,
   type ContactPageSchema,
 } from './structuredData'
+export {
+  isDateBlocked,
+  isValidFutureDate,
+  getDatesInRange,
+  getAllBlockedDates,
+  formatDateToISO,
+  parseISODate,
+  formatDateRange,
+  getMinSelectableDate,
+  isValidISODateString,
+} from './date'

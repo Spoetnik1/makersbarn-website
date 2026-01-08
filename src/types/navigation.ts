@@ -6,6 +6,7 @@ export enum Route {
   SHANTI_DEVA_RETREAT = '/experiences/shanti-deva-retreat',
   SURROUNDINGS = '/surroundings',
   CONTACT = '/contact',
+  BOOK = '/book',
 }
 
 export interface NavLink {

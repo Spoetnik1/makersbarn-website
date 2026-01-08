@@ -1,4 +1,5 @@
-import { createLogger, type ValidatedContactFormData } from '@/lib'
+import { createLogger, getRetreatTypeDisplayLabel, type ValidatedContactFormData } from '@/lib'
+import type { ValidatedBookingFormData, PartialBookingContactData } from '@/types'
 
 const logger = createLogger('slack-service')
 
@@ -90,6 +91,88 @@ export function formatContactFormMessage(data: ValidatedContactFormData): string
   }
 
   lines.push('', `*Message:*`, data.message)
+
+  return lines.join('\n')
+}
+
+export function formatBookingFormMessage(data: ValidatedBookingFormData): string {
+  const retreatTypeLabel = getRetreatTypeDisplayLabel(data.retreatType, data.retreatTypeOther)
+
+  const lines = [
+    '📅 *New Booking Request*',
+    '',
+    `*Name:* ${data.name}`,
+    `*Email:* ${data.email}`,
+  ]
+
+  if (data.phone) {
+    lines.push(`*Phone:* ${data.phone}`)
+  }
+
+  if (retreatTypeLabel) {
+    lines.push('', `*Retreat Type:* ${retreatTypeLabel}`)
+  }
+
+  if (data.startDate) {
+    const dateInfo = data.flexibleDates
+      ? `${data.startDate} (flexible)`
+      : data.startDate
+    lines.push(`*Preferred Date:* ${dateInfo}`)
+  } else if (data.flexibleDates && data.flexibleDatesText) {
+    lines.push(`*Preferred Date:* Flexible - ${data.flexibleDatesText}`)
+  }
+
+  if (data.duration) {
+    lines.push(`*Duration:* ${data.duration} days`)
+  }
+
+  if (data.minGroupSize || data.maxGroupSize) {
+    const groupSize = data.minGroupSize && data.maxGroupSize
+      ? `${data.minGroupSize} - ${data.maxGroupSize} people`
+      : data.minGroupSize
+        ? `${data.minGroupSize}+ people`
+        : `Up to ${data.maxGroupSize} people`
+    lines.push(`*Group Size:* ${groupSize}`)
+  }
+
+  // Only show flexibility notes if we have a start date (otherwise it's already shown in the date field)
+  if (data.startDate && data.flexibleDates && data.flexibleDatesText) {
+    lines.push(`*Flexibility Notes:* ${data.flexibleDatesText}`)
+  }
+
+  if (data.accommodationPreferences) {
+    lines.push('', `*Accommodation Preferences:*`, data.accommodationPreferences)
+  }
+
+  if (data.cateringNeeded) {
+    lines.push('', `*Catering:* Yes`)
+    if (data.cateringDetails) {
+      lines.push(`*Catering Details:* ${data.cateringDetails}`)
+    }
+  }
+
+  if (data.extraInfo) {
+    lines.push('', `*Extra Information:*`, data.extraInfo)
+  }
+
+  return lines.join('\n')
+}
+
+export function formatPartialBookingMessage(data: PartialBookingContactData): string {
+  const lines = [
+    '🚀 *Booking Started*',
+    '',
+    '_Someone started the booking process but has not completed it yet._',
+    '',
+    `*Name:* ${data.name}`,
+    `*Email:* ${data.email}`,
+  ]
+
+  if (data.phone) {
+    lines.push(`*Phone:* ${data.phone}`)
+  }
+
+  lines.push('', '_Follow up if they do not complete the booking._')
 
   return lines.join('\n')
 }

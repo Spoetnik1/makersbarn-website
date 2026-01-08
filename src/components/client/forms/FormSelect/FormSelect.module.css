@@ -1,0 +1,79 @@
+/* ==========================================================================
+   Form Select Styles - Light Theme
+   Designed for light backgrounds (cream/white)
+   ========================================================================== */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: clamp(0.95rem, 1.5vw + 0.4rem, 1.05rem);
+  color: #374151;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.required {
+  color: #b8894a;
+  margin-left: 0.25rem;
+  font-weight: 600;
+}
+
+.select {
+  padding: 0.875rem 2.75rem 0.875rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #1f2937;
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.1rem;
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.select:hover {
+  border-color: #cbd5e1;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #294b3a;
+  box-shadow: 0 0 0 3px rgba(41, 75, 58, 0.12);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23294b3a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+.select option {
+  background-color: #ffffff;
+  color: #1f2937;
+  padding: 0.5rem;
+}
+
+.selectError {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.selectError:hover {
+  border-color: #dc2626;
+}
+
+.selectError:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+  background-color: #ffffff;
+}
+
+.error {
+  font-size: 0.85rem;
+  color: #dc2626;
+  margin: 0;
+  line-height: 1.4;
+}

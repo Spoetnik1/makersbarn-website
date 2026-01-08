@@ -10,6 +10,7 @@ export interface NavTranslations {
   experiences: string
   surroundings: string
   contact: string
+  book: string
 }
 
 /**
@@ -433,6 +434,132 @@ export interface ShantiDevaRetreatTranslations {
 }
 
 /**
+ * Booking form translations
+ */
+export interface BookingTranslations {
+  pageTitle: string
+  metaTitle: string
+  metaDescription: string
+  introText: string
+  formTitle: string
+  progressLabel: string
+  sections: {
+    contact: string
+    retreat: string
+    dates: string
+    groupSize: string
+    accommodation: string
+    extraInfo: string
+  }
+  steps: {
+    contact: string
+    retreat: string
+    details: string
+    review: string
+  }
+  stepDescriptions: {
+    contact: string
+    retreat: string
+    details: string
+    review: string
+  }
+  validation: {
+    nameRequired: string
+    emailRequired: string
+    emailInvalid: string
+    retreatTypeOtherRequired: string
+  }
+  labels: {
+    name: string
+    email: string
+    phone: string
+    startDate: string
+    duration: string
+    flexibleDates: string
+    flexibleDatesText: string
+    minGroupSize: string
+    maxGroupSize: string
+    retreatType: string
+    retreatTypeOther: string
+    accommodationPreferences: string
+    cateringNeeded: string
+    cateringDetails: string
+    extraInfo: string
+  }
+  placeholders: {
+    name: string
+    email: string
+    phone: string
+    duration: string
+    flexibleDatesText: string
+    minGroupSize: string
+    maxGroupSize: string
+    retreatTypeOther: string
+    accommodationPreferences: string
+    cateringDetails: string
+    extraInfo: string
+    selectDate: string
+  }
+  retreatTypes: {
+    privateGroup: string
+    yoga: string
+    workshop: string
+    other: string
+  }
+  cateringOptions: {
+    yes: string
+    no: string
+  }
+  reviewLabels: {
+    contact: string
+    retreat: string
+    group: string
+    catering: string
+    notProvided: string
+  }
+  datePicker: {
+    unavailable: string
+    dateUnavailable: string
+  }
+  helpText: {
+    startDate: string
+    duration: string
+    accommodationIntro: string
+    accommodationCosmos: string
+    accommodationGroup: string
+  }
+  buttons: {
+    submit: string
+    submitting: string
+    next: string
+    back: string
+  }
+  messages: {
+    success: string
+    emailFailed: string
+    unexpectedError: string
+    validationError: string
+    rateLimited: string
+    loading: string
+  }
+  alert: {
+    title: string
+    description: string
+    joinRetreatLink: string
+    contactLink: string
+  }
+  success: {
+    title: string
+    subtitle: string
+    description: string
+    whatNext: string
+    steps: readonly string[]
+    newRequestButton: string
+    homeButton: string
+  }
+}
+
+/**
  * Complete dictionary structure for a single language
  */
 export interface Dictionary {
@@ -440,6 +567,7 @@ export interface Dictionary {
   hero: HeroTranslations
   heroDetails: HeroDetailsTranslations
   contact: ContactTranslations
+  booking: BookingTranslations
   footer: FooterTranslations
   about: AboutTranslations
   facilities: FacilitiesTranslations

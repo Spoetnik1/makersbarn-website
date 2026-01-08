@@ -306,3 +306,39 @@ export function generateContactPageSchema(): ContactPageSchema {
   }
 }
 
+export interface WebPageSchema {
+  '@context': string
+  '@type': 'WebPage'
+  name: string
+  url: string
+  description: string
+  isPartOf: {
+    '@id': string
+  }
+  about: {
+    '@type': 'Organization'
+    '@id': string
+  }
+}
+
+/**
+ * Generates WebPage schema for booking and similar pages
+ */
+export function generateBookingPageSchema(): WebPageSchema {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `Book Your Retreat | ${SITE_NAME}`,
+    url: `${SITE_URL}/book`,
+    description:
+      'Book your retreat at The Makers Barn. Choose your dates, group size, and accommodation preferences for your perfect getaway.',
+    isPartOf: {
+      '@id': `${SITE_URL}#website`,
+    },
+    about: {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}#organization`,
+    },
+  }
+}
+
