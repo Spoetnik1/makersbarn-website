@@ -44,23 +44,6 @@ export interface ContactTranslations {
   metaDescription: string
   introText: string
   formTitle: string
-  options: {
-    whatsapp: {
-      title: string
-      description: string
-      buttonText: string
-    }
-    email: {
-      title: string
-      description: string
-      buttonText: string
-    }
-    form: {
-      title: string
-      description: string
-      buttonText: string
-    }
-  }
   labels: {
     name: string
     email: string
@@ -84,6 +67,9 @@ export interface ContactTranslations {
     validationError: string
     rateLimited: string
     loading: string
+  }
+  emailAlternative: {
+    text: string
   }
 }
 
@@ -218,6 +204,14 @@ export interface TeamTranslations {
 }
 
 /**
+ * Floating WhatsApp button translations
+ */
+export interface FloatingWhatsAppTranslations {
+  ariaLabel: string
+  tooltip: string
+}
+
+/**
  * Common/shared translations
  */
 export interface CommonTranslations {
@@ -230,6 +224,7 @@ export interface CommonTranslations {
   imageNavigation: string
   imageThumbnails: string
   imageGallery: string
+  floatingWhatsApp: FloatingWhatsAppTranslations
   lightbox: {
     closeGallery: string
     previousImage: string

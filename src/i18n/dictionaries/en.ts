@@ -37,25 +37,8 @@ export const en: Dictionary = {
     metaDescription:
       "Get in touch with MakersBarn. We'd love to hear from you about planning your retreat, workshop, or creative gathering.",
     introText:
-      "We'd love to hear from you! Whether you're planning a retreat, workshop, or just want to learn more about Maker's Barn, we're here to help. Choose the way that works best for you:",
+      "We'd love to hear from you! Whether you're planning a retreat, workshop, or just want to learn more about Maker's Barn, we're here to help.",
     formTitle: 'Contact us',
-    options: {
-      whatsapp: {
-        title: 'WhatsApp',
-        description: 'Send us a quick message for instant communication',
-        buttonText: 'Get in touch on WhatsApp',
-      },
-      email: {
-        title: 'Send an Email',
-        description: "Drop us a line and we'll get back to you",
-        buttonText: 'Send an Email',
-      },
-      form: {
-        title: 'Contact Form',
-        description: "Fill out the form below and we'll get back to you",
-        buttonText: 'Go to Contact Form',
-      },
-    },
     labels: {
       name: 'Hi! My name is...',
       email: 'and you can reach me at...',
@@ -79,6 +62,9 @@ export const en: Dictionary = {
       validationError: 'Please check your input and try again.',
       rateLimited: 'Too many requests. Please wait a moment before trying again.',
       loading: 'Sending...',
+    },
+    emailAlternative: {
+      text: 'Prefer email? Reach us directly at',
     },
   },
 
@@ -568,6 +554,10 @@ export const en: Dictionary = {
     imageNavigation: 'Image navigation',
     imageThumbnails: 'Image thumbnails',
     imageGallery: 'Image gallery',
+    floatingWhatsApp: {
+      ariaLabel: 'Open WhatsApp chat',
+      tooltip: 'Chat with us on WhatsApp',
+    },
     lightbox: {
       closeGallery: 'Close gallery',
       previousImage: 'Previous image',

@@ -1,4 +1,4 @@
-import { LanguageWrapper, Navbar } from '@/components/client'
+import { LanguageWrapper, Navbar, FloatingWhatsApp } from '@/components/client'
 import { Footer } from '@/components/server'
 import { getValidLocale } from '@/lib/locale'
 
@@ -28,6 +28,7 @@ export default async function LocaleLayout({
       <Navbar />
       {children}
       <Footer locale={validLocale} />
+      <FloatingWhatsApp />
     </LanguageWrapper>
   )
 }

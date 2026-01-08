@@ -40,25 +40,8 @@ export const nl: Dictionary = {
     metaDescription:
       'Neem contact op met MakersBarn. We horen graag van je over het plannen van je retraite, workshop of creatieve bijeenkomst.',
     introText:
-      'Leuk dat je contact wilt opnemen! Of je nu een retraite of workshop wilt plannen, of gewoon meer wilt weten over the MakersBarn - we horen graag van je. Kies wat het beste bij je past:',
+      'Leuk dat je contact wilt opnemen! Of je nu een retraite of workshop wilt plannen, of gewoon meer wilt weten over the MakersBarn - we horen graag van je.',
     formTitle: 'Stuur ons een bericht',
-    options: {
-      whatsapp: {
-        title: 'WhatsApp',
-        description: 'Stuur ons een berichtje voor snel contact',
-        buttonText: 'App ons op WhatsApp',
-      },
-      email: {
-        title: 'E-mail',
-        description: 'Mail ons en we reageren zo snel mogelijk',
-        buttonText: 'Stuur een e-mail',
-      },
-      form: {
-        title: 'Contactformulier',
-        description: 'Vul het formulier in en we nemen contact met je op',
-        buttonText: 'Naar het formulier',
-      },
-    },
     labels: {
       name: 'Hoi! Ik ben...',
       email: 'Je kunt me bereiken via...',
@@ -82,6 +65,9 @@ export const nl: Dictionary = {
       validationError: 'Kun je je gegevens even checken en het opnieuw proberen?',
       rateLimited: 'Rustig aan! Wacht even en probeer het dan opnieuw.',
       loading: 'Bezig met versturen...',
+    },
+    emailAlternative: {
+      text: 'Liever mailen? Bereik ons direct via',
     },
   },
 
@@ -444,6 +430,10 @@ export const nl: Dictionary = {
     imageNavigation: 'Afbeelding navigatie',
     imageThumbnails: 'Afbeelding miniaturen',
     imageGallery: 'Afbeelding galerij',
+    floatingWhatsApp: {
+      ariaLabel: 'Open WhatsApp chat',
+      tooltip: 'Chat met ons via WhatsApp',
+    },
     lightbox: {
       closeGallery: 'Galerij sluiten',
       previousImage: 'Vorige afbeelding',
