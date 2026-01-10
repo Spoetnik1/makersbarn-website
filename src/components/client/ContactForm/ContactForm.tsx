@@ -151,14 +151,15 @@ export function ContactForm() {
                 />
               </div>
 
-              {statusMessage && (
+              {(statusMessage || status === FormStatus.SUCCESS) && (
                 <div
                   className={`${styles.statusMessage} ${
                     status === FormStatus.SUCCESS ? styles.statusSuccess : ''
                   } ${status === FormStatus.ERROR ? styles.statusError : ''}`}
                   role="alert"
+                  aria-live={status === FormStatus.SUCCESS ? 'polite' : 'assertive'}
                 >
-                  {statusMessage}
+                  {statusMessage || (status === FormStatus.SUCCESS ? statusMessages[FormStatus.SUCCESS] : '')}
                 </div>
               )}
 
