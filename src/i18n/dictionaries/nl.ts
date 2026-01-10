@@ -75,13 +75,13 @@ export const nl: Dictionary = {
   },
 
   unifiedContact: {
-    pageTitle: 'Neem Contact Op',
+    pageTitle: 'We horen graag van je',
     pageSubtitle:
       'Of je nu een retraite wilt plannen of gewoon een vraag hebt, we helpen je graag. Kies hoe je contact wilt opnemen.',
     selectorAriaLabel: 'Contact opties',
     intentSelector: {
       questionLabel: 'Stel een Vraag',
-      questionSublabel: 'Snelle vraag',
+      questionSublabel: 'Snel & eenvoudig',
       bookingLabel: 'Vraag een Offerte',
       bookingSublabel: 'Vrijblijvend',
     },
@@ -481,13 +481,13 @@ export const nl: Dictionary = {
       'The Makers Barn ligt in het prachtige Overijssel, omringd door natuur, historische steden en eindeloze outdoor activiteiten.',
     title: 'Onze Omgeving',
     intro:
-      'The Makers Barn ligt midden in Overijssel, een van de mooiste en meest natuurlijke provincies van Nederland. Omringd door bossen, rivieren en open landschappen is er geen gebrek aan dingen om te ontdekken.',
+      'The Makers Barn ligt midden in het Overijsselse Salland, een plek bekend om haar natuur en landelijkheid. Omringd door bossen, rivieren en open landschappen is er geen gebrek aan dingen om te ontdekken.',
     surroundings:
-      'Op loopafstand vind je een historisch kasteel met beeldentuinen. Lokale boerderijen bieden verse producten, en charmante dorpjes liggen verspreid over het platteland. Voor wellness-liefhebbers is een premium saunaresort slechts 15 minuten rijden.',
+      'Op loopafstand bevindt zich \'Kasteel Nijenhuis\', een historisch kasteel met museum en beeldentuinen. Lokale boerderijen bieden verse producten, en de charmante dorpen Heino en Wijhe zijn makkelijk te bereiken. Wellness-liefhebbers zitten goed, de fijne sauna \'Sauna Swoll\' is slechts 15 minuten rijden.',
     hiking:
-      'De omgeving biedt talloze wandel- en fietsroutes door natuurgebieden, langs de IJssel en door het prachtige nationaal park de Sallandse Heuvelrug. We stellen gratis fietsen beschikbaar zodat onze gasten op eigen tempo kunnen verkennen.',
+      'De omgeving biedt talloze wandel- en fietsroutes door natuurgebieden, langs de IJssel en door de prachtige Sallandse Heuvelrug. We stellen gratis fietsen beschikbaar zodat onze gasten op eigen tempo kunnen verkennen.',
     cities:
-      'Historische Hanzesteden zoals Zwolle, Deventer en Kampen zijn gemakkelijk bereikbaar met de trein of auto, elk met een rijke geschiedenis, prachtige architectuur en levendige lokale cultuur.',
+      'Historische Hanzesteden zoals Zwolle, Deventer en Kampen zijn gemakkelijk bereikbaar met de trein (station op 10 minuten fietsen) of auto, elk met een rijke geschiedenis, prachtige architectuur en levendige lokale cultuur.',
     cta: 'Neem contact met ons op voor meer informatie.',
     ctaButton: 'Neem Contact Op',
   },

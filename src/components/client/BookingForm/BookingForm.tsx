@@ -6,7 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { getBlockedDateRanges, BOOKING_ANCHOR_ID, GROUP_SIZE, DURATION } from '@/constants'
 import { submitBookingForm, notifyBookingStarted } from '@/actions'
 import { FormStatus, RetreatType, Route, type BookingFormData, type PartialBookingContactData } from '@/types'
-import { useTranslation } from '@/context'
+import { useTranslation, useLanguage } from '@/context'
+import { getLocalizedPath } from '@/lib/routing'
 import { FormField, FormFieldGroup, FormSelect, FormCheckbox, FormDatePicker } from '@/components/client/forms'
 import styles from './BookingForm.module.css'
 
@@ -103,6 +104,7 @@ export function BookingForm() {
   const previousStepRef = useRef<WizardStep>(currentStep)
 
   const { t: booking } = useTranslation('booking')
+  const { language } = useLanguage()
 
   // Focus management: move focus to step heading when step changes
   useEffect(() => {
@@ -371,7 +373,7 @@ export function BookingForm() {
                         {booking.alert.description}
                       </p>
                       <div className={styles.infoAlertLinks}>
-                        <Link href={Route.EXPERIENCES} className={styles.infoAlertLink}>
+                        <Link href={getLocalizedPath(Route.EXPERIENCES, language)} className={styles.infoAlertLink}>
                           {booking.alert.joinRetreatLink}
                         </Link>
                       </div>
