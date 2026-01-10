@@ -5,7 +5,7 @@ export const en: Dictionary = {
     home: 'Home',
     about: 'About',
     facilities: 'Facilities',
-    experiences: 'Join a Retreat',
+    experiences: 'Join as a guest',
     surroundings: 'Surroundings',
     contact: 'Contact',
     book: 'Book',
@@ -316,7 +316,7 @@ export const en: Dictionary = {
     intro: 'Whether you seek solitude, want to create your own getaway, or join a curated retreat with others, we have the perfect experience waiting for you.',
     createExperience: {
       title: 'Create Your Own Experience',
-      subtitle: 'Design your perfect escape with our flexible options',
+      subtitle: 'No plans to host a retreat? There are plenty of other ways to enjoy a stay with us. Join us for a private or duo retreat, gather a group of friends, or simply treat yourself to some rest by booking one of our vacation homes. You\'re also welcome to participate in one of our hosted retreats.',
       alternativeText: 'Want something else?',
       alternativeCta: 'Contact us for additional options',
     },
