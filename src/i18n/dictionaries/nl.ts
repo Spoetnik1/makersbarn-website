@@ -15,8 +15,8 @@ export const nl: Dictionary = {
   },
 
   hero: {
-    eyebrow: 'Welkom bij the',
-    emphasis: 'Makers Barn',
+    eyebrow: 'Welkom op',
+    emphasis: 'The MakersBarn',
     subtitle: 'Een thuis voor je retraite',
     subtitleBreak: '',
   },
@@ -224,7 +224,7 @@ export const nl: Dictionary = {
     getInTouch: 'Neem contact op',
     followUs: 'Volg ons',
     tagline: 'Where creativity meets tranquility',
-    copyright: "Maker's Barn.",
+    copyright: "The MakersBarn.",
     viewLocation: 'Bekijk locatie',
   },
 

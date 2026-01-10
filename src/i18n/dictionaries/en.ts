@@ -12,8 +12,8 @@ export const en: Dictionary = {
   },
 
   hero: {
-    eyebrow: 'Welcome to the',
-    emphasis: 'Makers Barn',
+    eyebrow: 'Welcome to',
+    emphasis: 'The MakersBarn',
     subtitle: 'A home for your retreat',
     subtitleBreak: '',
   },
@@ -221,7 +221,7 @@ export const en: Dictionary = {
     getInTouch: 'Get in Touch',
     followUs: 'Follow Us',
     tagline: 'Where creativity meets tranquility',
-    copyright: "Maker's Barn.",
+    copyright: "The MakersBarn.",
     viewLocation: 'View location',
   },
 
