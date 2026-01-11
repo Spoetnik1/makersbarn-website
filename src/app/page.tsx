@@ -2,7 +2,6 @@ import { redirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getServerLanguage } from '@/i18n'
 import { getLocalizedPath } from '@/lib/routing'
-import { generatePageMetadata } from '@/lib/metadata'
 import { DEFAULT_LANGUAGE } from '@/constants'
 import { SITE_CONFIG } from '@/constants/site'
 
