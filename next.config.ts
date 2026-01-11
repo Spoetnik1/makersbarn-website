@@ -32,6 +32,8 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['framer-motion', 'country-flag-icons'],
   },
+  // Ensure trailing slashes are consistent to prevent duplicate URLs
+  trailingSlash: false,
   async headers() {
     return [
       {

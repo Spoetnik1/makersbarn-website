@@ -45,13 +45,17 @@ export function generatePageMetadata({
   
   // Generate localized path for the current locale
   const localizedPath = getLocalizedPath(path, locale)
-  const url = `${SITE_URL}${localizedPath}`
+  // Normalize URL: ensure no trailing slash (except for root) and consistent format
+  const normalizedPath = localizedPath === '/' ? '/' : localizedPath.replace(/\/$/, '')
+  const url = `${SITE_URL}${normalizedPath}`
   
   // Generate alternate language URLs for hreflang tags
   const alternateLanguages: Record<string, string> = {}
   for (const lang of Object.values(Language) as Language[]) {
     const altPath = getLocalizedPath(path, lang)
-    alternateLanguages[lang] = `${SITE_URL}${altPath}`
+    // Normalize alternate URLs to match canonical format
+    const normalizedAltPath = altPath === '/' ? '/' : altPath.replace(/\/$/, '')
+    alternateLanguages[lang] = `${SITE_URL}${normalizedAltPath}`
   }
 
   // Build Open Graph image with required properties for WhatsApp
