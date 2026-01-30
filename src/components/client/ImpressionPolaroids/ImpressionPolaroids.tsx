@@ -3,9 +3,11 @@
 import { useRef, useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+
 import { POLAROID_IMAGES, IMAGES } from '@/data'
 import { cn } from '@/lib/cn'
 import { useTranslation } from '@/context'
+
 import styles from './ImpressionPolaroids.module.css'
 
 const CARD_POSITIONS = [

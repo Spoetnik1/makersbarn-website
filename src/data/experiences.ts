@@ -4,6 +4,7 @@ import {
   ExperienceOffer,
   FeaturedRetreat,
 } from '@/types'
+
 import { IMAGES } from './images'
 
 export const EXPERIENCE_OFFERS: ExperienceOffer[] = [

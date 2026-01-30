@@ -1,9 +1,12 @@
 'use client'
 
 import { memo, useState, useRef, useEffect, useCallback, useMemo, type ChangeEvent } from 'react'
-import { DayPicker } from 'react-day-picker'
+import { DayPicker, type Matcher } from 'react-day-picker'
 import { format, isWithinInterval } from 'date-fns'
+
 import type { DateRange } from '@/types'
+
+import { useClickOutside, useEscapeKey, useFocusTrap } from './hooks'
 import styles from './FormDatePicker.module.css'
 
 interface FormDatePickerProps {
@@ -25,6 +28,102 @@ interface FormDatePickerProps {
 const DEFAULT_PLACEHOLDER = 'Select a date'
 const DEFAULT_UNAVAILABLE_LABEL = 'Unavailable'
 const DEFAULT_DATE_UNAVAILABLE_ERROR = 'This date is not available'
+
+interface FormFieldMessagesProps {
+  id: string
+  error?: string
+  helpText?: string
+  isValueBlocked: boolean
+  dateUnavailableError: string
+}
+
+function FormFieldMessages({ id, error, helpText, isValueBlocked, dateUnavailableError }: FormFieldMessagesProps) {
+  const hasError = error || isValueBlocked
+
+  if (!hasError && helpText) {
+    return (
+      <p id={`${id}-help`} className={styles.helpText}>
+        {helpText}
+      </p>
+    )
+  }
+
+  if (hasError) {
+    return (
+      <p id={`${id}-error`} className={styles.error} role="alert">
+        {error || dateUnavailableError}
+      </p>
+    )
+  }
+
+  return null
+}
+
+interface DatePickerDropdownProps {
+  dropdownRef: React.RefObject<HTMLDivElement | null>
+  selectedDate?: Date
+  onSelect: (date: Date | undefined) => void
+  disabledDays: Matcher[]
+  blockedRanges: DateRange[]
+  unavailableLabel: string
+}
+
+function DatePickerDropdown({
+  dropdownRef,
+  selectedDate,
+  onSelect,
+  disabledDays,
+  blockedRanges,
+  unavailableLabel,
+}: DatePickerDropdownProps) {
+  return (
+    <div ref={dropdownRef} className={styles.dropdown} role="dialog" aria-label="Choose date">
+      <DayPicker
+        mode="single"
+        selected={selectedDate}
+        onSelect={onSelect}
+        disabled={disabledDays}
+        modifiers={{
+          blocked: blockedRanges.map((range) => ({
+            from: range.start,
+            to: range.end,
+          })),
+        }}
+        modifiersClassNames={{
+          blocked: styles.blockedDay,
+          disabled: styles.disabledDay,
+          selected: styles.selectedDay,
+          today: styles.todayDay,
+        }}
+        classNames={{
+          root: styles.calendar,
+          months: styles.months,
+          month: styles.month,
+          month_caption: styles.caption,
+          caption_label: styles.captionLabel,
+          nav: styles.nav,
+          button_previous: styles.navButton,
+          button_next: styles.navButton,
+          weekdays: styles.weekdays,
+          weekday: styles.weekday,
+          weeks: styles.weeks,
+          week: styles.week,
+          day: styles.day,
+          day_button: styles.dayButton,
+          outside: styles.outsideDay,
+        }}
+        showOutsideDays
+        fixedWeeks
+      />
+      <div className={styles.legend}>
+        <span className={styles.legendItem}>
+          <span className={styles.legendBlocked} />
+          {unavailableLabel}
+        </span>
+      </div>
+    </div>
+  )
+}
 
 export const FormDatePicker = memo(function FormDatePicker({
   label,
@@ -56,9 +155,8 @@ export const FormDatePicker = memo(function FormDatePicker({
   const selectedDate = value ? new Date(value) : undefined
 
   // Create disabled date matcher for react-day-picker
-  // Only calculate on client to avoid hydration mismatch
   const disabledDays = useMemo(() => {
-    if (!isMounted) return []
+    if (!isMounted) {return []}
 
     const today = new Date()
     today.setHours(0, 0, 0, 0)
@@ -85,101 +183,52 @@ export const FormDatePicker = memo(function FormDatePicker({
   // Handle date selection
   const handleSelect = useCallback(
     (date: Date | undefined) => {
-      if (date && onChange) {
-        const formattedDate = format(date, 'yyyy-MM-dd')
-        const syntheticEvent = {
-          target: {
-            name: name || id,
-            value: formattedDate,
-            type: 'text',
-          },
-        } as ChangeEvent<HTMLInputElement>
-        onChange(syntheticEvent)
+      if (!date || !onChange) {
+        setIsOpen(false)
+        triggerRef.current?.focus()
+        return
       }
+
+      const formattedDate = format(date, 'yyyy-MM-dd')
+      const syntheticEvent = {
+        target: {
+          name: name || id,
+          value: formattedDate,
+          type: 'text',
+        },
+      } as ChangeEvent<HTMLInputElement>
+      onChange(syntheticEvent)
       setIsOpen(false)
       triggerRef.current?.focus()
     },
     [onChange, name, id]
   )
 
-  // Close on outside click or escape key - combined for atomic cleanup
-  useEffect(() => {
-    if (!isOpen) return
+  // Close handlers
+  const handleClose = useCallback(() => setIsOpen(false), [])
 
-    const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setIsOpen(false)
-      }
-    }
+  useClickOutside(isOpen, containerRef, handleClose)
+  useEscapeKey(isOpen, handleClose, triggerRef)
+  useFocusTrap(isOpen, dropdownRef)
 
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsOpen(false)
-        triggerRef.current?.focus()
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    document.addEventListener('keydown', handleEscape)
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-      document.removeEventListener('keydown', handleEscape)
-    }
-  }, [isOpen])
-
-  // Focus trap for dialog - traps Tab navigation and focuses first element on open
-  useEffect(() => {
-    if (!isOpen || !dropdownRef.current) return
-
-    const dropdown = dropdownRef.current
-    const focusableSelector = 'button:not([disabled]), [tabindex]:not([tabindex="-1"])'
-    const focusableElements = dropdown.querySelectorAll<HTMLElement>(focusableSelector)
-    const firstFocusable = focusableElements[0]
-    const lastFocusable = focusableElements[focusableElements.length - 1]
-
-    // Focus first element when dialog opens
-    const focusTimer = setTimeout(() => {
-      firstFocusable?.focus()
-    }, 0)
-
-    const handleTabTrap = (event: KeyboardEvent) => {
-      if (event.key !== 'Tab') return
-
-      if (event.shiftKey) {
-        // Shift+Tab: if on first element, wrap to last
-        if (document.activeElement === firstFocusable) {
-          event.preventDefault()
-          lastFocusable?.focus()
-        }
-      } else {
-        // Tab: if on last element, wrap to first
-        if (document.activeElement === lastFocusable) {
-          event.preventDefault()
-          firstFocusable?.focus()
-        }
-      }
-    }
-
-    dropdown.addEventListener('keydown', handleTabTrap)
-
-    return () => {
-      clearTimeout(focusTimer)
-      dropdown.removeEventListener('keydown', handleTabTrap)
-    }
-  }, [isOpen])
-
-  // Check if selected value is blocked (only after mount to avoid hydration mismatch)
+  // Computed values
   const isValueBlocked = useMemo(() => {
-    if (!isMounted || !selectedDate) return false
-    return isDateBlocked(selectedDate)
+    return isMounted && selectedDate ? isDateBlocked(selectedDate) : false
   }, [isMounted, selectedDate, isDateBlocked])
 
-  // Format display value (only after mount to avoid hydration mismatch with locale)
   const displayValue = useMemo(() => {
-    if (!isMounted || !selectedDate) return ''
-    return format(selectedDate, 'MMM d, yyyy')
+    return isMounted && selectedDate ? format(selectedDate, 'MMM d, yyyy') : ''
   }, [isMounted, selectedDate])
+
+  const ariaDescribedBy = useMemo(() => {
+    if (error) {return `${id}-error`}
+    if (helpText) {return `${id}-help`}
+    return undefined
+  }, [error, helpText, id])
+
+  const inputClassName = useMemo(() => {
+    return hasError || isValueBlocked ? `${styles.input} ${styles.inputError}` : styles.input
+  }, [hasError, isValueBlocked])
 
   return (
     <div className={styles.field} ref={containerRef}>
@@ -192,12 +241,12 @@ export const FormDatePicker = memo(function FormDatePicker({
         ref={triggerRef}
         type="button"
         id={id}
-        className={`${styles.input} ${hasError || isValueBlocked ? styles.inputError : ''}`}
+        className={inputClassName}
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-haspopup="dialog"
         aria-invalid={hasError || isValueBlocked}
-        aria-describedby={error ? `${id}-error` : helpText ? `${id}-help` : undefined}
+        aria-describedby={ariaDescribedBy}
       >
         <span className={displayValue ? styles.inputValue : styles.inputPlaceholder}>
           {displayValue || placeholder}
@@ -206,63 +255,23 @@ export const FormDatePicker = memo(function FormDatePicker({
       </button>
 
       {isOpen && (
-        <div ref={dropdownRef} className={styles.dropdown} role="dialog" aria-label="Choose date">
-          <DayPicker
-            mode="single"
-            selected={selectedDate}
-            onSelect={handleSelect}
-            disabled={disabledDays}
-            modifiers={{
-              blocked: blockedRanges.map((range) => ({
-                from: range.start,
-                to: range.end,
-              })),
-            }}
-            modifiersClassNames={{
-              blocked: styles.blockedDay,
-              disabled: styles.disabledDay,
-              selected: styles.selectedDay,
-              today: styles.todayDay,
-            }}
-            classNames={{
-              root: styles.calendar,
-              months: styles.months,
-              month: styles.month,
-              month_caption: styles.caption,
-              caption_label: styles.captionLabel,
-              nav: styles.nav,
-              button_previous: styles.navButton,
-              button_next: styles.navButton,
-              weekdays: styles.weekdays,
-              weekday: styles.weekday,
-              weeks: styles.weeks,
-              week: styles.week,
-              day: styles.day,
-              day_button: styles.dayButton,
-              outside: styles.outsideDay,
-            }}
-            showOutsideDays
-            fixedWeeks
-          />
-          <div className={styles.legend}>
-            <span className={styles.legendItem}>
-              <span className={styles.legendBlocked} />
-              {unavailableLabel}
-            </span>
-          </div>
-        </div>
+        <DatePickerDropdown
+          dropdownRef={dropdownRef}
+          selectedDate={selectedDate}
+          onSelect={handleSelect}
+          disabledDays={disabledDays}
+          blockedRanges={blockedRanges}
+          unavailableLabel={unavailableLabel}
+        />
       )}
 
-      {helpText && !error && !isValueBlocked && (
-        <p id={`${id}-help`} className={styles.helpText}>
-          {helpText}
-        </p>
-      )}
-      {(error || isValueBlocked) && (
-        <p id={`${id}-error`} className={styles.error} role="alert">
-          {error || dateUnavailableError}
-        </p>
-      )}
+      <FormFieldMessages
+        id={id}
+        error={error}
+        helpText={helpText}
+        isValueBlocked={isValueBlocked}
+        dateUnavailableError={dateUnavailableError}
+      />
     </div>
   )
 })

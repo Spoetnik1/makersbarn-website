@@ -3,6 +3,7 @@
  */
 
 import { z } from 'zod'
+
 import { RetreatType, type ValidatedBookingFormData } from '@/types'
 import { BOOKING_FIELD_LIMITS, RETREAT_TYPE_LABELS } from '@/constants'
 
@@ -59,7 +60,7 @@ export function getRetreatTypeDisplayLabel(
   retreatType?: RetreatType,
   retreatTypeOther?: string
 ): string | undefined {
-  if (!retreatType) return undefined
+  if (!retreatType) {return undefined}
 
   if (retreatType === RetreatType.OTHER && retreatTypeOther) {
     return `Other: ${retreatTypeOther}`
@@ -163,7 +164,7 @@ export const BookingFormSchema = z.object({
     .string()
     .optional()
     .transform((val) => {
-      if (!val || val.length === 0) return undefined
+      if (!val || val.length === 0) {return undefined}
       const num = parseInt(val, 10)
       return isNaN(num) ? undefined : num
     }),
@@ -178,7 +179,7 @@ export const BookingFormSchema = z.object({
     .string()
     .optional()
     .transform((val) => {
-      if (!val || val.length === 0) return undefined
+      if (!val || val.length === 0) {return undefined}
       const num = parseInt(val, 10)
       return isNaN(num) ? undefined : num
     }),
@@ -186,7 +187,7 @@ export const BookingFormSchema = z.object({
     .string()
     .optional()
     .transform((val) => {
-      if (!val || val.length === 0) return undefined
+      if (!val || val.length === 0) {return undefined}
       const num = parseInt(val, 10)
       return isNaN(num) ? undefined : num
     }),

@@ -1,10 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
+
 import { Route, Language } from '@/types'
 import { IMAGES } from '@/data'
 import { getImageBlurData } from '@/lib'
 import { getServerTranslations } from '@/i18n'
 import { getLocalizedPath } from '@/lib/routing'
+
 import styles from './HeroDetails.module.css'
 
 const META_SEPARATOR = '\u2022' // bullet point

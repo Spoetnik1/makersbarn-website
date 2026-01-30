@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+
 import { TeamGrid, StructuredData } from '@/components/server'
 import { generatePageMetadata } from '@/lib/metadata'
 import { generatePageBreadcrumbs } from '@/lib/structuredData'
@@ -10,6 +11,7 @@ import { getValidLocale } from '@/lib/locale'
 import { getLocalizedPath } from '@/lib/routing'
 import { IMAGES, IMAGE_ALT_TEXT } from '@/data'
 import { CONTACT_URLS } from '@/constants'
+
 import styles from '../../about/page.module.css'
 
 const LOCATION_IMAGES = [
@@ -79,7 +81,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
                 <div key={src} className={styles.imageWrapper}>
                   <Image
                     src={src}
-                    alt={IMAGE_ALT_TEXT[src]?.[validLocale] || ''}
+                    alt={IMAGE_ALT_TEXT[src][validLocale] || ''}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className={styles.locationImage}

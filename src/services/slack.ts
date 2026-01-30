@@ -1,4 +1,4 @@
-import { createLogger, getRetreatTypeDisplayLabel, type ValidatedContactFormData } from '@/lib'
+import { createLogger, formatGroupSize, getRetreatTypeDisplayLabel, type ValidatedContactFormData } from '@/lib'
 import type { ValidatedBookingFormData, PartialBookingContactData } from '@/types'
 
 const logger = createLogger('slack-service')
@@ -16,6 +16,10 @@ export enum SlackChannel {
 }
 
 const DEFAULT_CHANNEL = SlackChannel.USER_CONTACTS
+
+function escapeSlackMarkdown(text: string): string {
+  return text.replace(/[*_~`<>]/g, (char) => `\\${char}`)
+}
 
 interface SlackMessageParams {
   channel?: SlackChannel
@@ -82,77 +86,79 @@ export function formatContactFormMessage(data: ValidatedContactFormData): string
   const lines = [
     '📬 *New Contact Form Submission*',
     '',
-    `*Name:* ${data.name}`,
-    `*Email:* ${data.email}`,
+    `*Name:* ${escapeSlackMarkdown(data.name)}`,
+    `*Email:* ${escapeSlackMarkdown(data.email)}`,
   ]
 
   if (data.phone) {
-    lines.push(`*Phone:* ${data.phone}`)
+    lines.push(`*Phone:* ${escapeSlackMarkdown(data.phone)}`)
   }
 
-  lines.push('', `*Message:*`, data.message)
+  lines.push('', `*Message:*`, escapeSlackMarkdown(data.message))
 
   return lines.join('\n')
 }
 
-export function formatBookingFormMessage(data: ValidatedBookingFormData): string {
-  const retreatTypeLabel = getRetreatTypeDisplayLabel(data.retreatType, data.retreatTypeOther)
-
-  const lines = [
-    '📅 *New Booking Request*',
-    '',
-    `*Name:* ${data.name}`,
-    `*Email:* ${data.email}`,
-  ]
-
-  if (data.phone) {
-    lines.push(`*Phone:* ${data.phone}`)
+function formatBookingDateInfo(data: ValidatedBookingFormData): string | undefined {
+  if (data.startDate && data.flexibleDates) {
+    return `${data.startDate} (flexible)`
   }
-
-  if (retreatTypeLabel) {
-    lines.push('', `*Retreat Type:* ${retreatTypeLabel}`)
-  }
-
   if (data.startDate) {
-    const dateInfo = data.flexibleDates
-      ? `${data.startDate} (flexible)`
-      : data.startDate
-    lines.push(`*Preferred Date:* ${dateInfo}`)
-  } else if (data.flexibleDates && data.flexibleDatesText) {
-    lines.push(`*Preferred Date:* Flexible - ${data.flexibleDatesText}`)
+    return data.startDate
   }
-
-  if (data.duration) {
-    lines.push(`*Duration:* ${data.duration} days`)
+  if (data.flexibleDates && data.flexibleDatesText) {
+    return `Flexible - ${data.flexibleDatesText}`
   }
+  return undefined
+}
 
-  if (data.minGroupSize || data.maxGroupSize) {
-    const groupSize = data.minGroupSize && data.maxGroupSize
-      ? `${data.minGroupSize} - ${data.maxGroupSize} people`
-      : data.minGroupSize
-        ? `${data.minGroupSize}+ people`
-        : `Up to ${data.maxGroupSize} people`
-    lines.push(`*Group Size:* ${groupSize}`)
-  }
+export function formatBookingFormMessage(data: ValidatedBookingFormData): string {
+  const lines: string[] = []
 
-  // Only show flexibility notes if we have a start date (otherwise it's already shown in the date field)
-  if (data.startDate && data.flexibleDates && data.flexibleDatesText) {
-    lines.push(`*Flexibility Notes:* ${data.flexibleDatesText}`)
-  }
-
-  if (data.accommodationPreferences) {
-    lines.push('', `*Accommodation Preferences:*`, data.accommodationPreferences)
-  }
-
-  if (data.cateringNeeded) {
-    lines.push('', `*Catering:* Yes`)
-    if (data.cateringDetails) {
-      lines.push(`*Catering Details:* ${data.cateringDetails}`)
+  const addLine = (value: string | undefined, prefix?: string) => {
+    if (value) {
+      lines.push(prefix ? `${prefix}${value}` : value)
     }
   }
 
+  const addSection = () => lines.push('')
+
+  const retreatTypeLabel = getRetreatTypeDisplayLabel(data.retreatType, data.retreatTypeOther)
+  const groupSize = formatGroupSize(data.minGroupSize, data.maxGroupSize)
+  const dateInfo = formatBookingDateInfo(data)
+
+  lines.push('📅 *New Booking Request*', '')
+  addLine(escapeSlackMarkdown(data.name), '*Name:* ')
+  addLine(escapeSlackMarkdown(data.email), '*Email:* ')
+  addLine(data.phone ? escapeSlackMarkdown(data.phone) : undefined, '*Phone:* ')
+
+  if (retreatTypeLabel) {
+    addSection()
+    addLine(retreatTypeLabel, '*Retreat Type:* ')
+  }
+
+  addLine(dateInfo, '*Preferred Date:* ')
+  addLine(data.duration ? `${data.duration} days` : undefined, '*Duration:* ')
+  addLine(groupSize, '*Group Size:* ')
+
+  if (data.startDate && data.flexibleDates && data.flexibleDatesText) {
+    addLine(data.flexibleDatesText, '*Flexibility Notes:* ')
+  }
+
+  if (data.accommodationPreferences) {
+    addSection()
+    lines.push('*Accommodation Preferences:*', escapeSlackMarkdown(data.accommodationPreferences))
+  }
+
+  if (data.cateringNeeded) {
+    addSection()
+    lines.push('*Catering:* Yes')
+    addLine(data.cateringDetails ? escapeSlackMarkdown(data.cateringDetails) : undefined, '*Catering Details:* ')
+  }
+
   if (data.extraInfo) {
-    lines.push('', `*Extra Information:*`, data.extraInfo)
+    addSection()
+    lines.push('*Extra Information:*', escapeSlackMarkdown(data.extraInfo))
   }
 
   return lines.join('\n')
@@ -164,12 +170,12 @@ export function formatPartialBookingMessage(data: PartialBookingContactData): st
     '',
     '_Someone started the booking process but has not completed it yet._',
     '',
-    `*Name:* ${data.name}`,
-    `*Email:* ${data.email}`,
+    `*Name:* ${escapeSlackMarkdown(data.name)}`,
+    `*Email:* ${escapeSlackMarkdown(data.email)}`,
   ]
 
   if (data.phone) {
-    lines.push(`*Phone:* ${data.phone}`)
+    lines.push(`*Phone:* ${escapeSlackMarkdown(data.phone)}`)
   }
 
   lines.push('', '_Follow up if they do not complete the booking._')

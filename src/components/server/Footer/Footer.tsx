@@ -1,4 +1,5 @@
 import Link from 'next/link'
+
 import {
   FOOTER_EMAIL,
   FOOTER_ADDRESS,
@@ -7,6 +8,7 @@ import {
 import { SocialPlatform, Language, Route } from '@/types'
 import { getServerTranslations, getServerLanguage } from '@/i18n'
 import { getLocalizedPath } from '@/lib/routing'
+
 import { InstagramIcon, FacebookIcon, LinkedInIcon } from './SocialIcons'
 import styles from './Footer.module.css'
 

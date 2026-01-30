@@ -1,8 +1,10 @@
 'use client'
 
 import Image from 'next/image'
+
 import { getImageAltText, getImageBlurData } from '@/lib'
 import { useLanguage } from '@/context'
+
 import styles from './ImageGallery.module.css'
 
 const IMAGES = {

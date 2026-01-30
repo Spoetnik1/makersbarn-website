@@ -1,7 +1,9 @@
 import Image from 'next/image'
+
 import { TEAM_MEMBERS } from '@/data'
 import { getServerTranslations, getServerLanguage } from '@/i18n'
 import { Language } from '@/types'
+
 import styles from './TeamGrid.module.css'
 
 interface TeamGridProps {

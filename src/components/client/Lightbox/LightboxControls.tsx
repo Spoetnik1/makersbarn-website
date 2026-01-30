@@ -2,6 +2,7 @@
 
 import { memo } from 'react'
 import { motion } from 'framer-motion'
+
 import { LIGHTBOX_ANIMATION } from './constants'
 import type { LightboxControlsProps } from './types'
 import styles from './Lightbox.module.css'

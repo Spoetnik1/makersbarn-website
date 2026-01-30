@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useCallback } from 'react'
+
 import { LIGHTBOX_TIMING } from '../constants'
 import type { UseLightboxFocusOptions } from '../types'
 
@@ -21,18 +22,18 @@ export function useLightboxFocus({
   const previousFocusRef = useRef<HTMLElement | null>(null)
 
   const getFocusableElements = useCallback((): HTMLElement[] => {
-    if (!containerRef.current) return []
+    if (!containerRef.current) {return []}
     return Array.from(
       containerRef.current.querySelectorAll(FOCUSABLE_SELECTOR)
-    ) as HTMLElement[]
+    )
   }, [containerRef])
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key !== 'Tab') return
+      if (event.key !== 'Tab') {return}
 
       const focusableElements = getFocusableElements()
-      if (focusableElements.length === 0) return
+      if (focusableElements.length === 0) {return}
 
       const firstElement = focusableElements[0]
       const lastElement = focusableElements[focusableElements.length - 1]
@@ -74,13 +75,13 @@ export function useLightboxFocus({
         clearTimeout(timeoutId)
         document.removeEventListener('keydown', handleKeyDown)
       }
-    } else {
-      // Return focus to trigger or previous element
-      const elementToFocus = triggerRef?.current ?? previousFocusRef.current
-      if (elementToFocus) {
-        elementToFocus.focus()
-      }
-      previousFocusRef.current = null
     }
+
+    // Return focus to trigger or previous element when lightbox closes
+    const elementToFocus = triggerRef?.current ?? previousFocusRef.current
+    if (elementToFocus) {
+      elementToFocus.focus()
+    }
+    previousFocusRef.current = null
   }, [isOpen, getFocusableElements, handleKeyDown, triggerRef])
 }

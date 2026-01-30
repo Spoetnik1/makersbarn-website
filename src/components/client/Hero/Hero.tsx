@@ -2,10 +2,12 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+
 import { IMAGES } from '@/data'
 import { HERO_ANIMATION } from '@/constants'
 import { getImageAltText, getImageBlurData } from '@/lib'
 import { useLanguage, useTranslation } from '@/context'
+
 import styles from './Hero.module.css'
 
 export function Hero() {

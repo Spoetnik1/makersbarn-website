@@ -2,12 +2,15 @@
 
 import { useState, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+
 import { CONTACT_URLS, CONTACT_EMAIL } from '@/constants'
 import { ContactIntent } from '@/types'
 import { useTranslation } from '@/context'
+
+import { BookingForm } from '../BookingForm'
+
 import { IntentSelector } from './IntentSelector'
 import { QuestionForm } from './QuestionForm'
-import { BookingForm } from '../BookingForm'
 import styles from './UnifiedContact.module.css'
 
 const CONTENT_VARIANTS = {
@@ -62,11 +65,17 @@ function WhatsAppIcon() {
 /**
  * Get initial intent from URL hash (SSR-safe)
  */
+function parseContactIntent(hash: string): ContactIntent {
+  const values = Object.values(ContactIntent) as string[]
+  if (values.includes(hash)) {
+    return hash as ContactIntent
+  }
+  return ContactIntent.QUESTION
+}
+
 function getInitialIntent(): ContactIntent {
   if (typeof window !== 'undefined') {
-    const hash = window.location.hash.slice(1)
-    if (hash === ContactIntent.BOOKING) return ContactIntent.BOOKING
-    if (hash === ContactIntent.QUESTION) return ContactIntent.QUESTION
+    return parseContactIntent(window.location.hash.slice(1))
   }
   return ContactIntent.QUESTION
 }
@@ -81,12 +90,7 @@ export function UnifiedContact() {
   // Handle hash changes after initial mount
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash.slice(1)
-      if (hash === ContactIntent.BOOKING) {
-        setIntent(ContactIntent.BOOKING)
-      } else if (hash === ContactIntent.QUESTION) {
-        setIntent(ContactIntent.QUESTION)
-      }
+      setIntent(parseContactIntent(window.location.hash.slice(1)))
     }
 
     // Mark as initialized after first render

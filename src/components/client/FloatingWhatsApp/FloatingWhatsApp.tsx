@@ -1,9 +1,12 @@
 'use client'
 
 import { motion } from 'framer-motion'
+
 import { CONTACT_URLS } from '@/constants'
 import { useTranslation } from '@/context'
+
 import { WhatsAppIcon } from '../icons'
+
 import styles from './FloatingWhatsApp.module.css'
 
 const ICON_SIZE = 28

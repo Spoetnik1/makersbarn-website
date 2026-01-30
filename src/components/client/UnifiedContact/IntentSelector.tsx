@@ -1,7 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
+
 import { ContactIntent } from '@/types'
+
 import styles from './IntentSelector.module.css'
 
 interface IntentOption {

@@ -1,6 +1,7 @@
 'use client'
 
 import { type ReactNode } from 'react'
+
 import { LanguageProvider } from '@/context'
 import { Language } from '@/types'
 

@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
+
 import { Language } from '@/types'
 import { DEFAULT_LANGUAGE, LANG_ATTRIBUTES } from '@/constants'
 import { getDictionary } from '@/i18n/dictionaries'

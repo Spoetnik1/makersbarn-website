@@ -1,6 +1,7 @@
 'use server'
 
 import { headers } from 'next/headers'
+
 import { sendBookingEmail } from '@/services/email'
 import { sendSlackMessage, formatBookingFormMessage, formatPartialBookingMessage, SlackChannel } from '@/services/slack'
 import { createLogger, validateBookingForm, RateLimiter, ContactInfoSchema } from '@/lib'
@@ -20,7 +21,7 @@ const rateLimiter = new RateLimiter({
  */
 function maskEmail(email: string): string {
   const [local, domain] = email.split('@')
-  if (!domain) return '***'
+  if (!domain) {return '***'}
   const maskedLocal = local.length > 1 ? `${local[0]}***` : '***'
   return `${maskedLocal}@${domain}`
 }
@@ -29,11 +30,17 @@ function maskEmail(email: string): string {
  * Validate IP address format (IPv4 or IPv6)
  */
 function isValidIpFormat(ip: string): boolean {
-  // IPv4 pattern
-  const ipv4Pattern = /^(\d{1,3}\.){3}\d{1,3}$/
+  // IPv4: validate each octet is 0-255
+  const ipv4Parts = ip.split('.')
+  if (ipv4Parts.length === 4) {
+    return ipv4Parts.every((part) => {
+      const num = parseInt(part, 10)
+      return !isNaN(num) && num >= 0 && num <= 255 && String(num) === part
+    })
+  }
   // IPv6 pattern (simplified - allows common formats)
   const ipv6Pattern = /^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$/
-  return ipv4Pattern.test(ip) || ipv6Pattern.test(ip)
+  return ipv6Pattern.test(ip)
 }
 
 /**

@@ -1,4 +1,5 @@
 import { Testimonial } from '@/types'
+
 import { IMAGES } from './images'
 
 export const TESTIMONIALS: Testimonial[] = [

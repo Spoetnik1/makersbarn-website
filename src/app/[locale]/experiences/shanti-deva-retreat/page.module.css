@@ -450,6 +450,10 @@
   margin: 0 auto;
 }
 
+.scheduleContentSpaced {
+  margin-top: 2rem;
+}
+
 .scheduleList {
   list-style: none;
   padding: 0;

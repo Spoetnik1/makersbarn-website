@@ -2,8 +2,13 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+
 import { Route } from '@/types'
+import { createLogger } from '@/lib'
+
 import styles from './error.module.css'
+
+const logger = createLogger('error-boundary')
 
 interface ErrorProps {
   error: Error & { digest?: string }
@@ -12,8 +17,11 @@ interface ErrorProps {
 
 export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error)
+    logger.error('Unhandled error in error boundary', {
+      name: error.name,
+      message: error.message,
+      digest: error.digest,
+    })
   }, [error])
 
   return (

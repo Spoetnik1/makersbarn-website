@@ -67,3 +67,4 @@ export {
   getMinSelectableDate,
   isValidISODateString,
 } from './date'
+export { formatGroupSize } from './formatting'

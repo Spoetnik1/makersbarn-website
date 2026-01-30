@@ -1,6 +1,7 @@
 'use client'
 
 import { memo, type InputHTMLAttributes, type TextareaHTMLAttributes, type ReactNode } from 'react'
+
 import styles from './FormField.module.css'
 
 interface BaseFieldProps {
@@ -38,7 +39,15 @@ export const FormField = memo(function FormField(props: FormFieldProps) {
           id={id}
           className={`${inputClassName} ${hasError ? styles.inputError : ''}`}
           aria-invalid={hasError}
-          aria-describedby={error ? `${id}-error` : helpText ? `${id}-help` : undefined}
+          aria-describedby={(() => {
+            if (error) {
+              return `${id}-error`
+            }
+            if (helpText) {
+              return `${id}-help`
+            }
+            return undefined
+          })()}
           {...(inputProps as TextareaHTMLAttributes<HTMLTextAreaElement>)}
         />
       ) : (
@@ -46,7 +55,15 @@ export const FormField = memo(function FormField(props: FormFieldProps) {
           id={id}
           className={`${inputClassName} ${hasError ? styles.inputError : ''}`}
           aria-invalid={hasError}
-          aria-describedby={error ? `${id}-error` : helpText ? `${id}-help` : undefined}
+          aria-describedby={(() => {
+            if (error) {
+              return `${id}-error`
+            }
+            if (helpText) {
+              return `${id}-help`
+            }
+            return undefined
+          })()}
           {...(inputProps as InputHTMLAttributes<HTMLInputElement>)}
         />
       )}

@@ -1,6 +1,7 @@
 'use client'
 
 import { memo, type InputHTMLAttributes } from 'react'
+
 import styles from './FormCheckbox.module.css'
 
 interface FormCheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'id' | 'type'> {

@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback, memo, useMemo, useRef } from 'react'
 import { motion, useMotionValue } from 'framer-motion'
 import Image from 'next/image'
+
 import { FACILITIES_OPTIONS } from '@/data'
 import { SPRING_OPTIONS, DRAG_BUFFER } from '@/constants'
 import { FacilitiesOption, Language } from '@/types'
@@ -11,6 +12,7 @@ import { useTranslation } from '@/context'
 import type { FacilitiesTranslations } from '@/i18n/types'
 
 import { Lightbox, type LightboxImage } from '../Lightbox'
+
 import styles from './FacilitiesCarousel.module.css'
 
 // Map facility IDs to translation keys
@@ -44,21 +46,31 @@ interface FacilitiesDetailProps {
   itemTranslation: FacilityItemTranslation
 }
 
-const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
-  option,
-  index,
+interface FacilityImageCarouselProps {
+  images: string[]
+  currentIndex: number
+  setCurrentIndex: (index: number | ((prev: number) => number)) => void
+  language: Language
+  carouselTranslations: FacilitiesTranslations['carousel']
+  itemTranslation: FacilityItemTranslation
+  lightboxOpen: boolean
+  setLightboxOpen: (open: boolean) => void
+  triggerRef: React.RefObject<HTMLDivElement | null>
+}
+
+function FacilityImageCarousel({
+  images,
+  currentIndex,
+  setCurrentIndex,
   language,
   carouselTranslations,
   itemTranslation,
-}: FacilitiesDetailProps) {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [lightboxOpen, setLightboxOpen] = useState(false)
-  const triggerRef = useRef<HTMLDivElement>(null)
-  const images = option.images && option.images.length > 0 ? option.images : [option.image]
-  const isReversed = index % 2 === 1
+  lightboxOpen,
+  setLightboxOpen,
+  triggerRef,
+}: FacilityImageCarouselProps) {
   const dragX = useMotionValue(0)
 
-  // Convert to Lightbox format - memoized to prevent unnecessary context updates
   const lightboxImages: LightboxImage[] = useMemo(
     () =>
       images.map((src, idx) => ({
@@ -80,46 +92,31 @@ const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
     } else if (x >= DRAG_BUFFER && currentIndex > 0) {
       setCurrentIndex((pv) => pv - 1)
     }
-  }, [dragX, currentIndex, images.length])
+  }, [dragX, currentIndex, images.length, setCurrentIndex])
 
   const handleImageClick = useCallback(() => {
     setLightboxOpen(true)
-  }, [])
+  }, [setLightboxOpen])
 
   const handleLightboxClose = useCallback(() => {
     setLightboxOpen(false)
-  }, [])
+  }, [setLightboxOpen])
 
   const handleLightboxImageChange = useCallback((newIndex: number) => {
     setCurrentIndex(newIndex)
-  }, [])
+  }, [setCurrentIndex])
 
   const handlePrevious = useCallback(() => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
-  }, [images.length])
+  }, [images.length, setCurrentIndex])
 
   const handleNext = useCallback(() => {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
-  }, [images.length])
+  }, [images.length, setCurrentIndex])
 
-  const content = (
-    <div className={styles.detailContent}>
-      <h2 className={styles.detailTitle}>{itemTranslation.title}</h2>
-      <p className={styles.detailBody}>{itemTranslation.description}</p>
-      {itemTranslation.features && itemTranslation.features.length > 0 && (
-        <ul className={styles.detailFeatures}>
-          {itemTranslation.features.map((feature) => (
-            <li key={feature}>{feature}</li>
-          ))}
-        </ul>
-      )}
-    </div>
-  )
-
-  const media = (
+  return (
     <div className={styles.detailMedia}>
       <div className={styles.carouselContainer}>
-        {/* Navigation Arrows */}
         {images.length > 1 && (
           <>
             <button
@@ -198,7 +195,6 @@ const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
         </div>
       )}
 
-      {/* Lightbox */}
       <Lightbox
         images={lightboxImages}
         initialIndex={currentIndex}
@@ -210,6 +206,48 @@ const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
         triggerRef={triggerRef}
       />
     </div>
+  )
+}
+
+const FacilitiesDetailSection = memo(function FacilitiesDetailSection({
+  option,
+  index,
+  language,
+  carouselTranslations,
+  itemTranslation,
+}: FacilitiesDetailProps) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const triggerRef = useRef<HTMLDivElement>(null)
+  const images = option.images.length > 0 ? option.images : [option.image]
+  const isReversed = index % 2 === 1
+
+  const content = (
+    <div className={styles.detailContent}>
+      <h2 className={styles.detailTitle}>{itemTranslation.title}</h2>
+      <p className={styles.detailBody}>{itemTranslation.description}</p>
+      {itemTranslation.features && itemTranslation.features.length > 0 && (
+        <ul className={styles.detailFeatures}>
+          {itemTranslation.features.map((feature) => (
+            <li key={feature}>{feature}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+
+  const media = (
+    <FacilityImageCarousel
+      images={images}
+      currentIndex={currentIndex}
+      setCurrentIndex={setCurrentIndex}
+      language={language}
+      carouselTranslations={carouselTranslations}
+      itemTranslation={itemTranslation}
+      lightboxOpen={lightboxOpen}
+      setLightboxOpen={setLightboxOpen}
+      triggerRef={triggerRef}
+    />
   )
 
   return (

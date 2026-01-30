@@ -1,5 +1,7 @@
 import { Language } from '@/types'
+
 import type { Dictionary, Dictionaries } from '../types'
+
 import { en } from './en'
 import { nl } from './nl'
 
@@ -16,7 +18,7 @@ export const dictionaries: Dictionaries = {
  * Falls back to English if language not found
  */
 export function getDictionary(language: Language): Dictionary {
-  return dictionaries[language] ?? dictionaries[Language.EN]
+  return dictionaries[language]
 }
 
 export { en, nl }

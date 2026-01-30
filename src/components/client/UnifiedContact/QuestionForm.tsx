@@ -4,11 +4,13 @@ import { useState, useCallback, useMemo, FormEvent, ChangeEvent } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { track } from '@vercel/analytics'
+
 import { IMAGES } from '@/data'
 import { submitContactForm } from '@/actions'
 import { AnalyticsEvent } from '@/constants'
 import { FormStatus, type ContactFormData } from '@/types'
 import { useTranslation } from '@/context'
+
 import styles from './QuestionForm.module.css'
 
 const INITIAL_FORM_DATA: ContactFormData = {
@@ -78,7 +80,7 @@ export function QuestionForm() {
 
   return (
     <div className={styles.formContainer}>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={(e) => { void handleSubmit(e) }} className={styles.form}>
         <div className={styles.formGroup}>
           <label htmlFor={FORM_FIELD_IDS.NAME} className={styles.formLabel}>
             {contact.labels.name}

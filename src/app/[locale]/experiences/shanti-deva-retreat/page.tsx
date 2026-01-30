@@ -1,14 +1,16 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+
 import { StructuredData } from '@/components/server'
 import { generatePageMetadata } from '@/lib/metadata'
 import { generatePageBreadcrumbs } from '@/lib/structuredData'
-import { Route, ScheduleDayType } from '@/types'
+import { Route, ScheduleDayType, Language } from '@/types'
 import { SHANTI_DEVA_RETREAT } from '@/data'
 import { getServerTranslations } from '@/i18n'
 import { getValidLocale } from '@/lib/locale'
 import { getLocalizedPath } from '@/lib/routing'
+
 import styles from './page.module.css'
 
 interface ShantiDevaRetreatPageProps {
@@ -191,23 +193,399 @@ function formatDateRange(startDate: string, endDate: string): string {
   return `${startFormatted}-${endFormatted}, ${year}`
 }
 
-export default async function ShantiDevaRetreatPage({ params }: ShantiDevaRetreatPageProps) {
-  const { locale } = await params
-  const validLocale = getValidLocale(locale)
-  const t = await getServerTranslations(validLocale)
+interface RetreatHeroProps {
+  t: Awaited<ReturnType<typeof getServerTranslations>>
+  retreat: typeof SHANTI_DEVA_RETREAT
+  validLocale: Language
+}
 
-  const retreat = SHANTI_DEVA_RETREAT
+function RetreatHero({ t, retreat, validLocale }: RetreatHeroProps) {
+  return (
+    <>
+      <Link href={getLocalizedPath(Route.EXPERIENCES, validLocale)} className={styles.backLink}>
+        <ArrowLeftIcon />
+        {t.shantiDevaRetreat.backToExperiences}
+      </Link>
 
+      <section className={styles.hero}>
+        <div className={styles.heroContent}>
+          <p className={styles.heroSubtitle}>{t.shantiDevaRetreat.hero.subtitle}</p>
+          <h1 className={styles.heroTitle}>{t.shantiDevaRetreat.hero.title}</h1>
+          <p className={styles.heroTeachers}>{t.shantiDevaRetreat.hero.withTeachers}</p>
+
+          <div className={styles.heroMeta}>
+            <span className={styles.heroMetaItem}>
+              <LocationIcon className={styles.heroMetaIcon} />
+              {retreat.location.address}
+            </span>
+            <span className={styles.heroMetaItem}>
+              <ClockIcon className={styles.heroMetaIcon} />
+              {t.shantiDevaRetreat.hero.dailyTime}
+            </span>
+          </div>
+
+          <a
+            href={retreat.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.heroCta}
+          >
+            {t.shantiDevaRetreat.hero.bookNow}
+            <ExternalLinkIcon className={styles.heroCtaIcon} />
+          </a>
+        </div>
+      </section>
+    </>
+  )
+}
+
+interface RetreatDatesProps {
+  t: Awaited<ReturnType<typeof getServerTranslations>>
+  retreat: typeof SHANTI_DEVA_RETREAT
+}
+
+function RetreatDates({ t, retreat }: RetreatDatesProps) {
+  return (
+    <section className={styles.datesSection}>
+      <h2 className={styles.sectionTitle}>{t.shantiDevaRetreat.dates.title}</h2>
+      <div className={styles.datesGrid}>
+        <div className={styles.dateCard}>
+          <p className={styles.dateLabel}>{t.shantiDevaRetreat.dates.firstRetreat}</p>
+          <p className={styles.dateRange}>
+            {formatDateRange(retreat.dates[0].startDate, retreat.dates[0].endDate)}
+          </p>
+          <p className={styles.dateDuration}>{t.shantiDevaRetreat.dates.duration}</p>
+        </div>
+        <div className={styles.dateCard}>
+          <p className={styles.dateLabel}>{t.shantiDevaRetreat.dates.secondRetreat}</p>
+          <p className={styles.dateRange}>
+            {formatDateRange(retreat.dates[1].startDate, retreat.dates[1].endDate)}
+          </p>
+          <p className={styles.dateDuration}>{t.shantiDevaRetreat.dates.duration}</p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+interface RetreatScheduleProps {
+  t: Awaited<ReturnType<typeof getServerTranslations>>
+  arrivalSchedule?: typeof SHANTI_DEVA_RETREAT.schedule[number]
+  studySchedule?: typeof SHANTI_DEVA_RETREAT.schedule[number]
+  finalSchedule?: typeof SHANTI_DEVA_RETREAT.schedule[number]
+}
+
+function RetreatSchedule({ t, arrivalSchedule, studySchedule, finalSchedule }: RetreatScheduleProps) {
   const getActivityLabel = (activityKey: string): string => {
     const activities = t.shantiDevaRetreat.schedule.activities
     return activities[activityKey as keyof typeof activities] || activityKey
   }
 
-  const arrivalSchedule = retreat.schedule.find(s => s.dayType === ScheduleDayType.ARRIVAL)
-  const studySchedule = retreat.schedule.find(s => s.dayType === ScheduleDayType.STUDY)
-  const finalSchedule = retreat.schedule.find(s => s.dayType === ScheduleDayType.FINAL)
+  return (
+    <section className={styles.scheduleSection}>
+      <h2 className={styles.sectionTitle}>{t.shantiDevaRetreat.schedule.title}</h2>
 
-  const eventSchema = {
+      <div className={styles.scheduleContent}>
+        <h3 className={styles.includedCardTitle}>{t.shantiDevaRetreat.schedule.arrivalDay}</h3>
+        {arrivalSchedule && (
+          <ul className={styles.scheduleList}>
+            {arrivalSchedule.items.map((item, index) => (
+              <li key={index} className={styles.scheduleItem}>
+                <span className={styles.scheduleTime}>{item.time}</span>
+                <span className={styles.scheduleActivity}>{getActivityLabel(item.activityKey)}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div className={`${styles.scheduleContent} ${styles.scheduleContentSpaced}`}>
+        <h3 className={styles.includedCardTitle}>{t.shantiDevaRetreat.schedule.studyDays}</h3>
+        {studySchedule && (
+          <ul className={styles.scheduleList}>
+            {studySchedule.items.map((item, index) => (
+              <li key={index} className={styles.scheduleItem}>
+                <span className={styles.scheduleTime}>{item.time}</span>
+                <span className={styles.scheduleActivity}>{getActivityLabel(item.activityKey)}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div className={`${styles.scheduleContent} ${styles.scheduleContentSpaced}`}>
+        <h3 className={styles.includedCardTitle}>{t.shantiDevaRetreat.schedule.finalDay}</h3>
+        {finalSchedule && (
+          <ul className={styles.scheduleList}>
+            {finalSchedule.items.map((item, index) => (
+              <li key={index} className={styles.scheduleItem}>
+                <span className={styles.scheduleTime}>{item.time}</span>
+                <span className={styles.scheduleActivity}>{getActivityLabel(item.activityKey)}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div className={styles.specialActivity}>
+        <p className={styles.specialActivityText}>{t.shantiDevaRetreat.schedule.specialActivity}</p>
+      </div>
+    </section>
+  )
+}
+
+interface RetreatIncludedProps {
+  t: Awaited<ReturnType<typeof getServerTranslations>>
+}
+
+function RetreatIncluded({ t }: RetreatIncludedProps) {
+  return (
+    <section className={styles.includedSection}>
+      <div className={styles.includedContent}>
+        <h2 className={styles.sectionTitle}>{t.shantiDevaRetreat.included.title}</h2>
+        <div className={styles.includedGrid}>
+          <div className={styles.includedCard}>
+            <h3 className={styles.includedCardTitle}>{t.shantiDevaRetreat.included.accommodation}</h3>
+            <ul className={styles.includedList}>
+              <li className={styles.includedItem}>
+                <CheckIcon className={styles.checkIcon} />
+                {t.shantiDevaRetreat.included.accommodationOptions.duration}
+              </li>
+              <li className={styles.includedItem}>
+                <CheckIcon className={styles.checkIcon} />
+                {t.shantiDevaRetreat.included.accommodationOptions.doubleRooms}
+              </li>
+              <li className={styles.includedItem}>
+                <CheckIcon className={styles.checkIcon} />
+                {t.shantiDevaRetreat.included.accommodationOptions.sharedRooms}
+              </li>
+              <li className={styles.includedItem}>
+                <CheckIcon className={styles.checkIcon} />
+                {t.shantiDevaRetreat.included.accommodationOptions.singleRoom}
+              </li>
+              <li className={styles.includedItem}>
+                <CheckIcon className={styles.checkIcon} />
+                {t.shantiDevaRetreat.included.accommodationOptions.tentCaravan}
+              </li>
+            </ul>
+          </div>
+          <div className={styles.includedCard}>
+            <h3 className={styles.includedCardTitle}>{t.shantiDevaRetreat.included.servicesTitle}</h3>
+            <ul className={styles.includedList}>
+              <li className={styles.includedItem}>
+                <CheckIcon className={styles.checkIcon} />
+                {t.shantiDevaRetreat.included.services.beddingTowels}
+              </li>
+              <li className={styles.includedItem}>
+                <CheckIcon className={styles.checkIcon} />
+                {t.shantiDevaRetreat.included.services.vegetarianMeals}
+              </li>
+              <li className={styles.includedItem}>
+                <CheckIcon className={styles.checkIcon} />
+                {t.shantiDevaRetreat.included.services.farmFacilities}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+interface RetreatPricingProps {
+  t: Awaited<ReturnType<typeof getServerTranslations>>
+  retreat: typeof SHANTI_DEVA_RETREAT
+}
+
+function RetreatPricing({ t, retreat }: RetreatPricingProps) {
+  return (
+    <section className={styles.pricingSection}>
+      <h2 className={styles.sectionTitle}>{t.shantiDevaRetreat.pricing.title}</h2>
+      <div className={styles.pricingCard}>
+        <div className={styles.priceHeader}>
+          <p className={styles.totalPrice}>{t.shantiDevaRetreat.pricing.totalPrice}</p>
+          <p className={styles.priceSubtext}>{t.shantiDevaRetreat.pricing.perParticipant}</p>
+        </div>
+
+        <div className={styles.priceDetails}>
+          <div className={styles.priceSection}>
+            <h3 className={styles.priceSectionTitle}>{t.shantiDevaRetreat.pricing.breakdown}</h3>
+            <div className={styles.priceBreakdown}>
+              {retreat.priceBreakdown.map((item, index) => (
+                <div key={index} className={styles.priceRow}>
+                  <span className={styles.priceRowLabel}>
+                    {t.shantiDevaRetreat.pricing.breakdownItems[item.labelKey as keyof typeof t.shantiDevaRetreat.pricing.breakdownItems]}
+                  </span>
+                  <span className={styles.priceRowAmount}>{item.amount}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.priceSection}>
+            <h3 className={styles.priceSectionTitle}>{t.shantiDevaRetreat.pricing.paymentTerms}</h3>
+            <ul className={styles.policyList}>
+              <li className={styles.policyItem}>
+                <CheckIcon className={styles.policyIcon} />
+                {t.shantiDevaRetreat.pricing.paymentItems.depositPayment}
+              </li>
+              <li className={styles.policyItem}>
+                <CheckIcon className={styles.policyIcon} />
+                {t.shantiDevaRetreat.pricing.paymentItems.secondPayment}
+              </li>
+            </ul>
+          </div>
+
+          <div className={styles.priceSection}>
+            <h3 className={styles.priceSectionTitle}>{t.shantiDevaRetreat.pricing.cancellation}</h3>
+            <ul className={styles.policyList}>
+              <li className={styles.policyItem}>
+                <CheckIcon className={styles.policyIcon} />
+                {t.shantiDevaRetreat.pricing.cancellationItems.fourMonthsRefund}
+              </li>
+              <li className={styles.policyItem}>
+                <CheckIcon className={styles.policyIcon} />
+                {t.shantiDevaRetreat.pricing.cancellationItems.afterFullPayment}
+              </li>
+              <li className={styles.policyItem}>
+                <CheckIcon className={styles.policyIcon} />
+                {t.shantiDevaRetreat.pricing.cancellationItems.replacementRefund}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+interface RetreatRegistrationProps {
+  t: Awaited<ReturnType<typeof getServerTranslations>>
+  retreat: typeof SHANTI_DEVA_RETREAT
+}
+
+function RetreatRegistration({ t, retreat }: RetreatRegistrationProps) {
+  return (
+    <section className={styles.registrationSection}>
+      <div className={styles.registrationContent}>
+        <h2 className={styles.registrationTitle}>{t.shantiDevaRetreat.registration.title}</h2>
+        <p className={styles.registrationSubtitle}>{t.shantiDevaRetreat.registration.subtitle}</p>
+
+        <p className={styles.participantInfo}>{t.shantiDevaRetreat.registration.participantRange}</p>
+        <a
+          href={retreat.bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.registerButton}
+        >
+          {t.shantiDevaRetreat.registration.registerButton}
+          <ArrowRightIcon className={styles.registerButtonIcon} />
+        </a>
+
+        <p className={styles.contactInfo}>{t.shantiDevaRetreat.registration.contact}</p>
+        <div className={styles.contactLinks}>
+          <a
+            href={`https://wa.me/${retreat.contact.whatsapp.replace(/[^0-9]/g, '')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.contactLink}
+          >
+            <PhoneIcon className={styles.contactLinkIcon} />
+            {t.shantiDevaRetreat.registration.whatsapp}: {retreat.contact.whatsapp}
+          </a>
+          <a
+            href={`mailto:${retreat.contact.email}`}
+            className={styles.contactLink}
+          >
+            <MailIcon className={styles.contactLinkIcon} />
+            {t.shantiDevaRetreat.registration.email}: {retreat.contact.email}
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+interface RetreatDetailsProps {
+  t: Awaited<ReturnType<typeof getServerTranslations>>
+  retreat: typeof SHANTI_DEVA_RETREAT
+}
+
+function RetreatDetails({ t, retreat }: RetreatDetailsProps) {
+  return (
+    <section className={styles.detailsSection}>
+      <div className={styles.detailsContent}>
+        <h2 className={styles.sectionTitle}>{t.shantiDevaRetreat.details.title}</h2>
+        <div className={styles.detailsGrid}>
+          <div className={styles.detailCard}>
+            <h3 className={styles.detailCardTitle}>
+              <LocationIcon className={styles.detailIcon} />
+              {t.shantiDevaRetreat.details.location}
+            </h3>
+            <p className={styles.detailText}>{t.shantiDevaRetreat.details.locationDescription}</p>
+            <p className={styles.detailText}>
+              <strong>{t.shantiDevaRetreat.details.address}:</strong>{' '}
+              <span className={styles.detailAddress}>{retreat.location.address}</span>
+            </p>
+          </div>
+          <div className={styles.detailCard}>
+            <h3 className={styles.detailCardTitle}>
+              <CarIcon className={styles.detailIcon} />
+              {t.shantiDevaRetreat.details.accessibility}
+            </h3>
+            <ul className={styles.accessibilityList}>
+              <li className={styles.accessibilityItem}>
+                <CheckIcon className={styles.checkIcon} />
+                {t.shantiDevaRetreat.details.accessibilityItems.carFromZwolle}
+              </li>
+              <li className={styles.accessibilityItem}>
+                <CheckIcon className={styles.checkIcon} />
+                {t.shantiDevaRetreat.details.accessibilityItems.freePickup}
+              </li>
+              <li className={styles.accessibilityItem}>
+                <CheckIcon className={styles.checkIcon} />
+                {t.shantiDevaRetreat.details.accessibilityItems.sharedTransport}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className={styles.venueGallery}>
+          <div className={styles.venueImageLarge}>
+            <Image
+              src="/images/practice-rooms-with-mats.jpg"
+              alt="Practice room with yoga mats"
+              fill
+              sizes="(max-width: 768px) 100vw, 60vw"
+              className={styles.venueImage}
+            />
+          </div>
+          <div className={styles.venueImageSmall}>
+            <Image
+              src="/images/graden_view_with_hammocks.JPG"
+              alt="Garden view with hammocks"
+              fill
+              sizes="(max-width: 768px) 50vw, 20vw"
+              className={styles.venueImage}
+            />
+          </div>
+          <div className={styles.venueImageSmall}>
+            <Image
+              src="/images/pond-complete.jpg"
+              alt="Natural pond surroundings"
+              fill
+              sizes="(max-width: 768px) 50vw, 20vw"
+              className={styles.venueImage}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function createEventSchema(t: Awaited<ReturnType<typeof getServerTranslations>>, retreat: typeof SHANTI_DEVA_RETREAT) {
+  return {
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: t.shantiDevaRetreat.hero.title,
@@ -236,12 +614,24 @@ export default async function ShantiDevaRetreatPage({ params }: ShantiDevaRetrea
       name: 'Shanti Deva Buddhist Tibetan Retreat Project',
     },
   }
+}
+
+export default async function ShantiDevaRetreatPage({ params }: ShantiDevaRetreatPageProps) {
+  const { locale } = await params
+  const validLocale = getValidLocale(locale)
+  const t = await getServerTranslations(validLocale)
+
+  const retreat = SHANTI_DEVA_RETREAT
+
+  const arrivalSchedule = retreat.schedule.find(s => s.dayType === ScheduleDayType.ARRIVAL)
+  const studySchedule = retreat.schedule.find(s => s.dayType === ScheduleDayType.STUDY)
+  const finalSchedule = retreat.schedule.find(s => s.dayType === ScheduleDayType.FINAL)
 
   return (
     <>
       <StructuredData
         data={[
-          eventSchema,
+          createEventSchema(t, retreat),
           generatePageBreadcrumbs({
             name: t.shantiDevaRetreat.metaTitle,
             path: getLocalizedPath(Route.SHANTI_DEVA_RETREAT, validLocale),
@@ -250,66 +640,12 @@ export default async function ShantiDevaRetreatPage({ params }: ShantiDevaRetrea
       />
 
       <div className={styles.retreatPage}>
-        {/* Back Link */}
-        <Link href={getLocalizedPath(Route.EXPERIENCES, validLocale)} className={styles.backLink}>
-          <ArrowLeftIcon />
-          {t.shantiDevaRetreat.backToExperiences}
-        </Link>
+        <RetreatHero t={t} retreat={retreat} validLocale={validLocale} />
 
-        {/* Hero Section */}
-        <section className={styles.hero}>
-          <div className={styles.heroContent}>
-            <p className={styles.heroSubtitle}>{t.shantiDevaRetreat.hero.subtitle}</p>
-            <h1 className={styles.heroTitle}>{t.shantiDevaRetreat.hero.title}</h1>
-            <p className={styles.heroTeachers}>{t.shantiDevaRetreat.hero.withTeachers}</p>
-
-            <div className={styles.heroMeta}>
-              <span className={styles.heroMetaItem}>
-                <LocationIcon className={styles.heroMetaIcon} />
-                {retreat.location.address}
-              </span>
-              <span className={styles.heroMetaItem}>
-                <ClockIcon className={styles.heroMetaIcon} />
-                {t.shantiDevaRetreat.hero.dailyTime}
-              </span>
-            </div>
-
-            <a
-              href={retreat.bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.heroCta}
-            >
-              {t.shantiDevaRetreat.hero.bookNow}
-              <ExternalLinkIcon className={styles.heroCtaIcon} />
-            </a>
-          </div>
-        </section>
-
-        {/* Dates Section */}
-        <section className={styles.datesSection}>
-          <h2 className={styles.sectionTitle}>{t.shantiDevaRetreat.dates.title}</h2>
-          <div className={styles.datesGrid}>
-            <div className={styles.dateCard}>
-              <p className={styles.dateLabel}>{t.shantiDevaRetreat.dates.firstRetreat}</p>
-              <p className={styles.dateRange}>
-                {formatDateRange(retreat.dates[0].startDate, retreat.dates[0].endDate)}
-              </p>
-              <p className={styles.dateDuration}>{t.shantiDevaRetreat.dates.duration}</p>
-            </div>
-            <div className={styles.dateCard}>
-              <p className={styles.dateLabel}>{t.shantiDevaRetreat.dates.secondRetreat}</p>
-              <p className={styles.dateRange}>
-                {formatDateRange(retreat.dates[1].startDate, retreat.dates[1].endDate)}
-              </p>
-              <p className={styles.dateDuration}>{t.shantiDevaRetreat.dates.duration}</p>
-            </div>
-          </div>
-        </section>
+        <RetreatDates t={t} retreat={retreat} />
 
         <div className={styles.divider} />
 
-        {/* Teacher Section */}
         <section className={styles.teacherSection}>
           <div className={styles.teacherContent}>
             <div className={styles.teacherImageWrapper}>
@@ -330,281 +666,22 @@ export default async function ShantiDevaRetreatPage({ params }: ShantiDevaRetrea
 
         <div className={styles.divider} />
 
-        {/* Details Section */}
-        <section className={styles.detailsSection}>
-          <div className={styles.detailsContent}>
-            <h2 className={styles.sectionTitle}>{t.shantiDevaRetreat.details.title}</h2>
-            <div className={styles.detailsGrid}>
-              <div className={styles.detailCard}>
-                <h3 className={styles.detailCardTitle}>
-                  <LocationIcon className={styles.detailIcon} />
-                  {t.shantiDevaRetreat.details.location}
-                </h3>
-                <p className={styles.detailText}>{t.shantiDevaRetreat.details.locationDescription}</p>
-                <p className={styles.detailText}>
-                  <strong>{t.shantiDevaRetreat.details.address}:</strong>{' '}
-                  <span className={styles.detailAddress}>{retreat.location.address}</span>
-                </p>
-              </div>
-              <div className={styles.detailCard}>
-                <h3 className={styles.detailCardTitle}>
-                  <CarIcon className={styles.detailIcon} />
-                  {t.shantiDevaRetreat.details.accessibility}
-                </h3>
-                <ul className={styles.accessibilityList}>
-                  <li className={styles.accessibilityItem}>
-                    <CheckIcon className={styles.checkIcon} />
-                    {t.shantiDevaRetreat.details.accessibilityItems.carFromZwolle}
-                  </li>
-                  <li className={styles.accessibilityItem}>
-                    <CheckIcon className={styles.checkIcon} />
-                    {t.shantiDevaRetreat.details.accessibilityItems.freePickup}
-                  </li>
-                  <li className={styles.accessibilityItem}>
-                    <CheckIcon className={styles.checkIcon} />
-                    {t.shantiDevaRetreat.details.accessibilityItems.sharedTransport}
-                  </li>
-                </ul>
-              </div>
-            </div>
+        <RetreatDetails t={t} retreat={retreat} />
 
-            {/* Venue Gallery */}
-            <div className={styles.venueGallery}>
-              <div className={styles.venueImageLarge}>
-                <Image
-                  src="/images/practice-rooms-with-mats.jpg"
-                  alt="Practice room with yoga mats"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 60vw"
-                  className={styles.venueImage}
-                />
-              </div>
-              <div className={styles.venueImageSmall}>
-                <Image
-                  src="/images/graden_view_with_hammocks.JPG"
-                  alt="Garden view with hammocks"
-                  fill
-                  sizes="(max-width: 768px) 50vw, 20vw"
-                  className={styles.venueImage}
-                />
-              </div>
-              <div className={styles.venueImageSmall}>
-                <Image
-                  src="/images/pond-complete.jpg"
-                  alt="Natural pond surroundings"
-                  fill
-                  sizes="(max-width: 768px) 50vw, 20vw"
-                  className={styles.venueImage}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Schedule Section */}
-        <section className={styles.scheduleSection}>
-          <h2 className={styles.sectionTitle}>{t.shantiDevaRetreat.schedule.title}</h2>
-
-          {/* Arrival Day */}
-          <div className={styles.scheduleContent}>
-            <h3 className={styles.includedCardTitle}>{t.shantiDevaRetreat.schedule.arrivalDay}</h3>
-            {arrivalSchedule && (
-              <ul className={styles.scheduleList}>
-                {arrivalSchedule.items.map((item, index) => (
-                  <li key={index} className={styles.scheduleItem}>
-                    <span className={styles.scheduleTime}>{item.time}</span>
-                    <span className={styles.scheduleActivity}>{getActivityLabel(item.activityKey)}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-
-          {/* Study Days */}
-          <div className={styles.scheduleContent} style={{ marginTop: '2rem' }}>
-            <h3 className={styles.includedCardTitle}>{t.shantiDevaRetreat.schedule.studyDays}</h3>
-            {studySchedule && (
-              <ul className={styles.scheduleList}>
-                {studySchedule.items.map((item, index) => (
-                  <li key={index} className={styles.scheduleItem}>
-                    <span className={styles.scheduleTime}>{item.time}</span>
-                    <span className={styles.scheduleActivity}>{getActivityLabel(item.activityKey)}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-
-          {/* Final Day */}
-          <div className={styles.scheduleContent} style={{ marginTop: '2rem' }}>
-            <h3 className={styles.includedCardTitle}>{t.shantiDevaRetreat.schedule.finalDay}</h3>
-            {finalSchedule && (
-              <ul className={styles.scheduleList}>
-                {finalSchedule.items.map((item, index) => (
-                  <li key={index} className={styles.scheduleItem}>
-                    <span className={styles.scheduleTime}>{item.time}</span>
-                    <span className={styles.scheduleActivity}>{getActivityLabel(item.activityKey)}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-
-          <div className={styles.specialActivity}>
-            <p className={styles.specialActivityText}>{t.shantiDevaRetreat.schedule.specialActivity}</p>
-          </div>
-        </section>
+        <RetreatSchedule
+          t={t}
+          arrivalSchedule={arrivalSchedule}
+          studySchedule={studySchedule}
+          finalSchedule={finalSchedule}
+        />
 
         <div className={styles.divider} />
 
-        {/* Included Section */}
-        <section className={styles.includedSection}>
-          <div className={styles.includedContent}>
-            <h2 className={styles.sectionTitle}>{t.shantiDevaRetreat.included.title}</h2>
-            <div className={styles.includedGrid}>
-              <div className={styles.includedCard}>
-                <h3 className={styles.includedCardTitle}>{t.shantiDevaRetreat.included.accommodation}</h3>
-                <ul className={styles.includedList}>
-                  <li className={styles.includedItem}>
-                    <CheckIcon className={styles.checkIcon} />
-                    {t.shantiDevaRetreat.included.accommodationOptions.duration}
-                  </li>
-                  <li className={styles.includedItem}>
-                    <CheckIcon className={styles.checkIcon} />
-                    {t.shantiDevaRetreat.included.accommodationOptions.doubleRooms}
-                  </li>
-                  <li className={styles.includedItem}>
-                    <CheckIcon className={styles.checkIcon} />
-                    {t.shantiDevaRetreat.included.accommodationOptions.sharedRooms}
-                  </li>
-                  <li className={styles.includedItem}>
-                    <CheckIcon className={styles.checkIcon} />
-                    {t.shantiDevaRetreat.included.accommodationOptions.singleRoom}
-                  </li>
-                  <li className={styles.includedItem}>
-                    <CheckIcon className={styles.checkIcon} />
-                    {t.shantiDevaRetreat.included.accommodationOptions.tentCaravan}
-                  </li>
-                </ul>
-              </div>
-              <div className={styles.includedCard}>
-                <h3 className={styles.includedCardTitle}>Services</h3>
-                <ul className={styles.includedList}>
-                  <li className={styles.includedItem}>
-                    <CheckIcon className={styles.checkIcon} />
-                    {t.shantiDevaRetreat.included.services.beddingTowels}
-                  </li>
-                  <li className={styles.includedItem}>
-                    <CheckIcon className={styles.checkIcon} />
-                    {t.shantiDevaRetreat.included.services.vegetarianMeals}
-                  </li>
-                  <li className={styles.includedItem}>
-                    <CheckIcon className={styles.checkIcon} />
-                    {t.shantiDevaRetreat.included.services.farmFacilities}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
+        <RetreatIncluded t={t} />
 
-        {/* Pricing Section */}
-        <section className={styles.pricingSection}>
-          <h2 className={styles.sectionTitle}>{t.shantiDevaRetreat.pricing.title}</h2>
-          <div className={styles.pricingCard}>
-            <div className={styles.priceHeader}>
-              <p className={styles.totalPrice}>{t.shantiDevaRetreat.pricing.totalPrice}</p>
-              <p className={styles.priceSubtext}>{t.shantiDevaRetreat.pricing.perParticipant}</p>
-            </div>
+        <RetreatPricing t={t} retreat={retreat} />
 
-            <div className={styles.priceDetails}>
-              <div className={styles.priceSection}>
-                <h3 className={styles.priceSectionTitle}>{t.shantiDevaRetreat.pricing.breakdown}</h3>
-                <div className={styles.priceBreakdown}>
-                  {retreat.priceBreakdown.map((item, index) => (
-                    <div key={index} className={styles.priceRow}>
-                      <span className={styles.priceRowLabel}>
-                        {t.shantiDevaRetreat.pricing.breakdownItems[item.labelKey as keyof typeof t.shantiDevaRetreat.pricing.breakdownItems]}
-                      </span>
-                      <span className={styles.priceRowAmount}>{item.amount}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className={styles.priceSection}>
-                <h3 className={styles.priceSectionTitle}>{t.shantiDevaRetreat.pricing.paymentTerms}</h3>
-                <ul className={styles.policyList}>
-                  <li className={styles.policyItem}>
-                    <CheckIcon className={styles.policyIcon} />
-                    {t.shantiDevaRetreat.pricing.paymentItems.depositPayment}
-                  </li>
-                  <li className={styles.policyItem}>
-                    <CheckIcon className={styles.policyIcon} />
-                    {t.shantiDevaRetreat.pricing.paymentItems.secondPayment}
-                  </li>
-                </ul>
-              </div>
-
-              <div className={styles.priceSection}>
-                <h3 className={styles.priceSectionTitle}>{t.shantiDevaRetreat.pricing.cancellation}</h3>
-                <ul className={styles.policyList}>
-                  <li className={styles.policyItem}>
-                    <CheckIcon className={styles.policyIcon} />
-                    {t.shantiDevaRetreat.pricing.cancellationItems.fourMonthsRefund}
-                  </li>
-                  <li className={styles.policyItem}>
-                    <CheckIcon className={styles.policyIcon} />
-                    {t.shantiDevaRetreat.pricing.cancellationItems.afterFullPayment}
-                  </li>
-                  <li className={styles.policyItem}>
-                    <CheckIcon className={styles.policyIcon} />
-                    {t.shantiDevaRetreat.pricing.cancellationItems.replacementRefund}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Registration Section */}
-        <section className={styles.registrationSection}>
-          <div className={styles.registrationContent}>
-            <h2 className={styles.registrationTitle}>{t.shantiDevaRetreat.registration.title}</h2>
-            <p className={styles.registrationSubtitle}>{t.shantiDevaRetreat.registration.subtitle}</p>
-
-            <p className={styles.participantInfo}>{t.shantiDevaRetreat.registration.participantRange}</p>
-            <a
-              href={retreat.bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.registerButton}
-            >
-              {t.shantiDevaRetreat.registration.registerButton}
-              <ArrowRightIcon className={styles.registerButtonIcon} />
-            </a>
-
-            <p className={styles.contactInfo}>{t.shantiDevaRetreat.registration.contact}</p>
-            <div className={styles.contactLinks}>
-              <a
-                href={`https://wa.me/${retreat.contact.whatsapp.replace(/[^0-9]/g, '')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.contactLink}
-              >
-                <PhoneIcon className={styles.contactLinkIcon} />
-                {t.shantiDevaRetreat.registration.whatsapp}: {retreat.contact.whatsapp}
-              </a>
-              <a
-                href={`mailto:${retreat.contact.email}`}
-                className={styles.contactLink}
-              >
-                <MailIcon className={styles.contactLinkIcon} />
-                {t.shantiDevaRetreat.registration.email}: {retreat.contact.email}
-              </a>
-            </div>
-          </div>
-        </section>
+        <RetreatRegistration t={t} retreat={retreat} />
       </div>
     </>
   )

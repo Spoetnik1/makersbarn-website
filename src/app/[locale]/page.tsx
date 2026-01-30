@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+
 import { Hero } from '@/components/client'
 import { HeroDetails, FacilitiesStats, StructuredData } from '@/components/server'
 import { generatePageMetadata } from '@/lib/metadata'

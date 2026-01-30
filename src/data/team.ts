@@ -1,4 +1,5 @@
 import { TeamMember } from '@/types'
+
 import { IMAGES } from './images'
 
 export const TEAM_MEMBERS: TeamMember[] = [

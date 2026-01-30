@@ -3,6 +3,7 @@
 import { memo, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+
 import { LIGHTBOX_ANIMATION, LIGHTBOX_LAYOUT } from './constants'
 import type { LightboxThumbnailsProps } from './types'
 import styles from './Lightbox.module.css'

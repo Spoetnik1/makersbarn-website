@@ -1,5 +1,6 @@
 import { FacilitiesOption, FacilitiesCategory, FacilitiesStat } from '@/types'
 import { FACILITIES_COLORS } from '@/constants'
+
 import { IMAGES } from './images'
 
 export const FACILITIES_OPTIONS: FacilitiesOption[] = [

@@ -12,20 +12,12 @@ export function getImageAltText(
   imagePath: string,
   language: Language = Language.EN
 ): string {
-  const imageData = IMAGE_ALT_TEXT[imagePath]
-  
+  const imageData: Record<Language, string> | undefined = IMAGE_ALT_TEXT[imagePath] as Record<Language, string> | undefined
+
   if (!imageData) {
     return ''
   }
-  
-  // Try to get alt text for the requested language
-  const altText = imageData[language]
-  
-  // Fall back to English if the requested language is not available
-  if (!altText && language !== Language.EN) {
-    return imageData[Language.EN] || ''
-  }
-  
-  return altText || ''
+
+  return imageData[language] || imageData[Language.EN] || ''
 }
 

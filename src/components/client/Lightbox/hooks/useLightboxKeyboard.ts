@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useCallback } from 'react'
+
 import { LIGHTBOX_KEYS } from '../constants'
 import type { UseLightboxKeyboardOptions } from '../types'
 
@@ -17,7 +18,7 @@ export function useLightboxKeyboard({
 }: UseLightboxKeyboardOptions): void {
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (!enabled || !isOpen) return
+      if (!enabled || !isOpen) {return}
 
       const handledKeys = [
         LIGHTBOX_KEYS.ESCAPE,
@@ -39,11 +40,11 @@ export function useLightboxKeyboard({
           break
         case LIGHTBOX_KEYS.ARROW_RIGHT:
         case LIGHTBOX_KEYS.ARROW_DOWN:
-          if (canGoNext) onNext()
+          if (canGoNext) {onNext()}
           break
         case LIGHTBOX_KEYS.ARROW_LEFT:
         case LIGHTBOX_KEYS.ARROW_UP:
-          if (canGoPrevious) onPrevious()
+          if (canGoPrevious) {onPrevious()}
           break
         case LIGHTBOX_KEYS.HOME:
           onFirst()
@@ -57,7 +58,7 @@ export function useLightboxKeyboard({
   )
 
   useEffect(() => {
-    if (!enabled || !isOpen) return
+    if (!enabled || !isOpen) {return}
 
     document.addEventListener('keydown', handleKeyDown)
 

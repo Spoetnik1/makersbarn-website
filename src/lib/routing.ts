@@ -1,4 +1,5 @@
 import { Language } from '@/types'
+
 import { isValidLocale } from './locale'
 
 /**
@@ -63,7 +64,7 @@ export function getLocaleFromPath(path: string): Language | null {
   
   // Check if the first segment is a valid locale
   if (segments.length > 0 && isValidLocale(segments[0])) {
-    return segments[0] as Language
+    return segments[0]
   }
   
   return null

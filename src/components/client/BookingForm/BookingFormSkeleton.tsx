@@ -1,9 +1,12 @@
 'use client'
 
 import Link from 'next/link'
+
 import { useTranslation } from '@/context'
 import { Route } from '@/types'
 import { BOOKING_ANCHOR_ID } from '@/constants'
+
+import { getStepLabel, WizardStep } from './BookingFormConstants'
 import styles from './BookingForm.module.css'
 import skeletonStyles from './BookingFormSkeleton.module.css'
 
@@ -28,13 +31,9 @@ export function BookingFormSkeleton() {
               <nav aria-label={booking.progressLabel}>
                 <ol className={styles.progressSteps}>
                   {Array.from({ length: TOTAL_STEPS }, (_, i) => {
-                    const step = i + 1
-                    const isActive = step === 1
-                    const stepLabel =
-                      step === 1 ? booking.steps.contact :
-                      step === 2 ? booking.steps.retreat :
-                      step === 3 ? booking.steps.details :
-                      booking.steps.review
+                    const step = (i + 1) as WizardStep
+                    const isActive = step === WizardStep.CONTACT
+                    const stepLabel = getStepLabel(step, booking.steps)
                     return (
                       <li
                         key={step}

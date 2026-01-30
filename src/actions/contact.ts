@@ -1,6 +1,7 @@
 'use server'
 
 import { headers } from 'next/headers'
+
 import { sendEmail } from '@/services/email'
 import { sendSlackMessage, formatContactFormMessage, SlackChannel } from '@/services/slack'
 import { createLogger, validateContactForm, RateLimiter } from '@/lib'
@@ -22,9 +23,9 @@ export interface SubmitContactFormResult {
 
 async function getClientIdentifier(): Promise<string> {
   const headersList = await headers()
-  const forwarded = headersList.get('x-forwarded-for')
+  const vercelForwardedFor = headersList.get('x-vercel-forwarded-for')
   const realIp = headersList.get('x-real-ip')
-  return forwarded?.split(',')[0]?.trim() || realIp || 'unknown'
+  return vercelForwardedFor?.split(',')[0]?.trim() || realIp || 'unknown'
 }
 
 export async function submitContactForm(data: ContactFormData): Promise<SubmitContactFormResult> {

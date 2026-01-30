@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+
 import { FacilitiesCarousel } from '@/components/client'
 import { StructuredData } from '@/components/server'
 import { generatePageMetadata } from '@/lib/metadata'
@@ -8,6 +9,7 @@ import { Route } from '@/types'
 import { getServerTranslations } from '@/i18n'
 import { getValidLocale } from '@/lib/locale'
 import { getLocalizedPath } from '@/lib/routing'
+
 import styles from '../../facilities/page.module.css'
 
 interface FacilitiesPageProps {

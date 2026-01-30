@@ -565,6 +565,7 @@ export const nl: Dictionary = {
         singleRoom: 'Eenpersoonskamer',
         tentCaravan: 'Optie om in eigen tent of caravan te verblijven tegen gereduceerd tarief',
       },
+      servicesTitle: 'Diensten',
       services: {
         beddingTowels: 'Beddengoed & handdoeken (zwembad/sauna handdoek niet inbegrepen)',
         vegetarianMeals: '3 vegetarische maaltijden per dag + drankjes & snacks',

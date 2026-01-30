@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
-import { Route } from '@/types'
-import { Language } from '@/types'
+
+import { Route, Language  } from '@/types'
 import { SITE_CONFIG } from '@/constants/site'
 import { getLocalizedPath } from '@/lib/routing'
 

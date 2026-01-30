@@ -1,6 +1,7 @@
 'use client'
 
-import { useCallback, useRef, type TouchEvent, type MouseEvent } from 'react'
+import { useCallback, useRef, type TouchEvent } from 'react'
+
 import { LIGHTBOX_GESTURES } from '../constants'
 import type { UseLightboxGesturesOptions } from '../types'
 
@@ -29,7 +30,7 @@ export function useLightboxGestures({
 
   const handleTouchStart = useCallback(
     (event: TouchEvent) => {
-      if (!enabled) return
+      if (!enabled) {return}
 
       const touch = event.touches[0]
       touchStateRef.current = {
@@ -44,7 +45,7 @@ export function useLightboxGestures({
 
   const handleTouchEnd = useCallback(
     (event: TouchEvent) => {
-      if (!enabled || !touchStateRef.current.isDragging) return
+      if (!enabled || !touchStateRef.current.isDragging) {return}
 
       const touch = event.changedTouches[0]
       const deltaX = touch.clientX - touchStateRef.current.startX
@@ -69,7 +70,7 @@ export function useLightboxGestures({
         absY >= swipeThreshold ||
         velocity >= velocityThreshold
 
-      if (!meetsThreshold) return
+      if (!meetsThreshold) {return}
 
       // Determine primary direction
       const isHorizontal = absX > absY
@@ -89,22 +90,8 @@ export function useLightboxGestures({
     [enabled, swipeThreshold, velocityThreshold, onSwipeLeft, onSwipeRight, onSwipeDown, onTap]
   )
 
-  const handleClick = useCallback(
-    (event: MouseEvent) => {
-      if (!enabled) return
-
-      // Only trigger tap on backdrop click, not on interactive elements
-      const target = event.target as HTMLElement
-      if (target.closest('button, a, img')) return
-
-      onTap()
-    },
-    [enabled, onTap]
-  )
-
   return {
     onTouchStart: handleTouchStart,
     onTouchEnd: handleTouchEnd,
-    onClick: handleClick,
   }
 }

@@ -1,7 +1,9 @@
 import { Metadata } from 'next'
+
 import { SITE_CONFIG } from '@/constants/site'
 import { DEFAULT_LANGUAGE } from '@/constants'
 import { Language } from '@/types'
+
 import { getLocalizedPath } from './routing'
 
 const SITE_NAME = SITE_CONFIG.name

@@ -3,9 +3,11 @@
 import React, { useRef, useState, useCallback, memo, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+
 import { IMAGES } from '@/data'
 import { CardPosition } from '@/types'
 import { useTranslation } from '@/context'
+
 import styles from './Testimonials.module.css'
 
 const CARD_POSITIONS: CardPosition[] = ['front', 'second', 'third', 'back']
@@ -98,7 +100,7 @@ export function Testimonials() {
     setOrder((prev) => {
       const copy = [...prev]
       const last = copy.pop()
-      if (last) copy.unshift(last)
+      if (last) {copy.unshift(last)}
       return copy
     })
   }, [])

@@ -1,5 +1,6 @@
 import { Language } from '@/types'
 import { getServerTranslations } from '@/i18n'
+
 import styles from './FacilitiesStats.module.css'
 
 interface FacilitiesStatsProps {

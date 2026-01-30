@@ -3,6 +3,7 @@
 import { memo, useState, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+
 import { LIGHTBOX_ANIMATION } from './constants'
 import type { LightboxImageProps, NavigationDirection } from './types'
 import styles from './Lightbox.module.css'

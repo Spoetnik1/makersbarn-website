@@ -2,7 +2,8 @@
 
 import * as postmark from 'postmark'
 import { revalidatePath } from 'next/cache'
-import { createLogger, escapeHtml, getRetreatTypeDisplayLabel, type ValidatedContactFormData } from '@/lib'
+
+import { createLogger, escapeHtml, formatGroupSize, getRetreatTypeDisplayLabel, type ValidatedContactFormData } from '@/lib'
 import type { ValidatedBookingFormData } from '@/types'
 
 const logger = createLogger('email-service')
@@ -27,7 +28,7 @@ interface EmailField {
 function createEmailHtml(fields: EmailField[]): string {
   return fields
     .filter(({ value }) => value)
-    .map(({ label, value }) => `<p><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value!)}</p>`)
+    .map(({ label, value }) => `<p><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value ?? '')}</p>`)
     .join('')
 }
 
@@ -146,12 +147,19 @@ The Makers Barn Team
         `.trim(),
       })
 
-      logger.info('User confirmation email sent', {
-        to: formData.email,
-        messageId: userEmailResponse.MessageID,
-        submittedAt: userEmailResponse.SubmittedAt,
-        errorCode: userEmailResponse.ErrorCode,
-      })
+      if (userEmailResponse.ErrorCode && userEmailResponse.ErrorCode !== 0) {
+        logger.warn('User confirmation email failed', {
+          to: formData.email,
+          errorCode: userEmailResponse.ErrorCode,
+          message: userEmailResponse.Message,
+        })
+      } else {
+        logger.info('User confirmation email sent', {
+          to: formData.email,
+          messageId: userEmailResponse.MessageID,
+          submittedAt: userEmailResponse.SubmittedAt,
+        })
+      }
     }
 
     revalidatePath('/contact')
@@ -164,24 +172,22 @@ The Makers Barn Team
 
 function buildBookingFields(data: ValidatedBookingFormData): EmailField[] {
   const retreatTypeLabel = getRetreatTypeDisplayLabel(data.retreatType, data.retreatTypeOther)
+  const groupSize = formatGroupSize(data.minGroupSize, data.maxGroupSize)
 
-  const groupSize = data.minGroupSize && data.maxGroupSize
-    ? `${data.minGroupSize} - ${data.maxGroupSize} people`
-    : data.minGroupSize
-      ? `${data.minGroupSize}+ people`
-      : data.maxGroupSize
-        ? `Up to ${data.maxGroupSize} people`
-        : undefined
-
-  const dateInfo = data.startDate
-    ? data.flexibleDates && data.flexibleDatesText
-      ? `${data.startDate} (flexible: ${data.flexibleDatesText})`
-      : data.flexibleDates
-        ? `${data.startDate} (flexible)`
-        : data.startDate
-    : data.flexibleDates && data.flexibleDatesText
-      ? `Flexible: ${data.flexibleDatesText}`
-      : undefined
+  let dateInfo: string | undefined
+  if (data.startDate) {
+    if (data.flexibleDates && data.flexibleDatesText) {
+      dateInfo = `${data.startDate} (flexible: ${data.flexibleDatesText})`
+    } else if (data.flexibleDates) {
+      dateInfo = `${data.startDate} (flexible)`
+    } else {
+      dateInfo = data.startDate
+    }
+  } else if (data.flexibleDates && data.flexibleDatesText) {
+    dateInfo = `Flexible: ${data.flexibleDatesText}`
+  } else {
+    dateInfo = undefined
+  }
 
   return [
     { label: 'Name', value: data.name },

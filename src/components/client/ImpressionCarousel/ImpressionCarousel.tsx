@@ -1,17 +1,98 @@
 'use client'
 
 import { useState, useCallback, useMemo, useRef } from 'react'
-import { motion, useMotionValue } from 'framer-motion'
+import { motion, useMotionValue, type MotionValue } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
+
 import { CAROUSEL_IMAGES } from '@/data'
 import { SPRING_OPTIONS, DRAG_BUFFER } from '@/constants'
 import { getImageAltText } from '@/lib'
 import { useTranslation, useLanguage } from '@/context'
-import { Route } from '@/types'
+import { Route, Language } from '@/types'
 import { getLocalizedPath } from '@/lib/routing'
+
 import { Lightbox, type LightboxImage } from '../Lightbox'
+
 import styles from './ImpressionCarousel.module.css'
+
+interface CarouselTrackProps {
+  imgIndex: number
+  dragX: MotionValue<number>
+  onDragEnd: () => void
+  visibleIndices: number[]
+  handleImageClick: () => void
+  triggerRef: React.RefObject<HTMLDivElement | null>
+  language: Language
+  t: ReturnType<typeof useTranslation<'impressionCarousel'>>['t']
+}
+
+function CarouselTrack({
+  imgIndex,
+  dragX,
+  onDragEnd,
+  visibleIndices,
+  handleImageClick,
+  triggerRef,
+  language,
+  t,
+}: CarouselTrackProps) {
+  return (
+    <motion.div
+      drag="x"
+      dragConstraints={{ left: 0, right: 0 }}
+      style={{ x: dragX }}
+      animate={{ translateX: `-${imgIndex * 100}%` }}
+      transition={SPRING_OPTIONS}
+      onDragEnd={onDragEnd}
+      className={styles.track}
+    >
+      {CAROUSEL_IMAGES.map((imgSrc, idx) => {
+        const isVisible = visibleIndices.includes(idx)
+        if (!isVisible) {
+          return (
+            <div
+              key={imgSrc}
+              className={styles.image}
+              aria-hidden="true"
+            />
+          )
+        }
+
+        return (
+          <motion.div
+            key={imgSrc}
+            ref={idx === imgIndex ? triggerRef : undefined}
+            animate={{ scale: imgIndex === idx ? 0.95 : 0.85 }}
+            transition={SPRING_OPTIONS}
+            className={`${styles.image} ${styles.imageClickable}`}
+            onClick={handleImageClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                handleImageClick()
+              }
+            }}
+            aria-label={`${t.viewFullscreen} ${idx + 1}`}
+            aria-haspopup="dialog"
+          >
+            <Image
+              src={imgSrc}
+              alt={getImageAltText(imgSrc, language)}
+              fill
+              sizes="100vw"
+              className={styles.imageInner}
+              priority={idx === imgIndex}
+              loading={idx === imgIndex ? undefined : 'lazy'}
+            />
+          </motion.div>
+        )
+      })}
+    </motion.div>
+  )
+}
 
 export function ImpressionCarousel() {
   const [imgIndex, setImgIndex] = useState(0)
@@ -21,7 +102,6 @@ export function ImpressionCarousel() {
   const { t, language } = useTranslation('impressionCarousel')
   const { language: currentLanguage } = useLanguage()
 
-  // Convert to Lightbox format - memoized to prevent unnecessary context updates
   const lightboxImages: LightboxImage[] = useMemo(
     () =>
       CAROUSEL_IMAGES.map((src, idx) => ({
@@ -30,7 +110,6 @@ export function ImpressionCarousel() {
       })),
     []
   )
-
 
   const onDragEnd = useCallback(() => {
     const x = dragX.get()
@@ -62,7 +141,6 @@ export function ImpressionCarousel() {
     setImgIndex((prev) => (prev === CAROUSEL_IMAGES.length - 1 ? 0 : prev + 1))
   }, [])
 
-  // Calculate which images should be rendered (visible + next)
   const visibleIndices = useMemo(() => {
     const indices = [imgIndex]
     const nextIndex = imgIndex === CAROUSEL_IMAGES.length - 1 ? 0 : imgIndex + 1
@@ -79,7 +157,6 @@ export function ImpressionCarousel() {
       </div>
 
       <div className={styles.container}>
-        {/* Navigation Arrows */}
         <button
           type="button"
           className={`${styles.navButton} ${styles.navButtonPrev}`}
@@ -101,60 +178,16 @@ export function ImpressionCarousel() {
           </svg>
         </button>
 
-        <motion.div
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          style={{ x: dragX }}
-          animate={{ translateX: `-${imgIndex * 100}%` }}
-          transition={SPRING_OPTIONS}
+        <CarouselTrack
+          imgIndex={imgIndex}
+          dragX={dragX}
           onDragEnd={onDragEnd}
-          className={styles.track}
-        >
-          {CAROUSEL_IMAGES.map((imgSrc, idx) => {
-            const isVisible = visibleIndices.includes(idx)
-            if (!isVisible) {
-              // Render placeholder to maintain layout structure
-              return (
-                <div
-                  key={imgSrc}
-                  className={styles.image}
-                  aria-hidden="true"
-                />
-              )
-            }
-
-            return (
-              <motion.div
-                key={imgSrc}
-                ref={idx === imgIndex ? triggerRef : undefined}
-                animate={{ scale: imgIndex === idx ? 0.95 : 0.85 }}
-                transition={SPRING_OPTIONS}
-                className={`${styles.image} ${styles.imageClickable}`}
-                onClick={handleImageClick}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    handleImageClick()
-                  }
-                }}
-                aria-label={`${t.viewFullscreen} ${idx + 1}`}
-                aria-haspopup="dialog"
-              >
-                <Image
-                  src={imgSrc}
-                  alt={getImageAltText(imgSrc, language)}
-                  fill
-                  sizes="100vw"
-                  className={styles.imageInner}
-                  priority={idx === imgIndex}
-                  loading={idx === imgIndex ? undefined : 'lazy'}
-                />
-              </motion.div>
-            )
-          })}
-        </motion.div>
+          visibleIndices={visibleIndices}
+          handleImageClick={handleImageClick}
+          triggerRef={triggerRef}
+          language={language}
+          t={t}
+        />
 
         <div className={styles.dots} role="group" aria-label={t.carouselNavigation}>
           {CAROUSEL_IMAGES.map((imgSrc, idx) => (
@@ -170,7 +203,6 @@ export function ImpressionCarousel() {
         </div>
       </div>
 
-      {/* Lightbox */}
       <Lightbox
         images={lightboxImages}
         initialIndex={imgIndex}
@@ -181,7 +213,6 @@ export function ImpressionCarousel() {
         triggerRef={triggerRef}
       />
 
-      {/* Facilities CTA */}
       <div className={styles.footer}>
         <Link href={getLocalizedPath(Route.FACILITIES, currentLanguage)} className={styles.facilitiesButton}>
           {t.facilitiesButton}

@@ -10,6 +10,7 @@ import {
   useRef,
   type ReactNode,
 } from 'react'
+
 import { LIGHTBOX_TIMING } from './constants'
 import type {
   LightboxContextValue,
@@ -131,14 +132,16 @@ export function LightboxProvider({
 
   const goTo = useCallback(
     (index: number) => {
-      if (index < 0 || index >= images.length) return
+      if (index < 0 || index >= images.length) {return}
 
-      const direction: NavigationDirection =
-        index > state.currentIndex
-          ? 'next'
-          : index < state.currentIndex
-            ? 'prev'
-            : 'none'
+      let direction: NavigationDirection
+      if (index > state.currentIndex) {
+        direction = 'next'
+      } else if (index < state.currentIndex) {
+        direction = 'prev'
+      } else {
+        direction = 'none'
+      }
 
       dispatch({ type: 'GO_TO', payload: { index, direction } })
       onImageChange?.(index)
@@ -147,7 +150,7 @@ export function LightboxProvider({
   )
 
   const goToNext = useCallback(() => {
-    if (!canGoNext) return
+    if (!canGoNext) {return}
 
     const nextIndex =
       state.currentIndex === images.length - 1 ? 0 : state.currentIndex + 1
@@ -156,7 +159,7 @@ export function LightboxProvider({
   }, [canGoNext, state.currentIndex, images.length, goTo])
 
   const goToPrevious = useCallback(() => {
-    if (!canGoPrevious) return
+    if (!canGoPrevious) {return}
 
     const prevIndex =
       state.currentIndex === 0 ? images.length - 1 : state.currentIndex - 1

@@ -390,6 +390,7 @@ export interface ShantiDevaRetreatTranslations {
       singleRoom: string
       tentCaravan: string
     }
+    servicesTitle: string
     services: {
       beddingTowels: string
       vegetarianMeals: string

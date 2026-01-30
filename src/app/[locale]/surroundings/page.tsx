@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+
 import { getValidLocale } from '@/lib/locale'
 import { getLocalizedPath } from '@/lib/routing'
 import { Route } from '@/types'

@@ -53,21 +53,31 @@ function formatError(error: unknown): LogEntry['error'] | undefined {
     }
   }
   if (error !== undefined && error !== null) {
+    let message: string
+    if (typeof error === 'string') {
+      message = error
+    } else if (typeof error === 'number' || typeof error === 'boolean') {
+      message = String(error)
+    } else {
+      message = JSON.stringify(error)
+    }
     return {
       name: 'Unknown',
-      message: String(error),
+      message,
     }
   }
   return undefined
 }
 
-function createLogEntry(
-  level: LogLevel,
-  service: string,
-  message: string,
-  context?: LogContext,
+interface CreateLogEntryParams {
+  level: LogLevel
+  service: string
+  message: string
+  context?: LogContext
   error?: unknown
-): LogEntry {
+}
+
+function createLogEntry({ level, service, message, context, error }: CreateLogEntryParams): LogEntry {
   const entry: LogEntry = {
     timestamp: new Date().toISOString(),
     level,
@@ -102,7 +112,7 @@ function log(entry: LogEntry): void {
       break
     case LogLevel.DEBUG:
     default:
-      console.log(output)
+      console.info(output)
       break
   }
 }
@@ -111,25 +121,25 @@ export function createLogger(service: string) {
   return {
     debug: (message: string, context?: LogContext) => {
       if (shouldLog(LogLevel.DEBUG)) {
-        log(createLogEntry(LogLevel.DEBUG, service, message, context))
+        log(createLogEntry({ level: LogLevel.DEBUG, service, message, context }))
       }
     },
 
     info: (message: string, context?: LogContext) => {
       if (shouldLog(LogLevel.INFO)) {
-        log(createLogEntry(LogLevel.INFO, service, message, context))
+        log(createLogEntry({ level: LogLevel.INFO, service, message, context }))
       }
     },
 
     warn: (message: string, context?: LogContext, error?: unknown) => {
       if (shouldLog(LogLevel.WARN)) {
-        log(createLogEntry(LogLevel.WARN, service, message, context, error))
+        log(createLogEntry({ level: LogLevel.WARN, service, message, context, error }))
       }
     },
 
     error: (message: string, context?: LogContext, error?: unknown) => {
       if (shouldLog(LogLevel.ERROR)) {
-        log(createLogEntry(LogLevel.ERROR, service, message, context, error))
+        log(createLogEntry({ level: LogLevel.ERROR, service, message, context, error }))
       }
     },
   }

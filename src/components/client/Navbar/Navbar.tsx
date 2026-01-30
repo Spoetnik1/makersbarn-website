@@ -5,11 +5,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { GB as EN, NL } from 'country-flag-icons/react/3x2'
+
 import { LANGUAGE_OPTIONS } from '@/constants'
 import { IMAGES } from '@/data'
 import { Language, Route } from '@/types'
 import { useLanguage, useTranslation } from '@/context'
 import { getLocalizedPath, replaceLocaleInPath, getLocaleFromPath } from '@/lib/routing'
+
 import styles from './Navbar.module.css'
 
 const FLAG_MAP = {

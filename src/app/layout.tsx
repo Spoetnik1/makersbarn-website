@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Quicksand } from 'next/font/google'
-import { baseMetadata } from '@/lib/metadata'
 import { Analytics } from '@vercel/analytics/react'
+
+import { baseMetadata } from '@/lib/metadata'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -31,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html className={`${playfair.variable} ${quicksand.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${quicksand.variable}`}>
       <body>
         {children}
         <Analytics />

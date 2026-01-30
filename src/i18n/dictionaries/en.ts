@@ -455,6 +455,7 @@ export const en: Dictionary = {
         singleRoom: 'Single room',
         tentCaravan: 'Option to stay in a tent or caravan at reduced price',
       },
+      servicesTitle: 'Services',
       services: {
         beddingTowels: 'Bedding & towels (pool/sauna towel not included)',
         vegetarianMeals: '3 vegetarian meals daily + drinks & snacks',

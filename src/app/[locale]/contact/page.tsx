@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+
 import { UnifiedContact } from '@/components/client'
 import { StructuredData } from '@/components/server'
 import { generatePageMetadata } from '@/lib/metadata'

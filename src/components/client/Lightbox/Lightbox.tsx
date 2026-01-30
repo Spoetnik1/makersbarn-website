@@ -1,16 +1,18 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { createPortal } from 'react-dom'
+
+import { useTranslation } from '@/context'
+
 import { LightboxProvider, useLightbox } from './LightboxContext'
 import { LightboxImage } from './LightboxImage'
 import { LightboxControls } from './LightboxControls'
 import { LightboxDots } from './LightboxDots'
 import { LightboxThumbnails } from './LightboxThumbnails'
-import { useLightboxKeyboard, useLightboxGestures, useLightboxFocus, useMediaQuery } from './hooks'
+import { useLightboxKeyboard, useLightboxGestures, useLightboxFocus, useMediaQuery, useBodyScrollLock, useAutoHideControls } from './hooks'
 import { LIGHTBOX_ANIMATION, LIGHTBOX_Z_INDEX, LIGHTBOX_BREAKPOINTS } from './constants'
-import { useTranslation } from '@/context'
 import type { LightboxProps, LightboxTranslations } from './types'
 import styles from './Lightbox.module.css'
 
@@ -83,39 +85,10 @@ function LightboxContent({
   })
 
   // Lock body scroll when open
-  useEffect(() => {
-    if (state === 'open' || state === 'opening') {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [state])
+  useBodyScrollLock(state === 'open' || state === 'opening')
 
   // Show controls on mouse movement
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout
-
-    const handleMouseMove = () => {
-      showControls()
-      clearTimeout(timeoutId)
-      timeoutId = setTimeout(() => {
-        // Auto-hide could be implemented here
-      }, 3000)
-    }
-
-    if (state === 'open') {
-      window.addEventListener('mousemove', handleMouseMove)
-    }
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      clearTimeout(timeoutId)
-    }
-  }, [state, showControls])
+  useAutoHideControls(state === 'open', showControls)
 
   const handleBackdropClick = (event: React.MouseEvent) => {
     // First check if it's a backdrop click (for closing)
@@ -168,7 +141,7 @@ function LightboxContent({
             aria-atomic="true"
             className={styles.srOnly}
           >
-            {translations.viewImage} {currentIndex + 1} {translations.imageOf} {images.length}. {currentImage?.alt}
+            {translations.viewImage} {currentIndex + 1} {translations.imageOf} {images.length}. {currentImage.alt}
           </div>
 
           {/* Main image */}

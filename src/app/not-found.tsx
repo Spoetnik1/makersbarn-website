@@ -1,5 +1,7 @@
 import Link from 'next/link'
+
 import { Route } from '@/types'
+
 import styles from './not-found.module.css'
 
 export default function NotFound() {

@@ -4,11 +4,13 @@ import { useState, useCallback, useMemo, FormEvent, ChangeEvent } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { track } from '@vercel/analytics'
+
 import { IMAGES } from '@/data'
 import { CONTACT_URLS, AnalyticsEvent } from '@/constants'
 import { submitContactForm } from '@/actions'
 import { FormStatus, type ContactFormData } from '@/types'
 import { useTranslation } from '@/context'
+
 import styles from './ContactForm.module.css'
 
 const INITIAL_FORM_DATA: ContactFormData = {
@@ -24,6 +26,80 @@ const FORM_FIELD_IDS = {
   PHONE: 'contact-phone',
   MESSAGE: 'contact-message',
 } as const
+
+interface ContactFormFieldsProps {
+  formData: ContactFormData
+  handleChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+  contact: ReturnType<typeof useTranslation<'contact'>>['t']
+}
+
+function ContactFormFields({ formData, handleChange, contact }: ContactFormFieldsProps) {
+  return (
+    <>
+      <div className={styles.formGroup}>
+        <label htmlFor={FORM_FIELD_IDS.NAME} className={styles.formLabel}>
+          {contact.labels.name}
+        </label>
+        <input
+          id={FORM_FIELD_IDS.NAME}
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder={contact.placeholders.name}
+          className={styles.formInput}
+          required
+        />
+      </div>
+
+      <div className={styles.formGroup}>
+        <label htmlFor={FORM_FIELD_IDS.EMAIL} className={styles.formLabel}>
+          {contact.labels.email}
+        </label>
+        <input
+          id={FORM_FIELD_IDS.EMAIL}
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder={contact.placeholders.email}
+          className={styles.formInput}
+          required
+        />
+      </div>
+
+      <div className={styles.formGroup}>
+        <label htmlFor={FORM_FIELD_IDS.PHONE} className={styles.formLabel}>
+          {contact.labels.phone}
+        </label>
+        <input
+          id={FORM_FIELD_IDS.PHONE}
+          type="tel"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          placeholder={contact.placeholders.phone}
+          className={styles.formInput}
+        />
+      </div>
+
+      <div className={styles.formGroup}>
+        <label htmlFor={FORM_FIELD_IDS.MESSAGE} className={styles.formLabel}>
+          {contact.labels.message}
+        </label>
+        <textarea
+          id={FORM_FIELD_IDS.MESSAGE}
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          placeholder={contact.placeholders.message}
+          className={styles.formTextarea}
+          required
+        />
+      </div>
+    </>
+  )
+}
 
 export function ContactForm() {
   const [formData, setFormData] = useState<ContactFormData>(INITIAL_FORM_DATA)
@@ -88,70 +164,10 @@ export function ContactForm() {
       <section className={styles.formSection}>
         <div className={styles.formWrapper}>
           <div className={styles.formContainer}>
-            <form onSubmit={handleSubmit} className={styles.form}>
+            <form onSubmit={(e) => { void handleSubmit(e) }} className={styles.form}>
               <h2 className={styles.formTitle}>{contact.formTitle}</h2>
 
-              <div className={styles.formGroup}>
-                <label htmlFor={FORM_FIELD_IDS.NAME} className={styles.formLabel}>
-                  {contact.labels.name}
-                </label>
-                <input
-                  id={FORM_FIELD_IDS.NAME}
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder={contact.placeholders.name}
-                  className={styles.formInput}
-                  required
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor={FORM_FIELD_IDS.EMAIL} className={styles.formLabel}>
-                  {contact.labels.email}
-                </label>
-                <input
-                  id={FORM_FIELD_IDS.EMAIL}
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder={contact.placeholders.email}
-                  className={styles.formInput}
-                  required
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor={FORM_FIELD_IDS.PHONE} className={styles.formLabel}>
-                  {contact.labels.phone}
-                </label>
-                <input
-                  id={FORM_FIELD_IDS.PHONE}
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder={contact.placeholders.phone}
-                  className={styles.formInput}
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor={FORM_FIELD_IDS.MESSAGE} className={styles.formLabel}>
-                  {contact.labels.message}
-                </label>
-                <textarea
-                  id={FORM_FIELD_IDS.MESSAGE}
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder={contact.placeholders.message}
-                  className={styles.formTextarea}
-                  required
-                />
-              </div>
+              <ContactFormFields formData={formData} handleChange={handleChange} contact={contact} />
 
               {(statusMessage || status === FormStatus.SUCCESS) && (
                 <div

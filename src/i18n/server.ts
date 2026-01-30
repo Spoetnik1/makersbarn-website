@@ -1,4 +1,5 @@
 import { cookies, headers } from 'next/headers'
+
 import { Language } from '@/types'
 import { DEFAULT_LANGUAGE } from '@/constants'
 import {
@@ -6,6 +7,7 @@ import {
   isValidLanguage,
   detectLanguageFromDomain,
 } from '@/lib/language'
+
 import { getDictionary } from './dictionaries'
 import type { Dictionary } from './types'
 
